@@ -1,0 +1,8 @@
+yarn add prisma -D
+yarn add @prisma/client
+npx prisma init
+database url on .env
+
+create model in schema prisma
+
+npx prisma migrate dev --name init
