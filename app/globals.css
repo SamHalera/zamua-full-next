@@ -113,3 +113,6 @@ html,
   height: 180px;
   width: 100%;
 }
+.custom-btn {
+  @apply font-semibold text-xl self-center bg-primary text-black hover:bg-transparent transition-all duration-500 border-2 border-primary hover:text-primary h-12 w-40 flex justify-center items-center;
+}

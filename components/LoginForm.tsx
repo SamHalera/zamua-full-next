@@ -35,35 +35,42 @@ const LoginForm = () => {
     }
   };
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>EMAIL</FormLabel>
-              <FormControl>
-                <Input placeholder="email" {...field} type="email" />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>PASSWORD</FormLabel>
-              <FormControl>
-                <Input placeholder="password" {...field} type="password" />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
+    <div className="">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-2/4 m-auto flex flex-col gap-10 justify-center my-16"
+        >
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>EMAIL</FormLabel>
+                <FormControl>
+                  <Input placeholder="email" {...field} type="email" />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>PASSWORD</FormLabel>
+                <FormControl>
+                  <Input placeholder="password" {...field} type="password" />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <Button className="self-end" type="submit">
+            Submit
+          </Button>
+        </form>
+      </Form>
+    </div>
   );
 };
 
