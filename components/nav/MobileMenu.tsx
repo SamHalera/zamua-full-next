@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { AlignJustify, Circle, CircleX } from "lucide-react";
+import { AlignJustify, CircleX } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const MobileMenu = ({ menu }: { menu: Menu }) => {

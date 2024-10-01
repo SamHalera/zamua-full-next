@@ -1,19 +1,11 @@
 "use client";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "./ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { redirect } from "next/navigation";
 
 type LoginForm = {
   email: string;

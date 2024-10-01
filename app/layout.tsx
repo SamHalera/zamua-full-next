@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Inter, Montserrat } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { Providers } from "./providers";
 import Header from "@/components/nav/Header";
 import Footer from "@/components/Footer/Footer";
@@ -16,7 +16,7 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
-const inter = Inter({ subsets: ["latin"] });
+
 const montserrat = Montserrat({
   weight: ["400", "700"],
   style: ["normal", "italic"],
@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={montserrat.className}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen relative flex flex-col justify-between w-full`}
+        className={`${geistSans.variable} ${geistMono.variable}  antialiased min-h-screen relative flex flex-col justify-between w-full`}
       >
         <Providers>
           <Header />
