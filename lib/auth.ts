@@ -1,7 +1,7 @@
 import prisma from "@/db";
 import { SHA256 } from "crypto-js";
 import encBase64 from "crypto-js/enc-base64";
-import NextAuth, { type NextAuthOptions } from "next-auth";
+import { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {

@@ -1,4 +1,3 @@
-import { createUser, getTestUser } from "@/actions/user";
 import React from "react";
 
 const page = async () => {
