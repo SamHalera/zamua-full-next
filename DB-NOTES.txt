@@ -1,0 +1,20 @@
+PAGE 
+
+id: 
+title
+path: string
+bg-hero
+section : [
+    {
+        text : string
+        caption : {
+            title: string
+            image : Cloudinary ? 
+        }
+        cta?: {
+            label : string
+            path: string
+        }
+    }
+]
+
