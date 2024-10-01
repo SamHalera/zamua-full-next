@@ -1,12 +1,19 @@
 "use client";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { error } from "console";
+import { redirect } from "next/navigation";
 
 type LoginForm = {
   email: string;
@@ -14,20 +21,25 @@ type LoginForm = {
 };
 const LoginForm = () => {
   const router = useRouter();
-  const form = useForm<LoginForm>();
+  const form = useForm<LoginForm>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
   const onSubmit: SubmitHandler<LoginForm> = async (values) => {
-    console.log(values);
     const signInData = await signIn("credentials", {
       email: values.email,
       password: values.password,
-      redirect: true,
+      redirect: false,
+      callbackUrl: "/admin",
     });
+
     if (signInData?.error) {
       console.log(signInData?.error);
     } else {
-      console.log("here", signInData);
-      router.push("/");
+      router.push("/admin");
     }
   };
   return (
@@ -38,7 +50,7 @@ const LoginForm = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>EMAIL</FormLabel>
               <FormControl>
                 <Input placeholder="email" {...field} type="email" />
               </FormControl>
@@ -50,7 +62,7 @@ const LoginForm = () => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>PASSWORD</FormLabel>
               <FormControl>
                 <Input placeholder="password" {...field} type="password" />
               </FormControl>
