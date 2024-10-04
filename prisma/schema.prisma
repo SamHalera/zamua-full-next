@@ -15,9 +15,21 @@ datasource db {
 
 
 model User {
-    id       Int     @id @default(autoincrement())
-    email    String  @unique
-    password String
+    id        Int     @id @default(autoincrement())
+    email     String  @unique
+    password  String
     salt      String
+
+}
+
+model MusicFeature {
+  id        Int     @id @default(autoincrement())
+  title     String
+  subTitle  String?
+  cover     String?
+  iframe    String
+  path      String
+  priority  Int 
+
 
 }

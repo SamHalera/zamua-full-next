@@ -1,7 +1,8 @@
+import { MenuType, MenuItem } from "@/types/types";
 import Link from "next/link";
 import React from "react";
 
-const Menu = ({ menu }: { menu: Menu }) => {
+const Menu = ({ menu }: { menu: MenuType }) => {
   return (
     <nav className="gap-5 items-center hidden lg:flex">
       {menu.map((item: MenuItem) => {

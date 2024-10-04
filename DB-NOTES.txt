@@ -1,0 +1,8 @@
+MusicFeature :
+ id        Int     
+  title     String
+  subTitle  String?
+  cover     String?
+  iframe    String
+  path      String
+  priority  Int 

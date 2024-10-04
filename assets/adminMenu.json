@@ -1,0 +1,32 @@
+[
+  {
+    "label": "Musics",
+    "href": "/admin/musics"
+  },
+  {
+    "label": "Projects",
+    "href": "/admin/projects"
+  },
+  {
+    "label": "Shows",
+    "href": "/admin/shows"
+  },
+  {
+    "label": "Playlists",
+    "href": "/admin/playlists"
+  },
+  {
+    "label": "Media",
+    "href": "/admin/media",
+    "items": [
+      {
+        "label": "Photos",
+        "href": "/admin/media/photos"
+      },
+      {
+        "label": "Videos",
+        "href": "/admin/media/videos"
+      }
+    ]
+  }
+]

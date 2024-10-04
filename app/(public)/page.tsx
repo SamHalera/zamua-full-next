@@ -1,4 +1,4 @@
-import HomeContent from "@/components/contents/Home/HomeContent";
+import HomeContent from "@/components/contents/home/HomeContent";
 
 export default async function Home() {
   return (
