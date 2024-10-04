@@ -1,4 +1,4 @@
-import AdminSideBar from "@/components/contents/Home/admin/AdminSideBar";
+import AdminSideBar from "@/components/admin/AdminSideBar";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -16,9 +16,11 @@ export default async function AdminLayout({
   }
   return (
     <div className=" flex gap-8">
-      <AdminSideBar />
+      <div className="mr-60">
+        <AdminSideBar />
+      </div>
 
-      <div className="flex-1">{children}</div>
+      <div className="flex-1 mx-auto">{children}</div>
     </div>
   );
 }

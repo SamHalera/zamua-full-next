@@ -2,6 +2,8 @@ import React from "react";
 import adminMenu from "@/assets/adminMenu.json";
 import Link from "next/link";
 import LogoutButton from "@/components/LogoutButton";
+import { Home } from "lucide-react";
+import { AdminMenuItem, SingleItem } from "@/types/types";
 
 const AdminMenu = () => {
   return (
@@ -35,6 +37,14 @@ const AdminMenu = () => {
           </div>
         );
       })}
+
+      <Link
+        className="flex gap-3 text-primary text-xl duration-700 hover:text-primary/70 font-semibold mb-2"
+        href={"/"}
+      >
+        <Home />
+        Public home
+      </Link>
       <LogoutButton />
     </div>
   );

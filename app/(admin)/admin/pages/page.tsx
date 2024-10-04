@@ -1,4 +1,4 @@
-import TableContents from "@/components/contents/Home/admin/TableContents";
+import TableContents from "@/components/admin/TableContents";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import React from "react";

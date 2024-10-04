@@ -4,8 +4,9 @@ import Link from "next/link";
 import React from "react";
 import Menu from "@/components/nav/Menu";
 import MobileMenu from "./MobileMenu";
+import { MenuType } from "@/types/types";
 
-const Navbar = ({ menu }: { menu: Menu }) => {
+const Navbar = ({ menu }: { menu: MenuType }) => {
   return (
     <>
       <div></div>

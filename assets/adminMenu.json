@@ -1,17 +1,7 @@
 [
   {
-    "label": "Pages",
-    "href": "/admin/pages",
-    "items": [
-      {
-        "label": "Bio",
-        "href": "/admin/pages/bio"
-      },
-      {
-        "label": "Music",
-        "href": "/admin/pages/music"
-      }
-    ]
+    "label": "Musics",
+    "href": "/admin/musics"
   },
   {
     "label": "Projects",

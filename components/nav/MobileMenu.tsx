@@ -4,8 +4,9 @@ import { AlignJustify, CircleX } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { MenuItem, MenuType } from "@/types/types";
 
-const MobileMenu = ({ menu }: { menu: Menu }) => {
+const MobileMenu = ({ menu }: { menu: MenuType }) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const handleShowMenuClick = () => {
     setShowMenu(!showMenu);

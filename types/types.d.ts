@@ -1,9 +1,11 @@
+import { UseFormRegister } from "react-hook-form";
+
 type MenuItem = {
   id: number;
   label: string;
   href: string;
 };
-type Menu = MenuItem[];
+type MenuType = MenuItem[];
 
 type AdminMenuItem = {
   label: string;
@@ -39,3 +41,19 @@ export interface CloudinaryFile {
   access_mode: string;
   original_filename: string;
 }
+
+type CustomInputProps = {
+  label?: string;
+  autoComplete?: string;
+  type: string;
+  name: string;
+  value?: string | number;
+  register: UseFormRegister<any>;
+  error?: FieldError | undefined;
+  required?: boolean;
+  disabled?: boolean;
+  placeholder: string;
+  handleChangeValue?: (value: string) => void;
+  customClass?: string;
+  setValue?: UseFormSetValue<any>;
+};
