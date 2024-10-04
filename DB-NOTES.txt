@@ -1,20 +1,8 @@
-PAGE 
-
-id: 
-title
-path: string
-bg-hero
-section : [
-    {
-        text : string
-        caption : {
-            title: string
-            image : Cloudinary ? 
-        }
-        cta?: {
-            label : string
-            path: string
-        }
-    }
-]
-
+MusicFeature :
+ id        Int     
+  title     String
+  subTitle  String?
+  cover     String?
+  iframe    String
+  path      String
+  priority  Int 
