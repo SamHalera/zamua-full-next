@@ -46,10 +46,7 @@ const MusicFeatureRow = ({
     }
   }, [dataImage, setValue]);
   return (
-    <div
-      key={field.id}
-      className="flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6"
-    >
+    <div className="flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6">
       <Trash2
         onClick={() => {
           remove(index);

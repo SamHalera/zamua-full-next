@@ -1,3 +1,4 @@
+import { ProjectMember } from "@prisma/client";
 import { UseFormRegister } from "react-hook-form";
 
 type MenuItem = {
@@ -56,4 +57,20 @@ type CustomInputProps = {
   handleChangeValue?: (value: string) => void;
   customClass?: string;
   setValue?: UseFormSetValue<any>;
+};
+
+type SelectOptions = {
+  value: string;
+  label: string;
+  disabled?: boolean;
+};
+
+type ProjectType = {
+  id: number;
+  cover: string | null;
+  description: string | null;
+  fullTitle: string;
+  primaryTitleString: string;
+  secondaryTitleString: string;
+  projectMember: ProjectMember[];
 };

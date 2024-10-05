@@ -8,6 +8,10 @@
     "href": "/admin/projects"
   },
   {
+    "label": "Projects members",
+    "href": "/admin/project-members"
+  },
+  {
     "label": "Shows",
     "href": "/admin/shows"
   },

@@ -61,10 +61,10 @@ const MusicFeatureForm = () => {
   };
 
   const onSubmit: SubmitHandler<MusicFeatureFormType> = async (values) => {
-    console.log("values form=>", values);
-    const actionCreate = await createOrUpdateMusicFeatures(values);
-    console.log(actionCreate);
     try {
+      console.log("values form=>", values);
+      const actionCreate = await createOrUpdateMusicFeatures(values);
+      console.log(actionCreate);
     } catch (error) {
       console.error("Erreur onSubmit", error);
     }
