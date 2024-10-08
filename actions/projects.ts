@@ -90,7 +90,7 @@ export const getProjectById = async (id: number) => {
     },
   });
 
-  console.log("project after action==>", project);
+  // console.log("project after action==>", project);
   return project;
 };
 

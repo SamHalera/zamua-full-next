@@ -1,5 +1,6 @@
 import ButtonToAdmin from "@/components/ButtonToAdmin";
-import Footer from "@/components/footer/Footer";
+import Footer from "@/components/Footer/Footer";
+
 import Header from "@/components/nav/Header";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";

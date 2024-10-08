@@ -1,4 +1,4 @@
-import { ProjectMember } from "@prisma/client";
+import { Project, ProjectMember } from "@prisma/client";
 import { UseFormRegister } from "react-hook-form";
 
 type MenuItem = {
@@ -73,4 +73,12 @@ type ProjectType = {
   primaryTitleString: string;
   secondaryTitleString: string;
   projectMember: ProjectMember[];
+};
+
+type ProjectMemberEntityType = {
+  name: string;
+  id: number;
+  features: string;
+  // project: string[] | [];
+  project: Project[];
 };

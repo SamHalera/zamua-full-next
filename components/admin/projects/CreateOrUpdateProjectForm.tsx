@@ -1,19 +1,20 @@
 "use client";
 import { Button } from "@/components/ui/button";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import CustomInput from "../forms/CustomInput";
-import { useProjectStore } from "@/stores/projects";
+
 import { createOrUpdateProject } from "@/actions/projects";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Project, ProjectMember } from "@prisma/client";
 import { ArrowLeft } from "lucide-react";
 import { useProjectMemberStore } from "@/stores/projectMembers";
 import { getProjectMembers } from "@/actions/projectMembers";
 import { SelectOptions } from "@/types/types";
-import CustomSelect from "../forms/CustomSelect";
+
+import CustomSelectMultiple from "../forms/CustomSelectMultiple";
 
 export type ProjectFormType = {
   id: number;
@@ -29,11 +30,9 @@ const CreateOrUpdateProjectForm = ({
 }: {
   project?: Project | null;
 }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { projectMembers, setProjectMembers } = useProjectMemberStore();
   const router = useRouter();
 
-  console.log("project", project);
   const { register, handleSubmit } = useForm<ProjectFormType>({
     values: {
       id: project?.id ?? 0,
@@ -66,14 +65,15 @@ const CreateOrUpdateProjectForm = ({
   useEffect(() => {
     const fetchData = async () => {
       const projectMembersDB = await getProjectMembers();
-      projectMembersDB && setProjectMembers(projectMembersDB);
+      if (projectMembersDB) {
+        setProjectMembers(projectMembersDB);
+      }
     };
     fetchData();
   }, []);
-  console.log("projectMembers", projectMembers);
 
   const selectOptions: SelectOptions[] = [];
-  projectMembers &&
+  if (projectMembers) {
     projectMembers.forEach((item) => {
       const obj: SelectOptions = {
         value: item.id.toString(),
@@ -81,12 +81,22 @@ const CreateOrUpdateProjectForm = ({
       };
       selectOptions.push(obj);
     });
+  }
 
-  const projectMembersIdArray = projectMembers?.map((item) => {
-    return item.id.toString();
-  });
+  const selectedValue: string | number | readonly string[] | undefined =
+    projectMembers?.map((item) => item.id.toString());
 
-  console.log("projectMembersIdArray==>", projectMembersIdArray);
+  // if (projectMembers.length === 1 && field.project[0].id === 0) {
+  //   selectedValue = null;
+  // } else {
+  //   selectedValue = field.project.map((item) => {
+  //     return {
+  //       value: item.id?.toString() ?? "",
+  //       label: item.fullTitle ?? "",
+  //     };
+  //   });
+  // }
+
   return (
     <div>
       <Button
@@ -146,14 +156,17 @@ const CreateOrUpdateProjectForm = ({
             ></textarea>
           </label>
         </div>
-        <CustomSelect
+
+        <CustomSelectMultiple
           selectOptions={selectOptions}
           register={register}
           name={"projectMembers"}
           label="Project members"
           multiple
-          selectedValue={projectMembersIdArray}
+          selectedValue={selectedValue}
+          disabled={true}
         />
+
         <Button className="self-end" type="submit">
           Submit
         </Button>

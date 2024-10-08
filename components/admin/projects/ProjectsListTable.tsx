@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table";
 import { SquarePen, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { Project, ProjectMember } from "@prisma/client";
+import { ProjectMember } from "@prisma/client";
 import { ProjectType } from "@/types/types";
 const ProjectsListTable = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -21,7 +21,9 @@ const ProjectsListTable = () => {
   useEffect(() => {
     const fecthData = async () => {
       const projectsFromDB = await getProjects();
-      projectsFromDB && setProjects(projectsFromDB);
+      if (projectsFromDB) {
+        setProjects(projectsFromDB);
+      }
 
       setIsLoading(false);
     };
@@ -35,7 +37,7 @@ const ProjectsListTable = () => {
       <Table className="w-full">
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Project</TableHead>
+            <TableHead className="">Project</TableHead>
 
             <TableHead>Members</TableHead>
             <TableHead className="text-right">Actions</TableHead>

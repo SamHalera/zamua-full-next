@@ -2,38 +2,39 @@
 import { getProjectMembers } from "@/actions/projectMembers";
 import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
-import { Project, ProjectMember } from "@prisma/client";
+
 import { PlusCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import ProjectMemberItem from "./ProjectMemberItem";
-import { features } from "process";
-import { number } from "zod";
+
 import { getProjects } from "@/actions/projects";
 import { useProjectStore } from "@/stores/projects";
-import { creatOrUpdateProjectMembers } from "@/actions/admin";
+
+import { ProjectMemberEntityType } from "@/types/types";
+import {
+  creatOrUpdateProjectMembers,
+  deleteAllProjectMember,
+} from "@/actions/admin/projectMember";
 
 export type ProjectMembersFormType = {
-  projectMembers: ProjectMemberType[];
+  projectMembers: ProjectMemberEntityType[];
 };
-export type ProjectMemberType = {
-  id: number;
-  name: string;
-  features: string;
-  projectId: number;
-};
+
 const ProjectmembersForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [dataProjectMember, setDataProjectMember] = useState<
-    ProjectMember[] | null
+    ProjectMemberEntityType[] | null
   >();
 
   const { setProjects } = useProjectStore();
+
   const {
     register,
     control,
     handleSubmit,
-    formState: { isDirty, errors },
+
+    formState: { isDirty },
   } = useForm<ProjectMembersFormType>({
     values: {
       projectMembers: dataProjectMember ? dataProjectMember : [],
@@ -50,8 +51,13 @@ const ProjectmembersForm = () => {
   });
   const onSubmit: SubmitHandler<ProjectMembersFormType> = async (values) => {
     try {
-      console.log("values=>", values);
-      await creatOrUpdateProjectMembers(values);
+      const { projectMembers } = values;
+
+      if (projectMembers?.length === 0) {
+        await deleteAllProjectMember();
+      } else {
+        await creatOrUpdateProjectMembers(projectMembers);
+      }
     } catch (error) {
       console.error("Erreur onSubmit", error);
     }
@@ -61,21 +67,32 @@ const ProjectmembersForm = () => {
     id: 0,
     name: "",
     features: "",
-    projectId: 0,
+    project: [
+      {
+        id: 0,
+        fullTitle: "",
+        primaryTitleString: "",
+        secondaryTitleString: "",
+        cover: "",
+        description: "",
+      },
+    ],
   };
   useEffect(() => {
     const fecthData = async () => {
       const projectMembers = await getProjectMembers();
       const projects = await getProjects();
-      console.log("projects from useeffect==>", projects);
 
       setDataProjectMember(projectMembers);
-      projects && setProjects(projects);
+      if (projects) {
+        setProjects(projects);
+      }
 
       setIsLoading(false);
     };
     fecthData();
   }, []);
+
   return isLoading ? (
     <Loader />
   ) : (
@@ -84,7 +101,9 @@ const ProjectmembersForm = () => {
         register={register}
         fields={fields}
         remove={remove}
-        errors={errors}
+        // errors={errors}
+
+        control={control}
       />
       <div
         onClick={() => {

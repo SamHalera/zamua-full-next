@@ -2,12 +2,16 @@
 import { MusicFeatureFormType } from "@/components/admin/musicFeature/MusicFeatureForm";
 import {
   ProjectMembersFormType,
-  ProjectMemberType,
+  // ProjectMemberEntityType,
 } from "@/components/admin/projectMembers/ProjectmembersForm";
 import prisma from "@/db";
-import { MusicFeature, ProjectMember } from "@prisma/client";
+import { MusicFeature, Project, ProjectMember } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { getProjectMembers } from "./projectMembers";
+import { ProjectMemberEntityType } from "@/types/types";
+import { getProjectById, getProjects } from "./projects";
+import { object } from "zod";
+import { disconnect } from "process";
 
 export const createPage = async (data: {
   title: string;
@@ -85,79 +89,6 @@ const removeMusicFeaturesOnUpdate = async (
       )
       .forEach(async (item) => {
         await prisma.musicFeature.delete({
-          where: {
-            id: item.id,
-          },
-        });
-      });
-  }
-};
-
-export const creatOrUpdateProjectMembers = async (
-  data: ProjectMembersFormType
-) => {
-  try {
-    const { projectMembers } = data;
-    console.log(projectMembers);
-
-    const existingProjectMembers = await getProjectMembers();
-    if (projectMembers.length === 0) {
-      console.log("delete all");
-
-      await prisma.projectMember.deleteMany({});
-    } else if (
-      existingProjectMembers &&
-      existingProjectMembers?.length > projectMembers.length
-    ) {
-      //remove
-      console.log("remove");
-      await removeProjectMembersOnUpdate(data, existingProjectMembers);
-    }
-
-    for (let item of projectMembers) {
-      if (item.id === 0) {
-        // const { id, ...projectMemberToPersists } = item;
-        const itemCreated = await prisma.projectMember.create({
-          data: {
-            name: item.name,
-            features: item.features,
-            project: {
-              connect: {
-                id: item.projectId,
-              },
-            },
-          },
-        });
-      } else {
-        console.log("item to update");
-        const itemUpdated = await prisma.projectMember.update({
-          where: {
-            id: item.id,
-          },
-          data: item,
-        });
-      }
-    }
-
-    revalidatePath("/admin/music");
-  } catch (error) {
-    console.error("Error Music Feature create", error);
-    return { error: "Oups something went wrong" };
-  }
-};
-
-const removeProjectMembersOnUpdate = async (
-  dataToPersist: ProjectMembersFormType,
-  existingProjectMembers: ProjectMember[] | null
-) => {
-  if (existingProjectMembers && existingProjectMembers?.length > 0) {
-    const projectMemberToRemove = existingProjectMembers
-      .filter(
-        (obj1) =>
-          !dataToPersist.projectMembers.some((obj2) => obj2.id === obj1.id)
-      )
-      .forEach(async (item) => {
-        await prisma.projectMember.delete({
           where: {
             id: item.id,
           },

@@ -1,36 +1,41 @@
 import React from "react";
 import {
+  Control,
   FieldArrayWithId,
-  FieldErrors,
+  // FieldErrors,
   UseFieldArrayRemove,
   UseFormRegister,
 } from "react-hook-form";
 import { ProjectMembersFormType } from "./ProjectmembersForm";
 import { Trash2 } from "lucide-react";
 import CustomInput from "../forms/CustomInput";
-import CustomSelect from "../forms/CustomSelect";
+
 import { useProjectStore } from "@/stores/projects";
 import { SelectOptions } from "@/types/types";
-import { Project } from "@prisma/client";
+
+import CustomReactMultipleSelect from "../forms/CustomReactMultipleSelect";
+import { cn } from "@/lib/utils";
 
 const ProjectMembersRow = ({
   register,
   field,
   index,
   remove,
-  errors,
+  // errors,
+
+  control,
 }: {
   register: UseFormRegister<ProjectMembersFormType>;
   field: FieldArrayWithId<ProjectMembersFormType, "projectMembers", "id">;
   index: number;
   remove: UseFieldArrayRemove;
-  errors: FieldErrors<ProjectMembersFormType>;
+  // errors: FieldErrors<ProjectMembersFormType>;
+
+  control: Control<ProjectMembersFormType, any>;
 }) => {
   const { projects } = useProjectStore();
 
-  console.log("project from store==>", projects);
-  console.log("field", field);
-  let projectOptions: SelectOptions[] = [];
+  const projectOptions: SelectOptions[] = [];
   if (projects) {
     projects.forEach((item) => {
       const objOption: SelectOptions = {
@@ -40,8 +45,30 @@ const ProjectMembersRow = ({
       projectOptions.push(objOption);
     });
   }
+
+  let selectedValue: { value: string; label: string }[] | null = [
+    { value: "", label: "" },
+  ];
+  if (field.project.length === 1 && field.project[0].id === 0) {
+    selectedValue = null;
+  } else {
+    selectedValue = field.project.map((item) => {
+      return {
+        value: item.id?.toString() ?? "",
+        label: item.fullTitle ?? "",
+      };
+    });
+  }
+
   return (
-    <div className="flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6">
+    <div
+      className={cn(
+        "flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6 flex-1",
+        {
+          "border-2 border-primary shadow-lg": field?.name === "",
+        }
+      )}
+    >
       <Trash2
         onClick={() => {
           remove(index);
@@ -66,15 +93,16 @@ const ProjectMembersRow = ({
           placeholder="project member's features"
           customClass="input input-bordered w-full"
         />
-        <CustomSelect
-          label="Projects"
-          register={register}
-          name={`projectMembers.${index}.projectId`}
-          selectedValue={field.projectId?.toString() ?? ""}
-          selectOptions={projectOptions}
-          multiple={false}
-        />
       </div>
+      <CustomReactMultipleSelect
+        control={control}
+        register={register}
+        label="Pick some projects"
+        selectOptions={projectOptions}
+        selectedValue={selectedValue}
+        field={field}
+        index={index}
+      />
     </div>
   );
 };

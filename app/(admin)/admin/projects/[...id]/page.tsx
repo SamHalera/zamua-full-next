@@ -1,6 +1,6 @@
 import { getProjectById } from "@/actions/projects";
 import CreateOrUpdateProjectForm from "@/components/admin/projects/CreateOrUpdateProjectForm";
-import Link from "next/link";
+
 import React from "react";
 
 const page = async ({ params }: { params: { id: string[] } }) => {

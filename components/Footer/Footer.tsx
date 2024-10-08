@@ -1,8 +1,9 @@
 import { Facebook, Instagram, Mail } from "lucide-react";
 import React from "react";
-import FooterMenu from "./FooterMenu";
+
 import Link from "next/link";
 import menuFooterJson from "@/assets/footerMenu.json";
+import FooterMenu from "./FooterMenu";
 
 const Footer = async () => {
   return (
