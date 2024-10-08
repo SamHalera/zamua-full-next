@@ -27,7 +27,7 @@ const MusicFeatureItem = ({
   errors: FieldErrors;
 }) => {
   return (
-    <div>
+    <div className="flex flex-wrap gap-2">
       {fields.map((field, index) => {
         return (
           <MusicFeatureRow

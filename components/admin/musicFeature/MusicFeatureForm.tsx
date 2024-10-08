@@ -6,9 +6,13 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 
 import MusicFeatureItem from "./MusicFeatureItem";
-import { createOrUpdateMusicFeatures, getMusicFeatures } from "@/actions/admin";
+
 import Loader from "@/components/Loader";
 import { PlusCircle } from "lucide-react";
+import {
+  createOrUpdateMusicFeatures,
+  getMusicFeatures,
+} from "@/actions/admin/musicFeature";
 
 export type MusicFeatureFormType = {
   musicFeature: MusicFeatureType[];

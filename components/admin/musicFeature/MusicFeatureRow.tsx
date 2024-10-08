@@ -12,6 +12,7 @@ import { Trash2 } from "lucide-react";
 import CustomInput from "../forms/CustomInput";
 import { CldUploadWidget } from "next-cloudinary";
 import { CldImage } from "next-cloudinary";
+import { cn } from "@/lib/utils";
 
 export type UploadResultType = {
   event: string | undefined;
@@ -45,8 +46,16 @@ const MusicFeatureRow = ({
       });
     }
   }, [dataImage, setValue]);
+
   return (
-    <div className="flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6">
+    <div
+      className={cn(
+        "flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6 flex-auto",
+        {
+          "border-2 border-primary shadow-lg": field.title === "",
+        }
+      )}
+    >
       <Trash2
         onClick={() => {
           remove(index);
