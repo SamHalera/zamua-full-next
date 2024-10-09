@@ -1,5 +1,5 @@
 "use client";
-import { deleteProjectById, getProjects } from "@/actions/projects";
+import { getProjects } from "@/actions/projects";
 import Loader from "@/components/Loader";
 import { useProjectStore } from "@/stores/projects";
 import React, { useEffect, useState } from "react";
@@ -16,6 +16,7 @@ import Link from "next/link";
 import { ProjectMember } from "@prisma/client";
 import { ProjectType } from "@/types/types";
 import { CldImage } from "next-cloudinary";
+import { deleteProjectById } from "@/actions/admin/project";
 const ProjectsListTable = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { projects, setProjects } = useProjectStore();
