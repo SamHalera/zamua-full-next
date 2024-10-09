@@ -1,45 +1,57 @@
 "use client";
 import { Button } from "@/components/ui/button";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import CustomInput from "../forms/CustomInput";
 
 import { createOrUpdateProject } from "@/actions/projects";
 import { useRouter } from "next/navigation";
-import { Project, ProjectMember } from "@prisma/client";
+import { ProjectMember } from "@prisma/client";
 import { ArrowLeft } from "lucide-react";
 import { useProjectMemberStore } from "@/stores/projectMembers";
 import { getProjectMembers } from "@/actions/projectMembers";
-import { SelectOptions } from "@/types/types";
+import { ProjectAndMediaType, SelectOptions } from "@/types/types";
 
 import CustomSelectMultiple from "../forms/CustomSelectMultiple";
+import AddMediaForm from "./AddMediaForm";
+
+import ButtonForMediaManager from "./ButtonForMediaManager";
+import { CldImage, CldUploadWidget } from "next-cloudinary";
 
 export type ProjectFormType = {
   id: number;
   fullTitle: string;
   primaryTitleString: string;
   secondaryTitleString: string;
-  // cover: string;
+  cover: string;
   description: string;
   projectMember: ProjectMember[];
 };
 const CreateOrUpdateProjectForm = ({
   project,
 }: {
-  project?: Project | null;
+  project?: ProjectAndMediaType | null;
 }) => {
+  const [dataImage, setDataImage] = useState<string>(project?.cover ?? "");
+  const [addMediaView, setAddMediaView] = useState<boolean>(false);
   const { projectMembers, setProjectMembers } = useProjectMemberStore();
   const router = useRouter();
 
-  const { register, handleSubmit } = useForm<ProjectFormType>({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { isDirty, isSubmitting },
+  } = useForm<ProjectFormType>({
     values: {
       id: project?.id ?? 0,
       fullTitle: project?.fullTitle ?? "",
       primaryTitleString: project?.primaryTitleString ?? "",
       secondaryTitleString: project?.secondaryTitleString ?? "",
       description: project?.description ?? "",
+      cover: project?.cover ?? "",
       projectMember:
         projectMembers && projectMembers.length > 0 ? projectMembers : [],
     },
@@ -86,91 +98,165 @@ const CreateOrUpdateProjectForm = ({
   const selectedValue: string | number | readonly string[] | undefined =
     projectMembers?.map((item) => item.id.toString());
 
-  // if (projectMembers.length === 1 && field.project[0].id === 0) {
-  //   selectedValue = null;
-  // } else {
-  //   selectedValue = field.project.map((item) => {
-  //     return {
-  //       value: item.id?.toString() ?? "",
-  //       label: item.fullTitle ?? "",
-  //     };
-  //   });
-  // }
-
+  useEffect(() => {
+    if (dataImage) {
+      setValue("cover", dataImage, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+    }
+  }, [dataImage, setValue]);
   return (
     <div>
-      <Button
-        onClick={(e) => {
-          e.preventDefault();
-          router.push("/admin/projects");
-        }}
-        className="mb-10 bg-orange-400 h-10"
-      >
-        <ArrowLeft className="mr-4" /> back to project list
-      </Button>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        <CustomInput
-          label="Project ID"
-          type="number"
-          name="id"
-          register={register}
-          placeholder=""
-          customClass="input input-bordered w-full"
-          disabled
-        />
-        <CustomInput
-          label="Project name"
-          type="text"
-          name="fullTitle"
-          register={register}
-          placeholder="name your project"
-          customClass="input input-bordered w-full"
-        />
-        <CustomInput
-          label="First part of title"
-          type="text"
-          name="primaryTitleString"
-          register={register}
-          placeholder="First part of title"
-          customClass="input input-bordered w-full"
-        />
-        <CustomInput
-          label="Second part of title"
-          type="text"
-          name="secondaryTitleString"
-          register={register}
-          placeholder="Second part of title"
-          customClass="input input-bordered w-full"
-        />
-
-        <div>
-          <label className="form-control">
-            <div className="label">
-              <span className="label-text">Description</span>
-            </div>
-            <textarea
-              {...register("description")}
-              name="description"
-              className="textarea textarea-bordered h-24"
-              placeholder="Project description"
-            ></textarea>
-          </label>
-        </div>
-
-        <CustomSelectMultiple
-          selectOptions={selectOptions}
-          register={register}
-          name={"projectMembers"}
-          label="Project members"
-          multiple
-          selectedValue={selectedValue}
-          disabled={true}
-        />
-
-        <Button className="self-end" type="submit">
-          Submit
+      <div className="flex justify-between">
+        <Button
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/admin/projects");
+          }}
+          className="mb-10 bg-orange-400 h-10"
+        >
+          <ArrowLeft className="mr-4" /> back to project list
         </Button>
-      </form>
+
+        {project && (
+          <ButtonForMediaManager
+            addMediaView={addMediaView}
+            setAddMediaView={setAddMediaView}
+          />
+        )}
+      </div>
+      {!addMediaView ? (
+        <form onSubmit={handleSubmit(onSubmit)} className="flex l gap-6">
+          <div className="flex gap-3 w-1/3">
+            <div className="flex-1 flex flex-col items-center gap-3 ">
+              <div className="fixed">
+                {dataImage && (
+                  <>
+                    <span className="font-semibold text-primary text-center mb-4 block">
+                      Project Cover
+                    </span>
+                    <CldImage
+                      width="200"
+                      height="200"
+                      src={dataImage}
+                      sizes="100vw"
+                      alt="Description of my image"
+                    />
+
+                    <CustomInput
+                      register={register}
+                      label="Cover"
+                      name="cover"
+                      type="text"
+                      customClass="input input-bordered w-full"
+                      placeholder="Cover"
+                      disabled={true}
+                    />
+                  </>
+                )}
+                <CldUploadWidget
+                  onSuccess={(result: any) => {
+                    console.log(result?.info?.secure_url);
+
+                    setDataImage(result?.info?.secure_url);
+                  }}
+                  uploadPreset="orzznnzy"
+                >
+                  {({ open }) => {
+                    return (
+                      <button
+                        name="uploadButton"
+                        className="border border-primary bg-primary hover:bg-primary/40 text-xs duration-500 font-semibold w-44 rounded-full py-4 mt-4"
+                        onClick={(e) => {
+                          open();
+                          e.preventDefault();
+                        }}
+                      >
+                        Upload an Image
+                      </button>
+                    );
+                  }}
+                </CldUploadWidget>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-3 flex-1">
+            <CustomInput
+              label="Project ID"
+              type="number"
+              name="id"
+              register={register}
+              placeholder=""
+              customClass="input input-bordered w-full"
+              disabled
+            />
+
+            <CustomInput
+              label="Project name"
+              type="text"
+              name="fullTitle"
+              register={register}
+              placeholder="name your project"
+              customClass="input input-bordered w-full"
+            />
+
+            <CustomInput
+              label="First part of title"
+              type="text"
+              name="primaryTitleString"
+              register={register}
+              placeholder="First part of title"
+              customClass="input input-bordered w-full"
+            />
+            <CustomInput
+              label="Second part of title"
+              type="text"
+              name="secondaryTitleString"
+              register={register}
+              placeholder="Second part of title"
+              customClass="input input-bordered w-full"
+            />
+
+            <div className="flex-1">
+              <label className="form-control">
+                <div className="label">
+                  <span className="label-text">Description</span>
+                </div>
+                <textarea
+                  {...register("description")}
+                  name="description"
+                  className="textarea textarea-bordered h-24"
+                  placeholder="Project description"
+                ></textarea>
+              </label>
+            </div>
+            <div className="flex-1">
+              <CustomSelectMultiple
+                selectOptions={selectOptions}
+                register={register}
+                name={"projectMembers"}
+                label="Project members"
+                multiple
+                selectedValue={selectedValue}
+                disabled={true}
+              />
+            </div>
+            <Button
+              disabled={!isDirty || isSubmitting}
+              className="self-end"
+              type="submit"
+            >
+              {isSubmitting && (
+                <span className="loading text-white loading-spinner loading-sm"></span>
+              )}
+              Submit
+            </Button>
+          </div>
+        </form>
+      ) : (
+        project && <AddMediaForm project={project} />
+      )}
     </div>
   );
 };

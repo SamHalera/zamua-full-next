@@ -9,26 +9,25 @@ const CustomSelect = ({
   selectOptions,
   selectedValue,
   multiple,
+  label,
 }: {
   register: UseFormRegister<any>;
   name: string;
   selectOptions: SelectOptions[];
   selectedValue?: string;
   multiple: boolean;
+  label: string;
 }) => {
   return (
     <label className="form-control w-full ">
       <div className="label">
-        <span className="label-text">Pick one project</span>
+        <span className="label-text">{label}</span>
       </div>
       <select
         {...register(name)}
         className="select select-bordered"
         multiple={multiple}
       >
-        <option disabled value={""}>
-          Pick one
-        </option>
         {selectOptions.map((item: SelectOptions) => {
           return (
             <option

@@ -42,25 +42,24 @@ model Project {
   cover                   String?
   description             String?
   projectMember           ProjectMember[]
-  // media                   Media[]
+  media                   Media[]
 }
 
 model ProjectMember {
   id    Int @id @default(autoincrement())
   name  String
   features  String
-  // projectId Int 
   project   Project[]
 }
 
-// model Media {
-//   id Int    @id @default(autoincrement())
-//   type      TypeOfMedia
-//   source    String
-//   priority  Int?
-//   projectId Int?
-//   project   Project? @relation(fields: [projectId], references: [id])
-// }
+model Media {
+  id Int    @id @default(autoincrement())
+  type      TypeOfMedia
+  source    String
+  publicId  String
+  projectId Int?
+  project   Project? @relation(fields: [projectId], references: [id])
+}
 
 enum TypeOfMedia {
   PHOTO

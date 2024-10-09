@@ -108,24 +108,7 @@ const MusicFeatureRow = ({
           customClass="input input-bordered w-full"
           placeholder="priority"
         />
-        {/* <>
-          <label className="form-control w-full ">
-            <div className="label">
-              <span className="label-text">
-                COVER
-            
-              </span>
-            </div>
 
-            <input
-              {...register(`musicFeature.${index}.cover`)}
-              value={dataImage}
-              type="text"
-              placeholder="cover"
-              className="input input-bordered w-full"
-            />
-          </label>
-        </> */}
         <CustomInput
           register={register}
           label="Cover"
@@ -135,7 +118,7 @@ const MusicFeatureRow = ({
           placeholder="Cover"
         />
       </div>
-      <div>
+      <div className="my-2">
         {dataImage && (
           <CldImage
             width="200"
@@ -158,7 +141,7 @@ const MusicFeatureRow = ({
             return (
               <button
                 name="uploadButton"
-                className="border border-primary bg-primary hover:bg-primary/40  duration-500 font-semibold self-center w-64 rounded-full py-4"
+                className="border border-primary bg-primary hover:bg-primary/40 text-xs duration-500 font-semibold self-center w-44 rounded-full py-4 mt-4"
                 onClick={(e) => {
                   open();
                   e.preventDefault();

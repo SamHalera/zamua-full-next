@@ -1,4 +1,4 @@
-import { Project, ProjectMember } from "@prisma/client";
+import { Media, Project, ProjectMember } from "@prisma/client";
 import { UseFormRegister } from "react-hook-form";
 
 type MenuItem = {
@@ -53,7 +53,7 @@ type CustomInputProps = {
   error?: FieldError | undefined;
   required?: boolean;
   disabled?: boolean;
-  placeholder: string;
+  placeholder?: string;
   handleChangeValue?: (value: string) => void;
   customClass?: string;
   setValue?: UseFormSetValue<any>;
@@ -65,7 +65,7 @@ type SelectOptions = {
   disabled?: boolean;
 };
 
-type ProjectType = {
+interface ProjectType {
   id: number;
   cover: string | null;
   description: string | null;
@@ -73,7 +73,7 @@ type ProjectType = {
   primaryTitleString: string;
   secondaryTitleString: string;
   projectMember: ProjectMember[];
-};
+}
 
 type ProjectMemberEntityType = {
   name: string;
@@ -82,3 +82,7 @@ type ProjectMemberEntityType = {
   // project: string[] | [];
   project: Project[];
 };
+
+interface ProjectAndMediaType extends ProjectType {
+  media: Media[];
+}

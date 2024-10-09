@@ -15,6 +15,7 @@ import { SquarePen, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { ProjectMember } from "@prisma/client";
 import { ProjectType } from "@/types/types";
+import { CldImage } from "next-cloudinary";
 const ProjectsListTable = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { projects, setProjects } = useProjectStore();
@@ -33,10 +34,11 @@ const ProjectsListTable = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <div>
+    <div className="my-9">
       <Table className="w-full">
         <TableHeader>
           <TableRow>
+            <TableHead></TableHead>
             <TableHead className="">Project</TableHead>
 
             <TableHead>Members</TableHead>
@@ -50,11 +52,24 @@ const ProjectsListTable = () => {
             projects.map((item: ProjectType) => {
               return (
                 <TableRow key={item.id}>
+                  <TableCell>
+                    {item.cover && (
+                      <CldImage
+                        className="rounded-full"
+                        width="100"
+                        height="100"
+                        src={item.cover}
+                        sizes="100vw"
+                        crop="fill"
+                        alt="Description of my image"
+                      />
+                    )}
+                  </TableCell>
                   <TableCell className="font-medium">
                     {item.fullTitle}
                   </TableCell>
 
-                  <TableCell>
+                  <TableCell className="">
                     {item.projectMember &&
                       item.projectMember.length > 0 &&
                       item.projectMember.map((member: ProjectMember, index) => {
