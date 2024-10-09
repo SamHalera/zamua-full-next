@@ -2,6 +2,7 @@
 
 import prisma from "@/db";
 import { ProjectMemberEntityType } from "@/types/types";
+import { revalidatePath } from "next/cache";
 
 export const creatOrUpdateProjectMembers = async (
   formValues: ProjectMemberEntityType[]
@@ -34,6 +35,7 @@ export const creatOrUpdateProjectMembers = async (
   const responseCreate = await updateProjectMember(
     arrayOfProjectMembersToUpdate
   );
+  revalidatePath("/admin/project-members");
 };
 export const createProjectMember = async (
   formValues: ProjectMemberEntityType[]

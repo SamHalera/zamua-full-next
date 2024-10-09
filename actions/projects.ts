@@ -42,7 +42,7 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
       });
       console.log("createProject==>", createProject);
 
-      updateProjectMembersForProject(createProject.id, data.projectMember);
+      // updateProjectMembersForProject(createProject.id, data.projectMember);
     } else {
       console.log("UPDATE");
       const updateProject = await prisma.project.update({
@@ -57,7 +57,7 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
           cover: data.cover,
         },
       });
-      updateProjectMembersForProject(updateProject.id, data.projectMember);
+      // updateProjectMembersForProject(updateProject.id, data.projectMember);
     }
 
     revalidatePath("/admin/projects");

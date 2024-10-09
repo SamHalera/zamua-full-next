@@ -34,7 +34,7 @@ const ProjectmembersForm = () => {
     control,
     handleSubmit,
 
-    formState: { isDirty },
+    formState: { isDirty, isSubmitting },
   } = useForm<ProjectMembersFormType>({
     values: {
       projectMembers: dataProjectMember ? dataProjectMember : [],
@@ -93,7 +93,7 @@ const ProjectmembersForm = () => {
     fecthData();
   }, []);
 
-  return isLoading ? (
+  return isLoading || isSubmitting ? (
     <Loader />
   ) : (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -114,7 +114,14 @@ const ProjectmembersForm = () => {
         <PlusCircle /> add a project member
       </div>
 
-      <Button disabled={!isDirty} className="self-end text-xl " type="submit">
+      <Button
+        disabled={!isDirty || isSubmitting}
+        className="self-end text-xl "
+        type="submit"
+      >
+        {isSubmitting && (
+          <span className="loading text-white loading-spinner loading-sm"></span>
+        )}
         Submit
       </Button>
     </form>

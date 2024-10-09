@@ -8,13 +8,11 @@ import CustomInput from "../forms/CustomInput";
 
 import { createOrUpdateProject } from "@/actions/projects";
 import { useRouter } from "next/navigation";
-import { ProjectMember } from "@prisma/client";
 import { ArrowLeft } from "lucide-react";
 import { useProjectMemberStore } from "@/stores/projectMembers";
 import { getProjectMembers } from "@/actions/projectMembers";
 import { ProjectAndMediaType, SelectOptions } from "@/types/types";
 
-import CustomSelectMultiple from "../forms/CustomSelectMultiple";
 import AddMediaForm from "./AddMediaForm";
 
 import ButtonForMediaManager from "./ButtonForMediaManager";
@@ -27,7 +25,6 @@ export type ProjectFormType = {
   secondaryTitleString: string;
   cover: string;
   description: string;
-  projectMember: ProjectMember[];
 };
 const CreateOrUpdateProjectForm = ({
   project,
@@ -52,8 +49,6 @@ const CreateOrUpdateProjectForm = ({
       secondaryTitleString: project?.secondaryTitleString ?? "",
       description: project?.description ?? "",
       cover: project?.cover ?? "",
-      projectMember:
-        projectMembers && projectMembers.length > 0 ? projectMembers : [],
     },
   });
 
@@ -94,9 +89,6 @@ const CreateOrUpdateProjectForm = ({
       selectOptions.push(obj);
     });
   }
-
-  const selectedValue: string | number | readonly string[] | undefined =
-    projectMembers?.map((item) => item.id.toString());
 
   useEffect(() => {
     if (dataImage) {
@@ -231,16 +223,17 @@ const CreateOrUpdateProjectForm = ({
                 ></textarea>
               </label>
             </div>
-            <div className="flex-1">
-              <CustomSelectMultiple
-                selectOptions={selectOptions}
-                register={register}
-                name={"projectMembers"}
-                label="Project members"
-                multiple
-                selectedValue={selectedValue}
-                disabled={true}
-              />
+            <div className="flex-1 border border-primary rounded-md p-4 bg-slate-100 opacity-75">
+              {project?.projectMember &&
+                project?.projectMember.length > 0 &&
+                project.projectMember.map((member) => {
+                  return (
+                    <div key={member.name}>
+                      <span className="font-semibold">{member.name} - </span>
+                      <span>{member.features}</span>
+                    </div>
+                  );
+                })}
             </div>
             <Button
               disabled={!isDirty || isSubmitting}
