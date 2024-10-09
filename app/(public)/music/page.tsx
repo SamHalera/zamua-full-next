@@ -1,4 +1,4 @@
-import { getMusicFeatures } from "@/actions/admin";
+import { getMusicFeatures } from "@/actions/admin/musicFeature";
 import MusicContent from "@/components/contents/music/MusicContent";
 import React from "react";
 

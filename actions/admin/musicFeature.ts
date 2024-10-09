@@ -1,14 +1,9 @@
 "use server";
 import { MusicFeatureFormType } from "@/components/admin/musicFeature/MusicFeatureForm";
+
 import prisma from "@/db";
 import { MusicFeature } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-
-export const createPage = async (data: {
-  title: string;
-  name: string;
-  path: string;
-}) => {};
 
 export const getMusicFeatures = async () => {
   console.log("inside action");

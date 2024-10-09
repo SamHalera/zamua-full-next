@@ -1,0 +1,110 @@
+import { handleMediaUpload } from "@/actions/projects";
+import { ProjectAndMediaType } from "@/types/types";
+import { $Enums, Media } from "@prisma/client";
+
+import { CldUploadWidget } from "next-cloudinary";
+
+import React, { useState } from "react";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import AddMediaRow from "./AddMediaRow";
+import { Button } from "@/components/ui/button";
+import Loader from "@/components/Loader";
+export type UploadMediaFormTYpe = {
+  media: Media[];
+};
+const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { register, handleSubmit, control, formState } =
+    useForm<UploadMediaFormTYpe>({
+      values: {
+        media: project.media && project.media,
+      },
+    });
+
+  const { fields, append, remove } = useFieldArray<
+    UploadMediaFormTYpe,
+    "media",
+    "id"
+  >({ name: "media", control });
+
+  const onSubmit: SubmitHandler<UploadMediaFormTYpe> = async (values) => {
+    setIsLoading(true);
+    console.log("values from form==>", values);
+    const { media } = values;
+    const response = await handleMediaUpload(media, project);
+    if (response) {
+      console.log("response==>", response);
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <div className="text-2xl mb-8">
+        Add media for <strong>{project.fullTitle.toUpperCase()} </strong>project
+      </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className=" flex gap-4">
+            {fields.length > 0 &&
+              fields.map((field, index) => {
+                return (
+                  <AddMediaRow
+                    key={field.id}
+                    register={register}
+                    field={field}
+                    index={index}
+                    remove={remove}
+                  />
+                );
+              })}
+          </div>
+        )}
+
+        <CldUploadWidget
+          onSuccess={(result: any) => {
+            const mediaField = {
+              id: 0,
+              source: result?.info?.secure_url,
+              publicId: result.info.public_id,
+              projectId: project.id,
+              type: "PHOTO" as $Enums.TypeOfMedia,
+            };
+            append(mediaField);
+          }}
+          uploadPreset="lvfy5bk7"
+        >
+          {({ open }) => {
+            return (
+              <button
+                name="uploadButton"
+                className="border border-primary bg-primary hover:bg-primary/40 text-xs duration-500 font-semibold self-center w-44 rounded-full py-4 mt-4"
+                onClick={(e) => {
+                  open();
+                  e.preventDefault();
+                }}
+              >
+                Upload an Image
+              </button>
+            );
+          }}
+        </CldUploadWidget>
+        <div className="self-end">
+          <Button
+            className="flex gap-4"
+            disabled={!formState.isDirty || formState.isSubmitting}
+          >
+            {formState.isSubmitting && (
+              <span className="loading text-white loading-spinner loading-sm"></span>
+            )}
+            Submit
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default AddMediaForm;

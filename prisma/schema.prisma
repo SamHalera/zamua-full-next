@@ -33,3 +33,35 @@ model MusicFeature {
 
 
 }
+
+model Project {
+  id                      Int   @id @default(autoincrement())  
+  fullTitle               String
+  primaryTitleString      String
+  secondaryTitleString    String
+  cover                   String?
+  description             String?
+  projectMember           ProjectMember[]
+  media                   Media[]
+}
+
+model ProjectMember {
+  id    Int @id @default(autoincrement())
+  name  String
+  features  String
+  project   Project[]
+}
+
+model Media {
+  id Int    @id @default(autoincrement())
+  type      TypeOfMedia
+  source    String
+  publicId  String
+  projectId Int?
+  project   Project? @relation(fields: [projectId], references: [id])
+}
+
+enum TypeOfMedia {
+  PHOTO
+  VIDEO
+}

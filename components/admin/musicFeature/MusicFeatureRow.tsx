@@ -12,6 +12,7 @@ import { Trash2 } from "lucide-react";
 import CustomInput from "../forms/CustomInput";
 import { CldUploadWidget } from "next-cloudinary";
 import { CldImage } from "next-cloudinary";
+import { cn } from "@/lib/utils";
 
 export type UploadResultType = {
   event: string | undefined;
@@ -45,10 +46,15 @@ const MusicFeatureRow = ({
       });
     }
   }, [dataImage, setValue]);
+
   return (
     <div
-      key={field.id}
-      className="flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6"
+      className={cn(
+        "flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6 flex-auto",
+        {
+          "border-2 border-primary shadow-lg": field.title === "",
+        }
+      )}
     >
       <Trash2
         onClick={() => {
@@ -102,24 +108,7 @@ const MusicFeatureRow = ({
           customClass="input input-bordered w-full"
           placeholder="priority"
         />
-        {/* <>
-          <label className="form-control w-full ">
-            <div className="label">
-              <span className="label-text">
-                COVER
-            
-              </span>
-            </div>
 
-            <input
-              {...register(`musicFeature.${index}.cover`)}
-              value={dataImage}
-              type="text"
-              placeholder="cover"
-              className="input input-bordered w-full"
-            />
-          </label>
-        </> */}
         <CustomInput
           register={register}
           label="Cover"
@@ -129,7 +118,7 @@ const MusicFeatureRow = ({
           placeholder="Cover"
         />
       </div>
-      <div>
+      <div className="my-2">
         {dataImage && (
           <CldImage
             width="200"
@@ -152,7 +141,7 @@ const MusicFeatureRow = ({
             return (
               <button
                 name="uploadButton"
-                className="border border-primary bg-primary hover:bg-primary/40  duration-500 font-semibold self-center w-64 rounded-full py-4"
+                className="border border-primary bg-primary hover:bg-primary/40 text-xs duration-500 font-semibold self-center w-44 rounded-full py-4 mt-4"
                 onClick={(e) => {
                   open();
                   e.preventDefault();

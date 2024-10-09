@@ -6,3 +6,10 @@ MusicFeature :
   iframe    String
   path      String
   priority  Int 
+
+Project :
+
+id                      Int     
+fullTitle               String
+primaryTitleString      String
+secondaryTitleString    String

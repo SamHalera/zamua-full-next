@@ -6,9 +6,13 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 
 import MusicFeatureItem from "./MusicFeatureItem";
-import { createOrUpdateMusicFeatures, getMusicFeatures } from "@/actions/admin";
+
 import Loader from "@/components/Loader";
 import { PlusCircle } from "lucide-react";
+import {
+  createOrUpdateMusicFeatures,
+  getMusicFeatures,
+} from "@/actions/admin/musicFeature";
 
 export type MusicFeatureFormType = {
   musicFeature: MusicFeatureType[];
@@ -61,10 +65,10 @@ const MusicFeatureForm = () => {
   };
 
   const onSubmit: SubmitHandler<MusicFeatureFormType> = async (values) => {
-    console.log("values form=>", values);
-    const actionCreate = await createOrUpdateMusicFeatures(values);
-    console.log(actionCreate);
     try {
+      console.log("values form=>", values);
+      const actionCreate = await createOrUpdateMusicFeatures(values);
+      console.log(actionCreate);
     } catch (error) {
       console.error("Erreur onSubmit", error);
     }
