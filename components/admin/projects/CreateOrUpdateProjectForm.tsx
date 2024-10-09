@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import CustomInput from "../forms/CustomInput";
 
-import { createOrUpdateProject } from "@/actions/projects";
+import { createOrUpdateProject } from "@/actions/admin/project";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { useProjectMemberStore } from "@/stores/projectMembers";
