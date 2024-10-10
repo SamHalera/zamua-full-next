@@ -1,4 +1,5 @@
 import AdminSideBar from "@/components/admin/AdminSideBar";
+import { Toaster } from "@/components/ui/toaster";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -17,6 +18,7 @@ export default async function AdminLayout({
   return (
     <div className=" flex gap-8">
       <div className="mr-60">
+        <Toaster />
         <AdminSideBar />
       </div>
 

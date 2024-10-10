@@ -17,6 +17,7 @@ import AddMediaForm from "./AddMediaForm";
 
 import ButtonForMediaManager from "./ButtonForMediaManager";
 import { CldImage, CldUploadWidget } from "next-cloudinary";
+import { useToast } from "@/hooks/use-toast";
 
 export type ProjectFormType = {
   id: number;
@@ -35,6 +36,7 @@ const CreateOrUpdateProjectForm = ({
   const [addMediaView, setAddMediaView] = useState<boolean>(false);
   const { projectMembers, setProjectMembers } = useProjectMemberStore();
   const router = useRouter();
+  const { toast } = useToast();
 
   const {
     register,
@@ -58,10 +60,24 @@ const CreateOrUpdateProjectForm = ({
       const response = await createOrUpdateProject(values);
       console.log(response);
       if (response?.error) {
+        toast({
+          title: "Uh oh! Something went wrong.",
+          description: response.error,
+          variant: "destructive",
+        });
         console.log("Response error==>", response.error);
       }
       if (response?.success) {
         console.log("Response success==>", response.success);
+        toast({
+          title: "Good news!",
+          description: response.success,
+          variant: "default",
+          style: {
+            backgroundColor: "#FEC140",
+            color: "black",
+          },
+        });
         router.push("/admin/projects");
       }
     } catch (error) {

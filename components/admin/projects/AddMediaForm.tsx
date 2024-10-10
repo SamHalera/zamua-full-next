@@ -1,4 +1,3 @@
-import { handleMediaUpload } from "@/actions/projects";
 import { ProjectAndMediaType } from "@/types/types";
 import { $Enums, Media } from "@prisma/client";
 
@@ -9,11 +8,15 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import AddMediaRow from "./AddMediaRow";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/Loader";
+import { useToast } from "@/hooks/use-toast";
+import { handleMediaUpload } from "@/actions/admin/project";
 export type UploadMediaFormTYpe = {
   media: Media[];
 };
 const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { toast } = useToast();
   const { register, handleSubmit, control, formState } =
     useForm<UploadMediaFormTYpe>({
       values: {
@@ -32,9 +35,25 @@ const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
     console.log("values from form==>", values);
     const { media } = values;
     const response = await handleMediaUpload(media, project);
-    if (response) {
+    if (response?.success) {
       console.log("response==>", response);
+      toast({
+        title: "Good news!",
+        description: response.success,
+        variant: "default",
+        style: {
+          backgroundColor: "#FEC140",
+          color: "black",
+        },
+      });
       setIsLoading(false);
+    }
+    if (response?.error) {
+      toast({
+        title: "Uh oh! Something went wrong.",
+        description: response.error,
+        variant: "destructive",
+      });
     }
   };
 
