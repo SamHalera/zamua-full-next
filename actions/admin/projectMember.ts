@@ -7,35 +7,40 @@ import { revalidatePath } from "next/cache";
 export const creatOrUpdateProjectMembers = async (
   formValues: ProjectMemberEntityType[]
 ) => {
-  const existingProjectMembers = await prisma.projectMember.findMany();
+  try {
+    const existingProjectMembers = await prisma.projectMember.findMany();
 
-  if (existingProjectMembers.length > formValues.length) {
-    const projectMemberToDelete = existingProjectMembers.filter((elt) => {
-      return !formValues.some((elt2) => elt2.id === elt.id);
-    });
-
-    projectMemberToDelete.forEach(async (item) => {
-      await prisma.projectMember.delete({
-        where: {
-          id: item.id,
-        },
+    if (existingProjectMembers.length > formValues.length) {
+      const projectMemberToDelete = existingProjectMembers.filter((elt) => {
+        return !formValues.some((elt2) => elt2.id === elt.id);
       });
-    });
-  }
-  const arrayOfProjectMembersToCreate = formValues?.filter(
-    (item) => item.id === 0
-  );
-  const arrayOfProjectMembersToUpdate = formValues?.filter(
-    (item) => item.id > 0
-  );
 
-  const responseUpdate = await createProjectMember(
-    arrayOfProjectMembersToCreate
-  );
-  const responseCreate = await updateProjectMember(
-    arrayOfProjectMembersToUpdate
-  );
-  revalidatePath("/admin/project-members");
+      projectMemberToDelete.forEach(async (item) => {
+        await prisma.projectMember.delete({
+          where: {
+            id: item.id,
+          },
+        });
+      });
+    }
+    const arrayOfProjectMembersToCreate = formValues?.filter(
+      (item) => item.id === 0
+    );
+    const arrayOfProjectMembersToUpdate = formValues?.filter(
+      (item) => item.id > 0
+    );
+
+    const responseUpdate = await createProjectMember(
+      arrayOfProjectMembersToCreate
+    );
+    const responseCreate = await updateProjectMember(
+      arrayOfProjectMembersToUpdate
+    );
+    revalidatePath("/admin/project-members");
+    return { success: "Members list has been updated!" };
+  } catch (error) {
+    return { error: "Members list couldn't have been updated!" };
+  }
 };
 export const createProjectMember = async (
   formValues: ProjectMemberEntityType[]
@@ -59,67 +64,78 @@ export const createProjectMember = async (
         },
       });
 
-      return { success: "Item created" };
+      return { success: "Members list has been created!" };
     });
   } catch (error) {
     console.log("Error item creation==>", error);
+    return { error: "Members list couldn't have been created!" };
   }
 };
 
 export const updateProjectMember = async (
   formValues: ProjectMemberEntityType[]
 ) => {
-  formValues.forEach(async (item) => {
-    const projectMemberFromDB = await prisma.projectMember.findUnique({
-      where: { id: item.id },
-      include: { project: true },
-    });
+  try {
+    formValues.forEach(async (item) => {
+      const projectMemberFromDB = await prisma.projectMember.findUnique({
+        where: { id: item.id },
+        include: { project: true },
+      });
 
-    let objectConnectDisconnect: {} = {};
+      let objectConnectDisconnect: {} = {};
 
-    if (projectMemberFromDB) {
-      if (item.project.length > projectMemberFromDB.project.length) {
-        const projectIdsToADD: string[] = item.project
-          .filter((elt) => {
-            return !projectMemberFromDB.project.some(
-              (elt2) => elt2.id.toString() === elt.toString()
-            );
-          })
-          .map((elt3) => elt3.toString());
+      if (projectMemberFromDB) {
+        if (item.project.length > projectMemberFromDB.project.length) {
+          const projectIdsToADD: string[] = item.project
+            .filter((elt) => {
+              return !projectMemberFromDB.project.some(
+                (elt2) => elt2.id.toString() === elt.toString()
+              );
+            })
+            .map((elt3) => elt3.toString());
 
-        objectConnectDisconnect = {
-          connect: projectIdsToADD.map((item) => ({
-            id: parseFloat(item.toString()),
-          })),
-        };
-      } else if (item.project.length < projectMemberFromDB.project.length) {
-        const projectIdsToRemove: string[] = projectMemberFromDB.project
-          .filter((elt) => {
-            return !item.project.some(
-              (elt2) => elt2.toString() === elt.id.toString()
-            );
-          })
-          .map((elt3) => elt3.id.toString());
+          objectConnectDisconnect = {
+            connect: projectIdsToADD.map((item) => ({
+              id: parseFloat(item.toString()),
+            })),
+          };
+        } else if (item.project.length < projectMemberFromDB.project.length) {
+          const projectIdsToRemove: string[] = projectMemberFromDB.project
+            .filter((elt) => {
+              return !item.project.some(
+                (elt2) => elt2.toString() === elt.id.toString()
+              );
+            })
+            .map((elt3) => elt3.id.toString());
 
-        objectConnectDisconnect = {
-          disconnect: projectIdsToRemove.map((item) => ({
-            id: parseFloat(item.toString()),
-          })),
-        };
+          objectConnectDisconnect = {
+            disconnect: projectIdsToRemove.map((item) => ({
+              id: parseFloat(item.toString()),
+            })),
+          };
+        }
       }
-    }
 
-    await prisma.projectMember.update({
-      where: { id: item.id },
-      data: {
-        name: item.name,
-        features: item.features,
-        project: objectConnectDisconnect,
-      },
-      include: { project: true },
+      await prisma.projectMember.update({
+        where: { id: item.id },
+        data: {
+          name: item.name,
+          features: item.features,
+          project: objectConnectDisconnect,
+        },
+        include: { project: true },
+      });
     });
-  });
+    return { success: "Members list has been updated!" };
+  } catch (error) {
+    return { error: "Members list couldn't have been updated!" };
+  }
 };
 export const deleteAllProjectMember = async () => {
-  await prisma.projectMember.deleteMany();
+  try {
+    await prisma.projectMember.deleteMany();
+    return { success: "Members list has been deleted!" };
+  } catch (error) {
+    return { error: "Members list couldn't have been deleted!" };
+  }
 };

@@ -16,6 +16,7 @@ import {
   creatOrUpdateProjectMembers,
   deleteAllProjectMember,
 } from "@/actions/admin/projectMember";
+import { useToast } from "@/hooks/use-toast";
 
 export type ProjectMembersFormType = {
   projectMembers: ProjectMemberEntityType[];
@@ -28,7 +29,7 @@ const ProjectmembersForm = () => {
   >();
 
   const { setProjects } = useProjectStore();
-
+  const { toast } = useToast();
   const {
     register,
     control,
@@ -52,11 +53,31 @@ const ProjectmembersForm = () => {
   const onSubmit: SubmitHandler<ProjectMembersFormType> = async (values) => {
     try {
       const { projectMembers } = values;
-
+      let response: any;
       if (projectMembers?.length === 0) {
-        await deleteAllProjectMember();
+        response = await deleteAllProjectMember();
       } else {
-        await creatOrUpdateProjectMembers(projectMembers);
+        response = await creatOrUpdateProjectMembers(projectMembers);
+      }
+      if (response?.error) {
+        toast({
+          title: "Uh oh! Something went wrong.",
+          description: response.error,
+          variant: "destructive",
+        });
+        console.log("Response error==>", response.error);
+      }
+      if (response?.success) {
+        console.log("Response success==>", response.success);
+        toast({
+          title: "Good news!",
+          description: response.success,
+          variant: "default",
+          style: {
+            backgroundColor: "#FEC140",
+            color: "black",
+          },
+        });
       }
     } catch (error) {
       console.error("Erreur onSubmit", error);

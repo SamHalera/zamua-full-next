@@ -17,6 +17,7 @@ cloudinary.config({
 
 export const createOrUpdateProject = async (data: ProjectFormType) => {
   try {
+    let message: string = "";
     if (data.id === 0) {
       const { id, ...dataToPersist } = data;
       console.log("creation", dataToPersist);
@@ -30,6 +31,7 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
         },
       });
       console.log("createProject==>", createProject);
+      message = "Project has been created successfully";
     } else {
       console.log("UPDATE");
       const updateProject = await prisma.project.update({
@@ -44,11 +46,12 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
           cover: data.cover,
         },
       });
+      message = "Project has been updated successfully";
     }
 
     revalidatePath("/admin/projects");
     return {
-      success: "Project has been created successfully",
+      success: message,
     };
   } catch (error) {
     console.log(error);
@@ -121,6 +124,7 @@ export const deletAllMediaFromDBAndCloudinary = async (
     return { success: "Media have been deleted!" };
   } catch (error) {
     console.log("error deletAllMediaFromDBAndCloudinary ==>", error);
+    return { error: "Media couldn't be deleted. Try again!" };
   }
 };
 export const deleteSomeMediaFromDBAndCloudinary = async (
@@ -156,6 +160,7 @@ export const deleteSomeMediaFromDBAndCloudinary = async (
     return { success: "Media have been deleted!" };
   } catch (error) {
     console.log("error deleteSomeMediaFromDBAndCloudinary ==>", error);
+    return { error: "Media couldn't be deleted. Try again!" };
   }
 };
 export const uploaAndCreatedMedia = async (
@@ -180,5 +185,6 @@ export const uploaAndCreatedMedia = async (
     return { success: "Media have been created!" };
   } catch (error) {
     console.log("error uploaAndCreatedMedia ==>", error);
+    return { error: "Media couldn't be created. Try again!" };
   }
 };

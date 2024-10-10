@@ -13,6 +13,7 @@ import {
   createOrUpdateMusicFeatures,
   getMusicFeatures,
 } from "@/actions/admin/musicFeature";
+import { useToast } from "@/hooks/use-toast";
 
 export type MusicFeatureFormType = {
   musicFeature: MusicFeatureType[];
@@ -32,7 +33,7 @@ const MusicFeatureForm = () => {
   >();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // const { setValue } = useFormContext();
+  const { toast } = useToast();
   const {
     register,
     handleSubmit,
@@ -67,8 +68,28 @@ const MusicFeatureForm = () => {
   const onSubmit: SubmitHandler<MusicFeatureFormType> = async (values) => {
     try {
       console.log("values form=>", values);
-      const actionCreate = await createOrUpdateMusicFeatures(values);
-      console.log(actionCreate);
+      const response = await createOrUpdateMusicFeatures(values);
+
+      if (response?.error) {
+        toast({
+          title: "Uh oh! Something went wrong.",
+          description: response.error,
+          variant: "destructive",
+        });
+        console.log("Response error==>", response.error);
+      }
+      if (response?.success) {
+        console.log("Response success==>", response.success);
+        toast({
+          title: "Good news!",
+          description: response.success,
+          variant: "default",
+          style: {
+            backgroundColor: "#FEC140",
+            color: "black",
+          },
+        });
+      }
     } catch (error) {
       console.error("Erreur onSubmit", error);
     }

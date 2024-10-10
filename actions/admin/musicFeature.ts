@@ -57,6 +57,7 @@ export const createOrUpdateMusicFeatures = async (
     }
 
     revalidatePath("/admin/music");
+    return { success: "Album list has been updated!" };
   } catch (error) {
     console.error("Error Music Feature create", error);
     return { error: "Oups something went wrong" };
