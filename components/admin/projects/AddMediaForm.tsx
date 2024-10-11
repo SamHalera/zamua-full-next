@@ -1,5 +1,5 @@
 import { ProjectAndMediaType } from "@/types/types";
-import { $Enums, Media } from "@prisma/client";
+import { Media } from "@prisma/client";
 
 import { CldUploadWidget } from "next-cloudinary";
 
@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import Loader from "@/components/Loader";
 import { useToast } from "@/hooks/use-toast";
 import { handleMediaUpload } from "@/actions/admin/project";
-export type UploadMediaFormTYpe = {
+export type UploadMediaFormType = {
   media: Media[];
 };
 const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
@@ -18,19 +18,19 @@ const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
 
   const { toast } = useToast();
   const { register, handleSubmit, control, formState } =
-    useForm<UploadMediaFormTYpe>({
+    useForm<UploadMediaFormType>({
       values: {
         media: project.media && project.media,
       },
     });
 
   const { fields, append, remove } = useFieldArray<
-    UploadMediaFormTYpe,
+    UploadMediaFormType,
     "media",
     "id"
   >({ name: "media", control });
 
-  const onSubmit: SubmitHandler<UploadMediaFormTYpe> = async (values) => {
+  const onSubmit: SubmitHandler<UploadMediaFormType> = async (values) => {
     setIsLoading(true);
     console.log("values from form==>", values);
     const { media } = values;
@@ -89,7 +89,9 @@ const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
               source: result?.info?.secure_url,
               publicId: result.info.public_id,
               projectId: project.id,
-              type: "PHOTO" as $Enums.TypeOfMedia,
+              caption: "",
+              isGalleryItem: false,
+              // type: "PHOTO" as $Enums.TypeOfMedia,
             };
             append(mediaField);
           }}

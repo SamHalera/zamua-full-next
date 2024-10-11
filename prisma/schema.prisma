@@ -43,6 +43,7 @@ model Project {
   description             String?
   projectMember           ProjectMember[]
   media                   Media[]
+  videos                  Videos[]
 }
 
 model ProjectMember {
@@ -54,12 +55,25 @@ model ProjectMember {
 
 model Media {
   id Int    @id @default(autoincrement())
-  type      TypeOfMedia
   source    String
+  caption   String?
   publicId  String
   projectId Int?
+  isGalleryItem Boolean @default(true)
   project   Project? @relation(fields: [projectId], references: [id])
 }
+
+
+model Videos {
+  id Int      @id @default(autoincrement())
+  iframe      String
+  priority    Int @default(1)
+  projectId   Int?
+  project     Project? @relation(fields: [projectId], references: [id])
+}
+
+
+
 model Show {
   id Int    @id @default(autoincrement())
   name    String
@@ -72,7 +86,6 @@ model Show {
 
 }
 
-
 model Playlist {
   id          Int    @id @default(autoincrement())
   title       String
@@ -81,7 +94,6 @@ model Playlist {
   path        String
   cover       String?
 }
-
 
 enum TypeOfMedia {
   PHOTO

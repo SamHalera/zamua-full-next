@@ -1,9 +1,10 @@
 import React from "react";
 import adminMenu from "@/assets/adminMenu.json";
 import Link from "next/link";
-import LogoutButton from "@/components/LogoutButton";
+
 import { Home } from "lucide-react";
 import { AdminMenuItem, SingleItem } from "@/types/types";
+import LogoutButtonComponent from "../LogutButtonComponent";
 
 const AdminMenu = () => {
   return (
@@ -45,7 +46,7 @@ const AdminMenu = () => {
         <Home />
         Public home
       </Link>
-      <LogoutButton />
+      <LogoutButtonComponent />
     </div>
   );
 };
