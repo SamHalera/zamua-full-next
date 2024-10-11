@@ -73,6 +73,16 @@ model Show {
 }
 
 
+model Playlist {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description   String?
+  iframe      String
+  path        String
+  cover       String?
+}
+
+
 enum TypeOfMedia {
   PHOTO
   VIDEO
