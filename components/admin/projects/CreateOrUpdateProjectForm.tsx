@@ -8,7 +8,7 @@ import CustomInput from "../forms/CustomInput";
 
 import { createOrUpdateProject } from "@/actions/admin/project";
 import { useRouter } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Plus } from "lucide-react";
 import { useProjectMemberStore } from "@/stores/projectMembers";
 import { getProjectMembers } from "@/actions/projectMembers";
 import { ProjectAndMediaType, SelectOptions } from "@/types/types";
@@ -42,7 +42,7 @@ const CreateOrUpdateProjectForm = ({
     register,
     handleSubmit,
     setValue,
-    formState: { isDirty, isSubmitting },
+    formState: { isDirty, isSubmitting, errors },
   } = useForm<ProjectFormType>({
     values: {
       id: project?.id ?? 0,
@@ -207,6 +207,8 @@ const CreateOrUpdateProjectForm = ({
               register={register}
               placeholder="name your project"
               customClass="input input-bordered w-full"
+              required={true}
+              error={errors.fullTitle}
             />
 
             <CustomInput
@@ -216,6 +218,8 @@ const CreateOrUpdateProjectForm = ({
               register={register}
               placeholder="First part of title"
               customClass="input input-bordered w-full"
+              required={true}
+              error={errors.primaryTitleString}
             />
             <CustomInput
               label="Second part of title"
@@ -224,6 +228,8 @@ const CreateOrUpdateProjectForm = ({
               register={register}
               placeholder="Second part of title"
               customClass="input input-bordered w-full"
+              required={true}
+              error={errors.secondaryTitleString}
             />
 
             <div className="flex-1">
@@ -240,6 +246,20 @@ const CreateOrUpdateProjectForm = ({
               </label>
             </div>
             <div className="flex-1 border border-primary rounded-md p-4 bg-slate-100 opacity-75">
+              <div className="flex justify-between">
+                <span className="text-primary font-semibold mb-4 block">
+                  Members of this project:
+                </span>
+                <Button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    router.push("/admin/project-members");
+                  }}
+                  className="flex text-xs items-center gap-2"
+                >
+                  <Plus size={14} /> add members
+                </Button>
+              </div>
               {project?.projectMember &&
                 project?.projectMember.length > 0 &&
                 project.projectMember.map((member) => {

@@ -60,6 +60,18 @@ model Media {
   projectId Int?
   project   Project? @relation(fields: [projectId], references: [id])
 }
+model Show {
+  id Int    @id @default(autoincrement())
+  name    String
+  date  DateTime
+  venue String
+  venueUrl String?
+  location String
+  locationUrl String?
+  ticketsUrl String?
+
+}
+
 
 enum TypeOfMedia {
   PHOTO

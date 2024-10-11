@@ -1,5 +1,5 @@
 import { Media, Project, ProjectMember } from "@prisma/client";
-import { UseFormRegister } from "react-hook-form";
+import { FieldError, FieldErrors, UseFormRegister } from "react-hook-form";
 
 type MenuItem = {
   id: number;
@@ -50,13 +50,15 @@ type CustomInputProps = {
   name: string;
   value?: string | number;
   register: UseFormRegister<any>;
-  error?: FieldError | undefined;
+
+  error?: FieldError;
   required?: boolean;
   disabled?: boolean;
   placeholder?: string;
   handleChangeValue?: (value: string) => void;
   customClass?: string;
   setValue?: UseFormSetValue<any>;
+  pattern?: RegExp;
 };
 
 type SelectOptions = {

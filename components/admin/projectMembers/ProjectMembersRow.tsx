@@ -29,6 +29,7 @@ const ProjectMembersRow = ({
   field: FieldArrayWithId<ProjectMembersFormType, "projectMembers", "id">;
   index: number;
   remove: UseFieldArrayRemove;
+
   // errors: FieldErrors<ProjectMembersFormType>;
 
   control: Control<ProjectMembersFormType, any>;
@@ -63,7 +64,7 @@ const ProjectMembersRow = ({
   return (
     <div
       className={cn(
-        "flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6 flex-1",
+        "flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6 w-2/3 mx-auto",
         {
           "border-2 border-primary shadow-lg": field?.name === "",
         }
@@ -84,6 +85,8 @@ const ProjectMembersRow = ({
           label="Member's name"
           placeholder="project member's name"
           customClass="input input-bordered w-full"
+          required={true}
+          value={field.name}
         />
         <CustomInput
           type="text"
@@ -92,6 +95,8 @@ const ProjectMembersRow = ({
           label="Member's features"
           placeholder="project member's features"
           customClass="input input-bordered w-full"
+          required={true}
+          value={field.features}
         />
       </div>
       <CustomReactMultipleSelect
