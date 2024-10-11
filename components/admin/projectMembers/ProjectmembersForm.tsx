@@ -24,6 +24,7 @@ export type ProjectMembersFormType = {
 
 const ProjectmembersForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const [dataProjectMember, setDataProjectMember] = useState<
     ProjectMemberEntityType[] | null
   >();
@@ -50,9 +51,11 @@ const ProjectmembersForm = () => {
     name: "projectMembers",
     control,
   });
+
   const onSubmit: SubmitHandler<ProjectMembersFormType> = async (values) => {
     try {
       const { projectMembers } = values;
+
       let response: any;
       if (projectMembers?.length === 0) {
         response = await deleteAllProjectMember();

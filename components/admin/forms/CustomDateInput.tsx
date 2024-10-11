@@ -17,11 +17,11 @@ const CustomInput = ({
   customClass,
 }: CustomInputProps) => {
   let errorMessage;
-  console.log("error==>", error, name);
-  if (error) {
+  if (error?.type === "required") {
     errorMessage = "Champs obligatoire";
+  } else if (error?.message) {
+    errorMessage = error?.message;
   }
-  // console.log(name);
   return (
     <>
       <label className="form-control w-full ">
@@ -29,7 +29,7 @@ const CustomInput = ({
           <span className="label-text">
             {label}
             {required && <span className="text-red-400">*</span>}
-            {required && error && (
+            {error && (
               <span className=" text-red-400 text-sm ml-2">{errorMessage}</span>
             )}
           </span>
@@ -47,18 +47,13 @@ const CustomInput = ({
           <input
             autoComplete={autoComplete ?? "on"}
             {...register(name, {
-              required: "This field is required",
-              minLength: {
-                value: 5,
-                message: "This field cannotbe less than 5 characters!",
-              },
+              required,
               // pattern,
             })}
-            defaultValue={value}
+            value={value}
             disabled={disabled}
             type={type}
             placeholder={placeholder}
-            // required={required}
             className={customClass}
           />
         )}

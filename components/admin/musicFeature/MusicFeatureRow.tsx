@@ -26,8 +26,8 @@ const MusicFeatureRow = ({
   remove,
   index,
   setValue,
-  errors,
-}: {
+}: // errors,
+{
   register: UseFormRegister<MusicFeatureFormType>;
   field: FieldArrayWithId<MusicFeatureFormType, "musicFeature", "id">;
   remove: UseFieldArrayRemove;
@@ -70,7 +70,6 @@ const MusicFeatureRow = ({
           type="text"
           customClass="input input-bordered w-full"
           placeholder="give a title"
-          error={errors.musicFeature}
         />
         <CustomInput
           register={register}
