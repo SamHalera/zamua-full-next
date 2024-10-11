@@ -17,7 +17,7 @@ const CustomInput = ({
   customClass,
 }: CustomInputProps) => {
   let errorMessage;
-  console.log("error==>", error, name);
+
   if (error) {
     errorMessage = "Champs obligatoire";
   }
@@ -46,14 +46,7 @@ const CustomInput = ({
         ) : (
           <input
             autoComplete={autoComplete ?? "on"}
-            {...register(name, {
-              required: "This field is required",
-              minLength: {
-                value: 5,
-                message: "This field cannotbe less than 5 characters!",
-              },
-              // pattern,
-            })}
+            {...register(name)}
             defaultValue={value}
             disabled={disabled}
             type={type}
