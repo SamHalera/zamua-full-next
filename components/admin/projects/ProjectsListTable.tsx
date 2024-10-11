@@ -17,9 +17,12 @@ import { ProjectMember } from "@prisma/client";
 import { ProjectType } from "@/types/types";
 import { CldImage } from "next-cloudinary";
 import { deleteProjectById } from "@/actions/admin/project";
+
+import { useRouter } from "next/navigation";
 const ProjectsListTable = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { projects, setProjects } = useProjectStore();
+  const router = useRouter();
   useEffect(() => {
     const fecthData = async () => {
       const projectsFromDB = await getProjects();
@@ -92,6 +95,7 @@ const ProjectsListTable = () => {
                     <div
                       onClick={async () => {
                         await deleteProjectById(item.id);
+                        router.push("/admin/projects");
                       }}
                       className="text-red-500 cursor-pointer"
                     >
