@@ -78,6 +78,8 @@ const PlaylistForm = () => {
     iframe: "",
     path: "",
     cover: "",
+    slug: "",
+    priority: 1,
   };
   useEffect(() => {
     const fecthData = async () => {

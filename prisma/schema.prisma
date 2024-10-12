@@ -92,6 +92,8 @@ model Playlist {
   description   String?
   iframe      String
   path        String
+  slug        String 
+  priority    Int @default(1)
   cover       String?
 }
 

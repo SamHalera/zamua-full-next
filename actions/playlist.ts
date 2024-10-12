@@ -10,3 +10,14 @@ export const getPlaylists = async () => {
     console.log("error finding playlists==>", error);
   }
 };
+
+export const gePlaylistBySlug = async (slug: string) => {
+  try {
+    const playlist = await prisma.playlist.findFirst({
+      where: { slug },
+    });
+    return playlist;
+  } catch (error) {
+    console.log("error finding playlists==>", error);
+  }
+};

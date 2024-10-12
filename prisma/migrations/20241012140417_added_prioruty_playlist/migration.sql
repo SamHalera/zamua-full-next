@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Playlist" ADD COLUMN     "priority" INTEGER NOT NULL DEFAULT 1,
+ALTER COLUMN "slug" DROP DEFAULT;
