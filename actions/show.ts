@@ -10,3 +10,17 @@ export const getShows = async () => {
     console.log("error getting shows", error);
   }
 };
+export const getShowsNotPast = async () => {
+  try {
+    const showsNotPast = await prisma.show.findMany({
+      where: {
+        date: {
+          gt: new Date(),
+        },
+      },
+    });
+    return showsNotPast;
+  } catch (error) {
+    console.log("error getting shows", error);
+  }
+};

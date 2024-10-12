@@ -25,7 +25,14 @@ const PlaylistRow = ({
   setValue: UseFormSetValue<PlaylistFormType>;
 }) => {
   const [dataImage, setDataImage] = useState<string>(field.cover ?? "");
+  const [slugValue, setSlugValue] = useState<string>("");
+  const handleSlugOnChange = (value: string) => {
+    const newStr = value.toLocaleLowerCase().split(" ").join("-");
+    console.log("newStr==>", newStr);
+    setSlugValue(`${newStr}`);
+  };
 
+  console.log("slugValue==>", slugValue);
   useEffect(() => {
     if (dataImage) {
       setValue(`playlists.${index}.cover`, dataImage, {
@@ -33,7 +40,13 @@ const PlaylistRow = ({
         shouldValidate: true,
       });
     }
-  }, [dataImage, setValue]);
+    if (slugValue) {
+      setValue(`playlists.${index}.slug`, slugValue, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+    }
+  }, [dataImage, slugValue, setValue]);
   return (
     <div
       className={cn(
@@ -106,7 +119,29 @@ const PlaylistRow = ({
             placeholder="A title for your plyalist"
             customClass="input input-bordered w-full"
             required={true}
-            value={field.title}
+            handleChangeValue={handleSlugOnChange}
+            // value={field.title}
+          />
+          <CustomInput
+            type="text"
+            register={register}
+            name={`playlists.${index}.slug`}
+            label="Slug"
+            placeholder="A slug for your plyalist"
+            customClass="input input-bordered w-full"
+            required={true}
+            value={slugValue}
+            disabled={true}
+          />
+          <CustomInput
+            type="number"
+            register={register}
+            name={`playlists.${index}.priority`}
+            label="Slug"
+            placeholder="A slug for your plyalist"
+            customClass="input input-bordered w-full"
+            required={true}
+            value={field.priority}
           />
           <div className="flex-1">
             <label className="form-control">

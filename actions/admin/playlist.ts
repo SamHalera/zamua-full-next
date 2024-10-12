@@ -38,6 +38,7 @@ export const createOrUpdatePlaylist = async (values: Playlist[]) => {
 export const createPlaylists = async (playlists: Playlist[]) => {
   try {
     const platlistsToPersist = playlists.map((item) => {
+      item.priority = parseFloat(item.priority.toString());
       const { id, ...partialItem } = item;
       return partialItem;
     });
@@ -53,6 +54,7 @@ export const createPlaylists = async (playlists: Playlist[]) => {
 export const updatePlaylists = async (playlists: Playlist[]) => {
   try {
     playlists.forEach(async (item) => {
+      item.priority = parseFloat(item.priority.toString());
       await prisma.playlist.update({
         where: { id: item.id },
         data: item,
