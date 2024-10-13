@@ -26,8 +26,13 @@
   },
   {
     "id": 6,
-    "label": "media",
-    "href": "/media"
+    "label": "photos",
+    "href": "/photos"
+  },
+  {
+    "id": 6,
+    "label": "videos",
+    "href": "/videos"
   },
   {
     "id": 7,

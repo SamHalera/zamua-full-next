@@ -1,5 +1,5 @@
 import { gePlaylistBySlug } from "@/actions/playlist";
-import { Playlist } from "@prisma/client";
+
 import Link from "next/link";
 import React from "react";
 

@@ -1,4 +1,4 @@
-import { getShows, getShowsNotPast } from "@/actions/show";
+import { getShowsNotPast } from "@/actions/show";
 import ShowsContent from "@/components/contents/shows/ShowsContent";
 import React from "react";
 
