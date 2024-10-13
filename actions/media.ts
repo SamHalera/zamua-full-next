@@ -9,3 +9,13 @@ export const getAllMedia = async () => {
     console.log("error retrieving all media==>", error);
   }
 };
+export const getAllMediaGallery = async () => {
+  try {
+    const allMediaGallery = await prisma.media.findMany({
+      where: { isGalleryItem: true },
+    });
+    return allMediaGallery ?? [];
+  } catch (error) {
+    console.log("error retrieving all media==>", error);
+  }
+};
