@@ -75,6 +75,8 @@ interface ProjectType {
   primaryTitleString: string;
   secondaryTitleString: string;
   projectMember: ProjectMember[];
+  priority: number;
+  slug: string;
 }
 
 type ProjectMemberEntityType = {

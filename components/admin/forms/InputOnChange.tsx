@@ -11,7 +11,6 @@ const InputOnChange = ({
   placeholder,
   handleChangeValue,
 }: CustomInputProps) => {
-  console.log("here", value);
   if (!handleChangeValue) return;
 
   return (

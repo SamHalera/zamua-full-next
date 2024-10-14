@@ -7,7 +7,6 @@ import { revalidatePath } from "next/cache";
 
 export const createOrUpdatePlaylist = async (values: Playlist[]) => {
   try {
-    console.log("playlists==>", values);
     const existingPlaylists = await prisma.playlist.findMany();
 
     if (values.length == 0) {

@@ -11,21 +11,26 @@ import { Media } from "@prisma/client";
 import { CldImage } from "next-cloudinary";
 
 const LightGalleryComponent = ({ images }: { images?: Media[] }) => {
+  const onInit = () => {
+    console.log("lightGallery has been initialized");
+  };
   return (
     <LightGallery
+      onInit={onInit}
       elementClassNames={"masonry-gallery-demo"}
       speed={500}
       plugins={[lgThumbnail, lgZoom]}
     >
-      <div className="flex flex-wrap gap-5 justify-center">
+      <div className="flex flex-wrap gap-5 justify-center" id="lightgallery">
         {images &&
           images.map((image) => {
+            console.log("image==>", image);
             return (
               <a
+                href={image.source}
                 key={image.id}
-                data-lg-size="1600-1067"
                 className=" cursor-pointer  hover:opacity-75 duration-700 bg-slate-400 w-[400px]"
-                data-src={`${image.source}`}
+                data-src={image.source}
                 data-sub-html={image.caption ?? ""}
               >
                 <CldImage
@@ -35,6 +40,7 @@ const LightGalleryComponent = ({ images }: { images?: Media[] }) => {
                   sizes="100vw"
                   crop="fill"
                   alt="Description of my image"
+                  priority
                 />
               </a>
             );

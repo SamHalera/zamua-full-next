@@ -44,6 +44,8 @@ model Project {
   projectMember           ProjectMember[]
   media                   Media[]
   videos                  Videos[]
+  priority                Int @default(1)
+  slug                    String @default("my-project")
 }
 
 model ProjectMember {

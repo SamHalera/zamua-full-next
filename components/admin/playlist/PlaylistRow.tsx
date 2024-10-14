@@ -28,11 +28,10 @@ const PlaylistRow = ({
   const [slugValue, setSlugValue] = useState<string>("");
   const handleSlugOnChange = (value: string) => {
     const newStr = value.toLocaleLowerCase().split(" ").join("-");
-    console.log("newStr==>", newStr);
+
     setSlugValue(`${newStr}`);
   };
 
-  console.log("slugValue==>", slugValue);
   useEffect(() => {
     if (dataImage) {
       setValue(`playlists.${index}.cover`, dataImage, {
@@ -137,7 +136,7 @@ const PlaylistRow = ({
             type="number"
             register={register}
             name={`playlists.${index}.priority`}
-            label="Slug"
+            label="Order priority"
             placeholder="A slug for your plyalist"
             customClass="input input-bordered w-full"
             required={true}
