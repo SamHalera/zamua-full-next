@@ -154,7 +154,7 @@ const CreateOrUpdateProjectForm = ({
         )}
       </div>
       {!addMediaView ? (
-        <form onSubmit={handleSubmit(onSubmit)} className="flex l gap-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex gap-6">
           <div className="flex gap-3 w-1/3">
             <div className="flex-1 flex flex-col items-center gap-3 ">
               <div className="fixed">
