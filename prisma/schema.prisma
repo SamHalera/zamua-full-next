@@ -63,6 +63,8 @@ model Media {
   projectId Int?
   isGalleryItem Boolean @default(true)
   project   Project? @relation(fields: [projectId], references: [id])
+  creditId Int?
+  credit  Credit? @relation(fields:  [creditId], references : [id])
 }
 
 
@@ -74,6 +76,12 @@ model Videos {
   project     Project? @relation(fields: [projectId], references: [id])
 }
 
+model Credit {
+  id Int @id @default(autoincrement())
+  name String
+  url String
+  media Media[]
+}
 
 
 model Show {

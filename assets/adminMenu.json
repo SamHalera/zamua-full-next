@@ -20,6 +20,10 @@
     "href": "/admin/playlists"
   },
   {
+    "label": "Credits",
+    "href": "/admin/credits"
+  },
+  {
     "label": "Media",
     "href": "/admin/media",
     "items": [

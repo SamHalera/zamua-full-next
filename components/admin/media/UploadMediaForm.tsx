@@ -93,6 +93,7 @@ const UploadMediaForm = () => {
             projectId: null,
             caption: "",
             isGalleryItem: true,
+            creditId: null,
             // type: "PHOTO" TypeOfMedia,
           };
           append(mediaField);

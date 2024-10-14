@@ -91,6 +91,7 @@ const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
               projectId: project.id,
               caption: "",
               isGalleryItem: false,
+              creditId: null,
               // type: "PHOTO" as $Enums.TypeOfMedia,
             };
             append(mediaField);
