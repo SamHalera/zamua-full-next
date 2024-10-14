@@ -26,6 +26,8 @@ export type ProjectFormType = {
   secondaryTitleString: string;
   cover: string;
   description: string;
+  priority: number;
+  slug: string;
 };
 const CreateOrUpdateProjectForm = ({
   project,
@@ -33,11 +35,13 @@ const CreateOrUpdateProjectForm = ({
   project?: ProjectAndMediaType | null;
 }) => {
   const [dataImage, setDataImage] = useState<string>(project?.cover ?? "");
+  const [slugValue, setSlugValue] = useState<string>("");
   const [addMediaView, setAddMediaView] = useState<boolean>(false);
   const { projectMembers, setProjectMembers } = useProjectMemberStore();
   const router = useRouter();
   const { toast } = useToast();
 
+  console.log("project==>", project);
   const {
     register,
     handleSubmit,
@@ -51,8 +55,16 @@ const CreateOrUpdateProjectForm = ({
       secondaryTitleString: project?.secondaryTitleString ?? "",
       description: project?.description ?? "",
       cover: project?.cover ?? "",
+      priority: project?.priority ?? 1,
+      slug: project?.slug ?? "",
     },
   });
+  const handleSlugOnChange = (value: string) => {
+    console.log("value==>", value);
+    const newStr = value.toLocaleLowerCase().split(" ").join("-");
+    console.log("newStr==>", newStr);
+    setSlugValue(`${newStr}`);
+  };
 
   const onSubmit: SubmitHandler<ProjectFormType> = async (values) => {
     try {
@@ -113,7 +125,14 @@ const CreateOrUpdateProjectForm = ({
         shouldDirty: true,
       });
     }
-  }, [dataImage, setValue]);
+    if (slugValue) {
+      console.log("slugValue=+>", slugValue);
+      setValue("slug", slugValue, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+    }
+  }, [dataImage, setValue, slugValue]);
   return (
     <div>
       <div className="flex justify-between">
@@ -209,6 +228,25 @@ const CreateOrUpdateProjectForm = ({
               customClass="input input-bordered w-full"
               required={true}
               error={errors.fullTitle}
+              handleChangeValue={handleSlugOnChange}
+            />
+            <CustomInput
+              label="Slug"
+              type="text"
+              name="slug"
+              register={register}
+              placeholder="project slug"
+              customClass="input input-bordered w-full"
+              disabled={true}
+              value={project?.slug}
+            />
+            <CustomInput
+              label="Order priority"
+              type="number"
+              name="priority"
+              register={register}
+              customClass="input input-bordered w-full"
+              required={true}
             />
 
             <CustomInput

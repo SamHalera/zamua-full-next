@@ -21,7 +21,7 @@ const CustomInput = ({
   if (error) {
     errorMessage = "Champs obligatoire";
   }
-  // console.log(name);
+
   return (
     <>
       <label className="form-control w-full ">

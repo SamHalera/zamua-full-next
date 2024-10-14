@@ -9,8 +9,6 @@ export const getProjects = async () => {
     },
   });
 
-  if (projects.length === 0) return null;
-
   return projects;
 };
 
@@ -18,6 +16,19 @@ export const getProjectById = async (id: number) => {
   const project = await prisma.project.findUnique({
     where: {
       id,
+    },
+    include: {
+      projectMember: true,
+      media: true,
+    },
+  });
+
+  return project;
+};
+export const getProjectBySlug = async (slug: string) => {
+  const project = await prisma.project.findFirst({
+    where: {
+      slug: slug[0],
     },
     include: {
       projectMember: true,

@@ -44,6 +44,8 @@ const ProjectsListTable = () => {
           <TableRow>
             <TableHead></TableHead>
             <TableHead className="">Project</TableHead>
+            <TableHead className="">Slug</TableHead>
+            <TableHead className="">Order priority</TableHead>
 
             <TableHead>Members</TableHead>
             <TableHead className="text-right">Actions</TableHead>
@@ -72,6 +74,8 @@ const ProjectsListTable = () => {
                   <TableCell className="font-medium">
                     {item.fullTitle}
                   </TableCell>
+                  <TableCell className="font-medium">{item.slug}</TableCell>
+                  <TableCell className="font-medium">{item.priority}</TableCell>
 
                   <TableCell className="">
                     {item.projectMember &&

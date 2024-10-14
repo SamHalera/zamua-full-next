@@ -20,7 +20,7 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
     let message: string = "";
     if (data.id === 0) {
       const { id, ...dataToPersist } = data;
-      console.log("creation", dataToPersist);
+
       const createProject = await prisma.project.create({
         data: {
           fullTitle: data.fullTitle,
@@ -28,9 +28,11 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
           secondaryTitleString: data.secondaryTitleString,
           description: data.description,
           cover: data.cover,
+          priority: parseFloat(data.priority.toString()),
+          slug: data.slug,
         },
       });
-      console.log("createProject==>", createProject);
+
       message = "Project has been created successfully";
     } else {
       console.log("UPDATE");
@@ -44,8 +46,11 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
           secondaryTitleString: data.secondaryTitleString,
           description: data.description,
           cover: data.cover,
+          priority: parseFloat(data.priority.toString()),
+          slug: data.slug,
         },
       });
+
       message = "Project has been updated successfully";
     }
 

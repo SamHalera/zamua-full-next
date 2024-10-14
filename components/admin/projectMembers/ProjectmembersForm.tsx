@@ -99,6 +99,8 @@ const ProjectmembersForm = () => {
         secondaryTitleString: "",
         cover: "",
         description: "",
+        slug: "",
+        priority: 1,
       },
     ],
   };
