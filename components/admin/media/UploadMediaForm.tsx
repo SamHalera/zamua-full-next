@@ -30,7 +30,6 @@ const UploadMediaForm = () => {
     },
   });
 
-  console.log("eeroors==>", errors.media);
   const { append, fields, remove } = useFieldArray<
     UploadMediaFormType,
     "media",
