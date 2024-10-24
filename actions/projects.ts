@@ -19,7 +19,11 @@ export const getProjectById = async (id: number) => {
     },
     include: {
       projectMember: true,
-      media: true,
+      media: {
+        include: {
+          credit: true,
+        },
+      },
     },
   });
 
@@ -32,7 +36,11 @@ export const getProjectBySlug = async (slug: string) => {
     },
     include: {
       projectMember: true,
-      media: true,
+      media: {
+        include: {
+          credit: true,
+        },
+      },
     },
   });
 

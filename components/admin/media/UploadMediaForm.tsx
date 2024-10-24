@@ -3,7 +3,7 @@ import { CldUploadWidget } from "next-cloudinary";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { UploadMediaFormType } from "../projects/AddMediaForm";
-import { Media } from "@prisma/client";
+
 import Loader from "@/components/Loader";
 import { getAllMedia } from "@/actions/media";
 
@@ -12,9 +12,10 @@ import { useProjectStore } from "@/stores/projects";
 import { getProjects } from "@/actions/projects";
 import { Button } from "@/components/ui/button";
 import { persistMedia } from "@/actions/admin/media";
+import { MediaType } from "@/types/types";
 
 const UploadMediaForm = () => {
-  const [dataMedia, setDataMedia] = useState<Media[]>([]);
+  const [dataMedia, setDataMedia] = useState<MediaType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { setProjects } = useProjectStore();
 
@@ -94,6 +95,7 @@ const UploadMediaForm = () => {
             caption: "",
             isGalleryItem: true,
             creditId: null,
+            credit: null,
             // type: "PHOTO" TypeOfMedia,
           };
           append(mediaField);
