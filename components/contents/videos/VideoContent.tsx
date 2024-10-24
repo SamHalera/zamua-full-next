@@ -1,18 +1,19 @@
 import React from "react";
-import SecondaryHeroSection from "../SecondaryHeroSection";
-import bgVideo from "@/public/images/picture-video.jpg";
 
 import { getAllVideos } from "@/actions/video";
 import VideoList from "./VideoList";
 
 const VideoContent = async () => {
   const videos = await getAllVideos();
-  const title = <span className="text-primary">VIDEOS</span>;
+
   return (
-    <>
-      <SecondaryHeroSection title={title} imgSrc={bgVideo.src} />
+    <div className="p-10">
+      <h1 className="font-bold text-center text-4xl sm:text-5xl md:text-6xl xl:text-7xl mb-10">
+        VIDEOS
+      </h1>
+
       <VideoList videos={videos} />
-    </>
+    </div>
   );
 };
 

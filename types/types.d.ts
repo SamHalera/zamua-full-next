@@ -1,4 +1,4 @@
-import { Media, Project, ProjectMember } from "@prisma/client";
+import { Credit, Media, Project, ProjectMember } from "@prisma/client";
 import { FieldError, FieldErrors, UseFormRegister } from "react-hook-form";
 
 type MenuItem = {
@@ -88,5 +88,16 @@ type ProjectMemberEntityType = {
 };
 
 interface ProjectAndMediaType extends ProjectType {
-  media: Media[];
+  media: MediaType[];
 }
+
+type MediaType = {
+  id: number;
+  source: string;
+  caption: string | null;
+  publicId: string;
+  // projectId: number | null;
+  isGalleryItem: boolean;
+  // project: Project | null;
+  credit: Credit | null;
+};

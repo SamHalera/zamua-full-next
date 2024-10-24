@@ -2,8 +2,7 @@
 
 import { ProjectFormType } from "@/components/admin/projects/CreateOrUpdateProjectForm";
 import prisma from "@/db";
-import { ProjectAndMediaType } from "@/types/types";
-import { Media } from "@prisma/client";
+import { MediaType, ProjectAndMediaType } from "@/types/types";
 
 import { v2 as cloudinary } from "cloudinary";
 import { revalidatePath } from "next/cache";
@@ -84,7 +83,7 @@ export const deleteProjectById = async (id: number) => {
 };
 
 export const handleMediaUpload = async (
-  dataImages: Media[],
+  dataImages: MediaType[],
   currentProject: ProjectAndMediaType
 ) => {
   if (dataImages.length === 0) {
@@ -108,7 +107,7 @@ export const handleMediaUpload = async (
 };
 
 export const deletAllMediaFromDBAndCloudinary = async (
-  currentProjectMedia: Media[]
+  currentProjectMedia: MediaType[]
 ) => {
   try {
     const mediaPublicIDSArray = currentProjectMedia.map(
@@ -133,8 +132,8 @@ export const deletAllMediaFromDBAndCloudinary = async (
   }
 };
 export const deleteSomeMediaFromDBAndCloudinary = async (
-  dataImages: Media[],
-  currentProjectMedia: Media[]
+  dataImages: MediaType[],
+  currentProjectMedia: MediaType[]
 ) => {
   try {
     const mediaToDelete = currentProjectMedia.filter((media) => {
@@ -169,8 +168,8 @@ export const deleteSomeMediaFromDBAndCloudinary = async (
   }
 };
 export const uploaAndCreatedMedia = async (
-  dataImages: Media[],
-  currentProjectMedia: Media[]
+  dataImages: MediaType[],
+  currentProjectMedia: MediaType[]
 ) => {
   try {
     const mediaToAdd = dataImages

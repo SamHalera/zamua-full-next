@@ -1,5 +1,4 @@
-import { ProjectAndMediaType } from "@/types/types";
-import { Media } from "@prisma/client";
+import { MediaType, ProjectAndMediaType } from "@/types/types";
 
 import { CldUploadWidget } from "next-cloudinary";
 
@@ -11,7 +10,7 @@ import Loader from "@/components/Loader";
 import { useToast } from "@/hooks/use-toast";
 import { handleMediaUpload } from "@/actions/admin/project";
 export type UploadMediaFormType = {
-  media: Media[];
+  media: MediaType[];
 };
 const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -92,6 +91,7 @@ const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
               caption: "",
               isGalleryItem: false,
               creditId: null,
+              credit: null,
               // type: "PHOTO" as $Enums.TypeOfMedia,
             };
             append(mediaField);

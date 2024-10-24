@@ -15,7 +15,7 @@ const SecondaryHeroSection = ({
     <>
       <div
         className={cn(
-          "relative mb-12 bg-cover bg-bottom px-8 py-24 lg:p-32 bg-scroll lg:bg-fixed  flex items-center h-[70vh]"
+          "relative mb-8 bg-cover bg-bottom px-8 py-24 lg:p-32 bg-scroll lg:bg-fixed  flex items-center h-[60vh]"
         )}
         style={{
           backgroundImage: `url(${imgSrc})`,
@@ -27,7 +27,7 @@ const SecondaryHeroSection = ({
 
         <Link
           href="#toScroll"
-          className="absolute left-2/4 -bottom-24 md:-bottom-32 flex flex-col items-center gap-6"
+          className="absolute left-2/4 -bottom-24 md:-bottom-12 flex flex-col items-center gap-6"
         >
           <span
             className={cn(
@@ -36,10 +36,10 @@ const SecondaryHeroSection = ({
           >
             scroll
           </span>
-          <div className="w-[2px] h-28 md:h-36 lg:h-60 bg-primary"></div>
+          <div className="w-[2px] h-28 md:h-36 lg:h-40 bg-primary"></div>
         </Link>
       </div>
-      <div id="toScroll" className=" mb-40"></div>
+      <div id="toScroll" className=" mb-20"></div>
     </>
   );
 };
