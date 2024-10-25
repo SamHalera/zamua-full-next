@@ -91,14 +91,14 @@ const ShowForm = ({ shows }: { shows?: Show[] }) => {
         onClick={() => {
           append(fieldToAppend);
         }}
-        className="flex items-center border border-primary p-3 gap-3 text-primary duration-500 hover:text-slate-700 hover:border-slate-700 hover:text-primary/80 font-semibold cursor-pointer self-start rounded-md"
+        className="fixed bottom-10 flex items-center border border-primary p-3 gap-3 text-primary duration-500 hover:text-slate-700 hover:border-slate-700 hover:text-primary/80 font-semibold cursor-pointer self-start rounded-md"
       >
         <PlusCircle /> add a new show
       </div>
 
       <Button
         disabled={!isDirty || isSubmitting}
-        className="self-end text-xl "
+        className="self-end text-xl fixed bottom-10"
         type="submit"
       >
         {isSubmitting && (

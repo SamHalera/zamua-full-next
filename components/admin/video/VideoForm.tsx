@@ -93,18 +93,20 @@ const VideoForm = () => {
         onClick={() => {
           append(fieldToAppend);
         }}
-        className="flex items-center border border-primary p-3 gap-3 text-primary duration-500 hover:text-slate-700 hover:border-slate-700 hover:text-primary/80 font-semibold cursor-pointer self-start rounded-md"
+        className="fixed bottom-10 flex items-center border border-primary p-3 gap-3 text-primary duration-500 hover:text-slate-700 hover:border-slate-700 hover:text-primary/80 font-semibold cursor-pointer self-start rounded-md"
       >
         <PlusCircle /> add a video source
       </div>
-      <div className="self-end">
-        <Button className="flex gap-4" disabled={!isDirty || isSubmitting}>
-          {isSubmitting && (
-            <span className="loading text-white loading-spinner loading-sm"></span>
-          )}
-          Submit
-        </Button>
-      </div>
+
+      <Button
+        className="flex gap-4 fixed bottom-10 self-end"
+        disabled={!isDirty || isSubmitting}
+      >
+        {isSubmitting && (
+          <span className="loading text-white loading-spinner loading-sm"></span>
+        )}
+        Submit
+      </Button>
     </form>
   );
 };

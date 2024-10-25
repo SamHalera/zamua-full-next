@@ -23,7 +23,7 @@ const UploadMediaForm = () => {
     handleSubmit,
     register,
     control,
-    formState: { isDirty, isSubmitting, errors },
+    formState: { isDirty, isSubmitting },
   } = useForm<UploadMediaFormType>({
     values: {
       media: dataMedia ? dataMedia : [],

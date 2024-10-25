@@ -27,7 +27,7 @@ const ProjectSingle = ({ project }: { project: ProjectAndMediaType }) => {
             }}
           />
 
-          <div className="flex flex-col md:flex-row gap-11 md:items-end items-center md:justify-center">
+          <div className="flex flex-col md:flex-row gap-11 md:items-start items-center md:justify-center">
             {project.cover && (
               <CldImage
                 width="300"

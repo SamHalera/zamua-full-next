@@ -128,7 +128,7 @@ const MusicFeatureForm = () => {
           </div>
           <Button
             disabled={!isDirty}
-            className="self-end text-xl "
+            className="self-end text-xl fixed bottom-20 btn btn-custom"
             type="submit"
           >
             Submit

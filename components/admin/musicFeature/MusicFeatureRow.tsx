@@ -115,6 +115,7 @@ const MusicFeatureRow = ({
           type="text"
           customClass="input input-bordered w-full"
           placeholder="Cover"
+          disabled={true}
         />
       </div>
       <div className="my-2">

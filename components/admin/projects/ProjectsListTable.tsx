@@ -57,13 +57,13 @@ const ProjectsListTable = () => {
             projects.length > 0 &&
             projects.map((item: ProjectType) => {
               return (
-                <TableRow key={item.id}>
+                <TableRow key={item.id} className="">
                   <TableCell>
                     {item.cover && (
                       <CldImage
                         className="rounded-full"
-                        width="100"
-                        height="100"
+                        width="70"
+                        height="70"
                         src={item.cover}
                         sizes="100vw"
                         crop="fill"
@@ -89,7 +89,7 @@ const ProjectsListTable = () => {
                         );
                       })}
                   </TableCell>
-                  <TableCell className="flex  gap-4 justify-end">
+                  <TableCell className="flex gap-4 justify-end items-center">
                     <Link
                       href={`/admin/projects/${item.id}`}
                       className="text-green-600"

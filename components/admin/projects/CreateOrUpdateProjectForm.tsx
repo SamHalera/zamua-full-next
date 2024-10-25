@@ -163,6 +163,7 @@ const CreateOrUpdateProjectForm = ({
                     <span className="font-semibold text-primary text-center mb-4 block">
                       Project Cover
                     </span>
+
                     <CldImage
                       width="200"
                       height="200"

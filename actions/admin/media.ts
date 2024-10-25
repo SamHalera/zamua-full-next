@@ -39,7 +39,7 @@ const uploaAndCreatedMedia = async (media: MediaType[]) => {
   try {
     console.log("mediaToCreate==>", media);
     const mediaToAdd = media.map((elt) => {
-      const { id, ...noIdMedia } = elt;
+      const { id, credit, ...noIdMedia } = elt;
       return noIdMedia;
     });
     await prisma.media.createMany({
