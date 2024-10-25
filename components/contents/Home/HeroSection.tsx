@@ -63,7 +63,7 @@ const HeroSection = () => {
 
         <Link
           href="#toScroll"
-          className="absolute left-2/4 -bottom-24 md:-bottom-32 flex flex-col items-center gap-6"
+          className="absolute left-2/4 -bottom-24 md:-bottom-12 flex flex-col items-center gap-6"
         >
           <span
             className={cn("[writing-mode:vertical-lr] line-scroll", {
@@ -72,7 +72,7 @@ const HeroSection = () => {
           >
             scroll
           </span>
-          <div className="w-[2px] h-28 md:h-36 lg:h-60 bg-primary"></div>
+          <div className="w-[2px] h-28 md:h-36 lg:h-40 bg-primary"></div>
         </Link>
       </div>
       <div id="toScroll" className=" mb-40"></div>

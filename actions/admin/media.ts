@@ -2,9 +2,10 @@
 
 import prisma from "@/db";
 import { itemsToDelete } from "@/lib/serverActionhepelrs";
+import { MediaType } from "@/types/types";
 import { Media } from "@prisma/client";
 
-export const persistMedia = async (media: Media[]) => {
+export const persistMedia = async (media: MediaType[]) => {
   try {
     console.log("media from form inside action==>", media);
 
@@ -34,11 +35,11 @@ export const persistMedia = async (media: Media[]) => {
   }
 };
 
-const uploaAndCreatedMedia = async (media: Media[]) => {
+const uploaAndCreatedMedia = async (media: MediaType[]) => {
   try {
     console.log("mediaToCreate==>", media);
     const mediaToAdd = media.map((elt) => {
-      const { id, ...noIdMedia } = elt;
+      const { id, credit, ...noIdMedia } = elt;
       return noIdMedia;
     });
     await prisma.media.createMany({
@@ -51,7 +52,7 @@ const uploaAndCreatedMedia = async (media: Media[]) => {
   }
 };
 
-const updateMedia = async (media: Media[]) => {
+const updateMedia = async (media: MediaType[]) => {
   try {
     console.log("mediaToUpdate==>", media);
     media.forEach(async (item) => {

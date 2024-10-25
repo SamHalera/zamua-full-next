@@ -94,13 +94,16 @@ const CreditForm = () => {
         onClick={() => {
           append(fieldToAppend);
         }}
-        className="flex items-center border border-primary p-3 gap-3 text-primary duration-500 hover:text-slate-700 hover:border-slate-700 hover:text-primary/80 font-semibold cursor-pointer self-start rounded-md"
+        className="fixed bottom-10 flex items-center border border-primary p-3 gap-3 text-primary duration-500 hover:text-slate-700 hover:border-slate-700 hover:text-primary/80 font-semibold cursor-pointer self-start rounded-md"
       >
         <PlusCircle />
         add a new credit
       </div>
 
-      <Button className="self-end" disabled={!isDirty || isSubmitting}>
+      <Button
+        className="self-end fixed bottom-10"
+        disabled={!isDirty || isSubmitting}
+      >
         {isSubmitting && (
           <span className="loading text-white loading-spinner loading-sm"></span>
         )}
