@@ -15,7 +15,99 @@ datasource db {
 
 
 model User {
-    id       Int     @id @default(autoincrement())
-    email    String  @unique
-    password String
+    id        Int     @id @default(autoincrement())
+    email     String  @unique
+    password  String
+    salt      String
+
+}
+
+model MusicFeature {
+  id        Int     @id @default(autoincrement())
+  title     String
+  subTitle  String?
+  cover     String?
+  iframe    String
+  path      String
+  priority  Int 
+
+
+}
+
+model Project {
+  id                      Int   @id @default(autoincrement())  
+  fullTitle               String
+  primaryTitleString      String
+  secondaryTitleString    String
+  cover                   String?
+  description             String?
+  projectMember           ProjectMember[]
+  media                   Media[]
+  videos                  Videos[]
+  priority                Int @default(1)
+  slug                    String @default("my-project")
+}
+
+model ProjectMember {
+  id    Int @id @default(autoincrement())
+  name  String
+  features  String
+  project   Project[]
+}
+
+model Media {
+  id Int    @id @default(autoincrement())
+  source    String
+  caption   String?
+  publicId  String
+  projectId Int?
+  isGalleryItem Boolean @default(true)
+  project   Project? @relation(fields: [projectId], references: [id])
+  creditId Int?
+  credit  Credit? @relation(fields:  [creditId], references : [id])
+}
+
+
+model Videos {
+  id Int      @id @default(autoincrement())
+  iframe      String
+  priority    Int @default(1)
+  projectId   Int?
+  project     Project? @relation(fields: [projectId], references: [id])
+}
+
+model Credit {
+  id Int @id @default(autoincrement())
+  name String
+  url String
+  media Media[]
+}
+
+
+model Show {
+  id Int    @id @default(autoincrement())
+  name    String
+  date  DateTime
+  venue String
+  venueUrl String?
+  location String
+  locationUrl String?
+  ticketsUrl String?
+
+}
+
+model Playlist {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description   String?
+  iframe      String
+  path        String
+  slug        String 
+  priority    Int @default(1)
+  cover       String?
+}
+
+enum TypeOfMedia {
+  PHOTO
+  VIDEO
 }

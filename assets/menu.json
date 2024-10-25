@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "label": "home",
+    "href": "/"
+  },
+  {
+    "id": 2,
+    "label": "bio",
+    "href": "/bio"
+  },
+  {
+    "id": 3,
+    "label": "music",
+    "href": "/music"
+  },
+  {
+    "id": 4,
+    "label": "shows",
+    "href": "/shows"
+  },
+  {
+    "id": 5,
+    "label": "projects",
+    "href": "/projects"
+  },
+  {
+    "id": 6,
+    "label": "photos",
+    "href": "/photos"
+  },
+  {
+    "id": 6,
+    "label": "videos",
+    "href": "/videos"
+  },
+  {
+    "id": 7,
+    "label": "playlists",
+    "href": "/playlists"
+  },
+  {
+    "id": 8,
+    "label": "contact",
+    "href": "/contact"
+  }
+]

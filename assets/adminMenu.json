@@ -1,0 +1,40 @@
+[
+  {
+    "label": "Musics",
+    "href": "/admin/musics"
+  },
+  {
+    "label": "Projects",
+    "href": "/admin/projects"
+  },
+  {
+    "label": "Projects members",
+    "href": "/admin/project-members"
+  },
+  {
+    "label": "Shows",
+    "href": "/admin/shows"
+  },
+  {
+    "label": "Playlists",
+    "href": "/admin/playlists"
+  },
+  {
+    "label": "Credits",
+    "href": "/admin/credits"
+  },
+  {
+    "label": "Media",
+    "href": "/admin/media",
+    "items": [
+      {
+        "label": "Photos",
+        "href": "/admin/media/photos"
+      },
+      {
+        "label": "Videos",
+        "href": "/admin/media/videos"
+      }
+    ]
+  }
+]
