@@ -1,8 +1,42 @@
 import { gePlaylistBySlug } from "@/actions/playlist";
+import { Metadata } from "next";
 
 import Link from "next/link";
 import React from "react";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string; index: number };
+}): Promise<Metadata> {
+  const { slug } = params;
+  const playlist = await gePlaylistBySlug(slug[1]);
+  const title = "Zamua soul and folk song-writer";
+  const description =
+    playlist?.description ??
+    "PLAY-THE-TAPE Playlists is a section dedicated to the music and artists I listen to, who inspire me every day and influence my creativity.";
+
+  const url = `${process.env.NEXTAUTH_URL}/playlists/${slug[0]}/${slug[1]}`;
+
+  const metadata: Metadata = {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url,
+      images: [
+        {
+          url: `${playlist?.cover}`,
+          width: 800,
+          height: 600,
+        },
+      ],
+    },
+  };
+
+  return metadata;
+}
 const page = async ({
   params,
 }: {
@@ -10,7 +44,6 @@ const page = async ({
 }) => {
   const { slug } = params;
 
-  console.log("slug", slug);
   const playlist = await gePlaylistBySlug(slug[1]);
 
   if (!playlist) return;
