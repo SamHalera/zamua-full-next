@@ -1,10 +1,11 @@
-import LoginForm from "@/components/LoginForm";
+import SignInContent from "@/components/contents/sign-in/SignInContent";
+
 import React from "react";
 
 const page = async () => {
   return (
     <div>
-      <LoginForm />
+      <SignInContent />
     </div>
   );
 };

@@ -35,42 +35,40 @@ const LoginForm = () => {
     }
   };
   return (
-    <div className="">
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-2/4 m-auto flex flex-col gap-10 justify-center my-16"
-        >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>EMAIL</FormLabel>
-                <FormControl>
-                  <Input placeholder="email" {...field} type="email" />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>PASSWORD</FormLabel>
-                <FormControl>
-                  <Input placeholder="password" {...field} type="password" />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <Button className="self-end" type="submit">
-            Submit
-          </Button>
-        </form>
-      </Form>
-    </div>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-2/4 m-auto flex flex-col gap-10 justify-center bg-primary/30 p-12"
+      >
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-2xl font-semibold">EMAIL</FormLabel>
+              <FormControl>
+                <Input placeholder="email" {...field} type="email" />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-2xl font-semibold">PASSWORD</FormLabel>
+              <FormControl>
+                <Input placeholder="password" {...field} type="password" />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <Button className="self-end" type="submit">
+          Submit
+        </Button>
+      </form>
+    </Form>
   );
 };
 
