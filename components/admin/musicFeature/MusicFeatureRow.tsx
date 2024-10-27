@@ -49,12 +49,9 @@ const MusicFeatureRow = ({
 
   return (
     <div
-      className={cn(
-        "flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6 flex-auto",
-        {
-          "border-2 border-primary shadow-lg": field.title === "",
-        }
-      )}
+      className={cn("flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6", {
+        "border-2 border-primary shadow-lg": field.title === "",
+      })}
     >
       <Trash2
         onClick={() => {
@@ -62,7 +59,7 @@ const MusicFeatureRow = ({
         }}
         className="size-8 text-red-400 self-end cursor-pointer"
       />
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <CustomInput
           register={register}
           label="Title"
@@ -80,7 +77,7 @@ const MusicFeatureRow = ({
           placeholder="Any sub title"
         />
       </div>
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <CustomInput
           register={register}
           label="Album Iframe"
@@ -98,7 +95,7 @@ const MusicFeatureRow = ({
           placeholder="Url"
         />
       </div>
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <CustomInput
           register={register}
           label="Display order in Front End"
@@ -131,8 +128,6 @@ const MusicFeatureRow = ({
 
         <CldUploadWidget
           onSuccess={(result: any) => {
-            console.log(result?.info?.secure_url);
-
             setDataImage(result?.info?.secure_url);
           }}
           uploadPreset="orzznnzy"

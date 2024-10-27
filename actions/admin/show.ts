@@ -12,7 +12,7 @@ export const createOrUpdateShow = async (showsData: Show[]) => {
       const showsToDelete = existingShows.filter((show) => {
         return !showsData.some((show2) => show2.id === show.id);
       });
-      console.log("showsToDelete==>", showsToDelete);
+
       showsToDelete.forEach(async (item) => {
         await prisma.show.delete({
           where: { id: item.id },
@@ -23,7 +23,6 @@ export const createOrUpdateShow = async (showsData: Show[]) => {
     const showsToUpdate = showsData.filter((show) => show.id > 0);
     createShows(showsToCreate);
     updateShows(showsToUpdate);
-    // console.log("showsToUpdate==>", showsToUpdate);
 
     return { success: "Shows list has been updated!" };
   } catch (error) {
@@ -38,7 +37,7 @@ const createShows = async (showsToCreate: Show[]) => {
       remaininItem.date = new Date(remaininItem.date);
       return remaininItem;
     });
-    console.log("showsToPersist==>", showsToPersist);
+
     await prisma.show.createMany({
       data: showsToPersist,
     });

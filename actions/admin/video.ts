@@ -6,8 +6,6 @@ import { Videos } from "@prisma/client";
 
 export const createOrUpdateVideos = async (videos: Videos[]) => {
   try {
-    console.log("videos indide action==>", videos);
-
     const existingVideos = await prisma.videos.findMany();
 
     if (videos.length === 0) {

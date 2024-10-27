@@ -34,7 +34,6 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
 
       message = "Project has been created successfully";
     } else {
-      console.log("UPDATE");
       const updateProject = await prisma.project.update({
         where: {
           id: data.id,

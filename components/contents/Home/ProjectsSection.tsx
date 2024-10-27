@@ -6,18 +6,18 @@ const ProjectsSection = () => {
   return (
     <div
       className={cn(
-        " bg-cover bg-scroll bg-right-top lg:bg-fixed h-auto md:h-screen"
+        " bg-cover bg-scroll bg-right-top lg:bg-fixed h-auto md:h-screen py-6"
       )}
       style={{
         backgroundImage: `url(/images/bg-cta.jpg)`,
       }}
     >
       <div className="bg-black/60 h-screen flex flex-col items-center justify-center gap-8">
-        <h1 className="text-primary text-5xl text-center md:text-6xl lg:text-7xl">
+        <h1 className="text-primary text-4xl text-center md:text-6xl lg:text-7xl">
           ZAMUA&apos;S PROJECTS
         </h1>
 
-        <div className="text-white text-2xl md:text-3xl leading-10 px-7 md:px-28 flex flex-col items-center gap-8">
+        <div className="text-white text-xl md:text-2xl leading-10 px-7 md:px-28 flex flex-col items-center gap-8 ">
           <p className="text-center">
             Zamua is involved in different musical projects and he collaborates
             with many artists and performers.

@@ -6,13 +6,13 @@ import Link from "next/link";
 
 const MusicFeatureSection = () => {
   return (
-    <div className="flex flex-wrap justify-center md:gap-8 lg:gap-20 py-32 px-10">
+    <div className="flex flex-wrap justify-center md:gap-8 lg:gap-20 py-20 lg:py-32 px-10">
       <div className="mb-20 flex flex-col items-center gap-6">
         <div className={cn("text-center flex flex-col gap-4 h-44")}>
-          <h2 className={cn("text-black text-7xl md:text-8xl lg:text-8xl")}>
+          <h2 className={cn("text-black text-6xl md:text-7xl lg:text-8xl")}>
             LITANIE
           </h2>
-          <h3 className={cn("text-black text-7xl")}>EP</h3>
+          <h3 className={cn("text-black text-5xl md:text-7xl")}>EP</h3>
         </div>
         <div className=" flex flex-col items-center">
           <Image

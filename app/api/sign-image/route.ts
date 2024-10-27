@@ -1,7 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 
 export async function POST(request: Request) {
-  console.log("KEY", process.env.CLOUDINARY_API_SECRET);
   const body = (await request.json()) as {
     paramsToSign: Record<string, string>;
   };

@@ -1,4 +1,4 @@
-import AdminSideBar from "@/components/admin/AdminSideBar";
+import HeaderAdmin from "@/components/admin/nav/HeaderAdmin";
 import { Toaster } from "@/components/ui/toaster";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
@@ -12,17 +12,19 @@ export default async function AdminLayout({
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    console.log("no session!!");
     redirect("/");
   }
   return (
-    <div className=" flex gap-8">
-      <div className="mr-60">
-        <Toaster />
-        <AdminSideBar />
-      </div>
+    <>
+      <HeaderAdmin />
+      <Toaster />
 
-      <div className="flex-1 mx-auto">{children}</div>
-    </div>
+      <div className="p-4">
+        <div className="text-black text-4xl font-bold text-center my-10">
+          ADMIN SECTION
+        </div>
+        {children}
+      </div>
+    </>
   );
 }

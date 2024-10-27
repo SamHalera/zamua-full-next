@@ -56,11 +56,11 @@ const page = async ({
       >
         back to playlists
       </Link>
-      <h1 className="text-6xl text-center md:text-start">
+      <h1 className="text-4xl sm:text-6xl text-center md:text-start">
         PLAY THE TAPE{" "}
         <span className="text-primary font-semibold">#{slug[0]}</span>
       </h1>
-      <h2 className="text-4xl text-primary font-semibold text-center md:text-start">
+      <h2 className="text-3xl sm:text-4xl text-primary font-semibold text-center md:text-start">
         {playlist.title}
       </h2>
       <div
