@@ -23,8 +23,6 @@ const SlideGalleryComponent = ({
     React.SetStateAction<CurrentSlideType | null>
   >;
 }) => {
-  console.log("currentSlideItem==>", currentSlideItem);
-
   const handleToggleSlide = (image: MediaType) => {
     const newSlideItem: CurrentSlideType = {
       src: image.source,
@@ -76,7 +74,7 @@ const SlideGalleryComponent = ({
           </div>
         )}
       </div>
-      <div className="flex flex-nowrap w-2/3 overflow-scroll">
+      <div className="flex flex-nowrap w-3/3 overflow-scroll">
         {mediaGallery &&
           mediaGallery.map((image) => {
             return (

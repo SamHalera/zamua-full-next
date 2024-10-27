@@ -22,12 +22,9 @@ const CreditRow = ({
 }) => {
   return (
     <div
-      className={cn(
-        "flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6 w-1/3",
-        {
-          "border-2 border-primary shadow-lg": field?.name === "",
-        }
-      )}
+      className={cn("flex flex-col gap-3 bg-slate-200 rounded-lg p-4 mb-6 ", {
+        "border-2 border-primary shadow-lg": field?.name === "",
+      })}
     >
       <Trash2
         onClick={() => {

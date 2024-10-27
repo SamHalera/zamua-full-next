@@ -3,8 +3,8 @@ import React from "react";
 
 const AdminShowPage = async () => {
   return (
-    <div className="p-10 ">
-      <h1 className="text-3xl font-semibold mb-6">MANAGE Shows </h1>
+    <div className="p-2 md:p-10 ">
+      <h1 className="text-3xl font-semibold mb-6 text-center">MANAGE Shows </h1>
       <ShowsContent />
     </div>
   );

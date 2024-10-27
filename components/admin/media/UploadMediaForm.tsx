@@ -41,7 +41,6 @@ const UploadMediaForm = () => {
 
   const onSubmit: SubmitHandler<UploadMediaFormType> = async (values) => {
     const { media } = values;
-    console.log("media from form==>", media);
 
     try {
       await persistMedia(media);
@@ -64,12 +63,12 @@ const UploadMediaForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-3 w-full"
+      className="flex flex-col gap-3 w-full justify-center"
     >
       {isLoading ? (
         <Loader />
       ) : (
-        <div className=" flex gap-4 flex-wrap">
+        <div className=" flex gap-4 flex-wrap justify-center ">
           {fields.length > 0 &&
             fields.map((field, index) => {
               return (
@@ -105,7 +104,7 @@ const UploadMediaForm = () => {
           return (
             <button
               name="uploadButton"
-              className="border border-primary bg-primary hover:bg-primary/40 text-xs duration-500 font-semibold self-center w-44 rounded-full py-4 mt-4"
+              className="border fixed bottom-20 border-primary bg-primary hover:bg-primary/40 text-xs duration-500 font-semibold self-start w-44 rounded-full py-4 mt-4"
               onClick={(e) => {
                 open();
                 e.preventDefault();
@@ -116,7 +115,7 @@ const UploadMediaForm = () => {
           );
         }}
       </CldUploadWidget>
-      <div className="self-end">
+      <div className="self-end fixed bottom-20">
         <Button className="flex gap-4" disabled={!isDirty || isSubmitting}>
           {isSubmitting && (
             <span className="loading text-white loading-spinner loading-sm"></span>

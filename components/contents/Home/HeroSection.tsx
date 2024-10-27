@@ -56,14 +56,14 @@ const HeroSection = () => {
               </div>
             </Link>
           </div>
-          <h1 className="text-black font-normal text-center text-4xl sm:text-5xl md:text-6xl xl:text-7xl lg:text-start w-full  lg:w-2/3 mb-3">
+          <h1 className="text-black font-normal text-center text-3xl sm:text-4xl md:text-6xl xl:text-7xl lg:text-start w-full  lg:w-2/3 mb-3">
             When music enters your life, it is bound to leave an indelible mark
           </h1>
         </div>
 
         <Link
           href="#toScroll"
-          className="absolute left-2/4 -bottom-24 md:-bottom-12 flex flex-col items-center gap-6"
+          className="absolute left-2/4 -bottom-24 md:-bottom-32 flex flex-col items-center gap-6"
         >
           <span
             className={cn("[writing-mode:vertical-lr] line-scroll", {

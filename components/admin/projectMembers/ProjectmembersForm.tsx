@@ -68,10 +68,8 @@ const ProjectmembersForm = () => {
           description: response.error,
           variant: "destructive",
         });
-        console.log("Response error==>", response.error);
       }
       if (response?.success) {
-        console.log("Response success==>", response.success);
         toast({
           title: "Good news!",
           description: response.success,

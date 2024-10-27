@@ -13,16 +13,16 @@ const PlaylistItem = ({
   return (
     <Link
       href={`/playlists/${index}/${playlist.slug}`}
-      className="w-60 h-60 bg-cover bg-center rounded-md block shadow-lg group"
+      className=" w-52 h-52 sm:w-72 sm:h-72 bg-cover bg-center rounded-md block shadow-lg group"
       style={{
         backgroundImage: `url(${playlist.cover})`,
       }}
     >
-      <div className="w-60 h-60 bg-slate-900/50 rounded-md relative flex justify-center  group-hover:bg-slate-900/80 duration-700">
+      <div className="w-52 h-52 sm:w-72 sm:h-72 bg-slate-900/50 rounded-md relative flex justify-center  group-hover:bg-slate-900/80 duration-700">
         <h3 className="text-primary text-xl font-semibold py-9 absolute top-11 duration-700 group-hover:top-8">
           {playlist.title}
         </h3>
-        <Link2 className=" size-9 text-primary absolute bottom-10 opacity-0 duration-500 group-hover:bottom-24 group-hover:opacity-100"></Link2>
+        <Link2 className=" size-9 text-primary absolute bottom-10 opacity-0 duration-500 group-hover:bottom-32 group-hover:opacity-100"></Link2>
       </div>
     </Link>
   );

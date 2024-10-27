@@ -7,8 +7,6 @@ import { Media } from "@prisma/client";
 
 export const persistMedia = async (media: MediaType[]) => {
   try {
-    console.log("media from form inside action==>", media);
-
     const mediaFromDB = await prisma.media.findMany();
 
     if (media.length === 0) {
@@ -37,7 +35,6 @@ export const persistMedia = async (media: MediaType[]) => {
 
 const uploaAndCreatedMedia = async (media: MediaType[]) => {
   try {
-    console.log("mediaToCreate==>", media);
     const mediaToAdd = media.map((elt) => {
       const { id, credit, ...noIdMedia } = elt;
       return noIdMedia;
@@ -54,7 +51,6 @@ const uploaAndCreatedMedia = async (media: MediaType[]) => {
 
 const updateMedia = async (media: MediaType[]) => {
   try {
-    console.log("mediaToUpdate==>", media);
     media.forEach(async (item) => {
       await prisma.media.update({
         where: { id: item.id },

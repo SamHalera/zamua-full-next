@@ -60,11 +60,11 @@ const ProjectMembersRow = ({
       };
     });
   }
-  console.log("field.project=>", field.project);
+
   return (
     <div
       className={cn(
-        "flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6 w-2/3 mx-auto",
+        "flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6 mx-auto flex-1",
         {
           "border-2 border-primary shadow-lg": field?.name === "",
         }
@@ -77,7 +77,7 @@ const ProjectMembersRow = ({
         className="size-8 text-red-400 self-end cursor-pointer"
       />
 
-      <div className="flex gap-7">
+      <div className="flex flex-col md:flex-row gap-4">
         <CustomInput
           type="text"
           register={register}

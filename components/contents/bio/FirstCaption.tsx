@@ -27,12 +27,12 @@ const FirstCaption = () => {
       </div>
       <div
         className={cn(
-          "hidden lg:block lg:absolute right-80 top-20 bg-primary w-96 h-[500px]"
+          "hidden lg:block lg:absolute right-40 top-20 xl:right-80 xl:top-20 bg-primary w-96 h-[500px]"
         )}
       ></div>
       <div
         className={cn(
-          "hidden lg:block lg:absolute left-96 top-96 bg-[#E3A53F] w-[500px] h-96"
+          "hidden lg:block lg:absolute left-56 top-96 xl:left-96 xl:top-96 bg-[#E3A53F] w-[500px] h-96"
         )}
       ></div>
     </div>

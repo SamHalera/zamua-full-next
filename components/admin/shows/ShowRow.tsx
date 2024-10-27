@@ -24,7 +24,6 @@ const ShowRow = ({
   remove: UseFieldArrayRemove;
   errorItems?: FieldErrors<ShowFormType>;
 }) => {
-  if (errorItems?.shows) console.log("here==>", errorItems?.shows[index]);
   return (
     <div
       className={cn(
@@ -40,7 +39,7 @@ const ShowRow = ({
         }}
         className="size-8 text-red-400 self-end cursor-pointer"
       />
-      <div className=" flex gap-4">
+      <div className="flex gap-4">
         <CustomInput
           register={register}
           name={`shows.${index}.name`}
@@ -52,7 +51,8 @@ const ShowRow = ({
           value={field.name}
           error={errorItems?.shows ? errorItems?.shows[index]?.name : undefined}
         />
-
+      </div>
+      <div>
         <CustomInput
           register={register}
           name={`shows.${index}.date`}
@@ -67,7 +67,7 @@ const ShowRow = ({
           error={errorItems?.shows ? errorItems?.shows[index]?.date : undefined}
         />
       </div>
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <CustomInput
           register={register}
           name={`shows.${index}.venue`}
@@ -93,7 +93,7 @@ const ShowRow = ({
           pattern={/^https:\/\/[a-z1-9]+-?_?\.?[a-z1-9]+.[a-z]{2,4}/gm}
         />
       </div>
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <CustomInput
           register={register}
           name={`shows.${index}.location`}
@@ -117,6 +117,8 @@ const ShowRow = ({
           customClass="input input-bordered w-full"
           pattern={/^https:\/\/[a-z1-9]+-?_?\.?[a-z1-9]+.[a-z]{2,4}/gm}
         />
+      </div>
+      <div>
         <CustomInput
           register={register}
           name={`shows.${index}.ticketsUrl`}

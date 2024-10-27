@@ -6,8 +6,6 @@ import { MusicFeature } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export const getMusicFeatures = async () => {
-  console.log("inside action");
-
   const musicFeatures = await prisma.musicFeature.findMany({
     orderBy: {
       priority: "asc",
@@ -23,18 +21,16 @@ export const createOrUpdateMusicFeatures = async (
 ) => {
   try {
     const { musicFeature } = data;
-    console.log("musicFeature==>", musicFeature);
+
     const existingMusicFeature = await getMusicFeatures();
     if (musicFeature.length === 0) {
-      console.log("delete all");
-
       await prisma.musicFeature.deleteMany({});
     } else if (
       existingMusicFeature &&
       existingMusicFeature?.length > musicFeature.length
     ) {
       //remove
-      console.log("remove");
+
       await removeMusicFeaturesOnUpdate(data, existingMusicFeature);
     }
 
@@ -46,7 +42,6 @@ export const createOrUpdateMusicFeatures = async (
           data: musicFeatureToPersists,
         });
       } else {
-        console.log("item to update");
         const itemUpdated = await prisma.musicFeature.update({
           where: {
             id: item.id,

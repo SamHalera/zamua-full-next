@@ -31,11 +31,10 @@ const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
 
   const onSubmit: SubmitHandler<UploadMediaFormType> = async (values) => {
     setIsLoading(true);
-    console.log("values from form==>", values);
+
     const { media } = values;
     const response = await handleMediaUpload(media, project);
     if (response?.success) {
-      console.log("response==>", response);
       toast({
         title: "Good news!",
         description: response.success,

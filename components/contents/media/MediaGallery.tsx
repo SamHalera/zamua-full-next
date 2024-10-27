@@ -17,12 +17,11 @@ const MediaGallery = ({ mediaGallery }: { mediaGallery: MediaType[] }) => {
     useState<CurrentSlideType | null>(null);
   return (
     <div className="">
-      <div className=" p-8">
+      <div className=" p-4 md:p-8">
         <div className="flex flex-wrap gap-5 justify-center" id="lightgallery">
           {!isSlideView &&
             mediaGallery &&
             mediaGallery.map((image) => {
-              console.log(image);
               return (
                 <CldImage
                   onClick={() => {
@@ -45,7 +44,7 @@ const MediaGallery = ({ mediaGallery }: { mediaGallery: MediaType[] }) => {
                     });
                   }}
                   key={image.id}
-                  className=" cursor-pointer  hover:opacity-75 duration-700 w-[300px] object-cover"
+                  className=" cursor-pointer  hover:opacity-75 duration-700 object-cover"
                   width="300"
                   height="300"
                   src={image.source}

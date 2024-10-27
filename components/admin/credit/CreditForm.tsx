@@ -44,7 +44,6 @@ const CreditForm = () => {
   };
   const onSubmit: SubmitHandler<CreditFormType> = async (values) => {
     const { credits } = values;
-    console.log("values credits form==>", values);
 
     try {
       const response = await createOrUpdateCredit(credits);
@@ -54,10 +53,8 @@ const CreditForm = () => {
           description: response.error,
           variant: "destructive",
         });
-        console.log("Response error==>", response.error);
       }
       if (response?.success) {
-        console.log("Response success==>", response.success);
         toast({
           title: "Good news!",
           description: response.success,
@@ -76,7 +73,7 @@ const CreditForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       const credits = await getCredits();
-      console.log(credits);
+
       if (credits) setDataCredits(credits);
       setIsLoading(false);
     };

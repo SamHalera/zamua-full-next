@@ -25,7 +25,7 @@ const UploadMediaRow = ({
   return (
     <div
       className={cn(
-        "flex flex-col gap-3 items-center p-5 bg-slate-200 rounded-md shadow-md w-1/3",
+        "flex flex-col gap-3 items-center p-5 bg-slate-200 rounded-md shadow-md",
         {
           "border-2 border-primary": field.source === "",
         }

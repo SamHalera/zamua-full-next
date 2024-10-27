@@ -11,9 +11,7 @@ import { Media } from "@prisma/client";
 import { CldImage } from "next-cloudinary";
 
 const LightGalleryComponent = ({ images }: { images?: Media[] }) => {
-  const onInit = () => {
-    console.log("lightGallery has been initialized");
-  };
+  const onInit = () => {};
   return (
     <LightGallery
       onInit={onInit}
@@ -24,7 +22,6 @@ const LightGalleryComponent = ({ images }: { images?: Media[] }) => {
       <div className="flex flex-wrap gap-5 justify-center" id="lightgallery">
         {images &&
           images.map((image) => {
-            console.log("image==>", image);
             return (
               <a
                 href={image.source}

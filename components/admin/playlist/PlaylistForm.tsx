@@ -44,7 +44,7 @@ const PlaylistForm = () => {
 
   const onSubmit: SubmitHandler<PlaylistFormType> = async (values) => {
     const { playlists } = values;
-    console.log("playlists values==>", playlists);
+
     const response = await createOrUpdatePlaylist(playlists);
 
     if (response?.error) {
@@ -53,10 +53,8 @@ const PlaylistForm = () => {
         description: response.error,
         variant: "destructive",
       });
-      console.log("Response error==>", response.error);
     }
     if (response?.success) {
-      console.log("Response success==>", response.success);
       toast({
         title: "Good news!",
         description: response.success,
@@ -67,8 +65,6 @@ const PlaylistForm = () => {
         },
       });
     }
-
-    console.log("response==>", response);
   };
 
   const fieldToAppend = {
@@ -84,7 +80,7 @@ const PlaylistForm = () => {
   useEffect(() => {
     const fecthData = async () => {
       const playlists = await getPlaylists();
-      console.log("fetch playlists==>", playlists);
+
       if (playlists) {
         setDataPlaylists(playlists);
         setIsLoading(false);
