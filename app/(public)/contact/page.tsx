@@ -1,7 +1,32 @@
 import React from "react";
 import Link from "next/link";
 import { Facebook, Instagram } from "lucide-react";
+import { Metadata } from "next";
 
+export async function generateMetadata(): Promise<Metadata> {
+  const title = "Zamua soul and folk song-writer";
+  const description =
+    "Zamua is an italian and burundian song-writer, singer and guitarist based in Paris. His music is a fusion between pop-folk and soul-jazz.";
+
+  const metadata: Metadata = {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `${process.env.NEXTAUTH_URL}/contact`,
+      images: [
+        {
+          url: `${process.env.NEXTAUTH_URL}/images/bg-home.jpg`,
+          width: 800,
+          height: 600,
+        },
+      ],
+    },
+  };
+
+  return metadata;
+}
 const page = () => {
   return (
     <div
@@ -11,13 +36,15 @@ const page = () => {
       }}
     >
       <div className="bg-black/40 h-screen flex flex-col gap-12 justify-center items-center">
-        <h1 className="text-white text-7xl font-semibold mb-10">CONTACT</h1>
-        <h2 className="text-white text-4xl font-semibold">
+        <h1 className="text-white text-center text-5xl sm:text-5xl md:text-6xl xl:text-7xl lg:text-start font-semibold mb-10">
+          CONTACT
+        </h1>
+        <h2 className="text-white text-center text-2xl md:text-3xl xl:text-4xl lg:text-start font-semibold">
           Booking and Management
         </h2>
         <a
           href="mailto:contact@zamuamusic.com"
-          className="text-primary text-3xl font-semibold mb-10"
+          className="text-primary text-center text-xl md:text-3xl xl:text-4xl lg:text-start font-semibold mb-10"
         >
           contact@zamuamusic.com
         </a>

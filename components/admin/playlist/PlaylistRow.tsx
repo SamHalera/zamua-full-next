@@ -87,8 +87,6 @@ const PlaylistRow = ({
           )}
           <CldUploadWidget
             onSuccess={(result: any) => {
-              console.log(result?.info?.secure_url);
-
               setDataImage(result?.info?.secure_url);
             }}
             uploadPreset="nzr9uqpt"

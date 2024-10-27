@@ -47,20 +47,16 @@ const VideoForm = () => {
 
   const onSubmit: SubmitHandler<VideoFormType> = async (values) => {
     try {
-      console.log("values==>", values);
       const { videos } = values;
       const response = await createOrUpdateVideos(videos);
       if (response?.error) {
-        console.log("response eeee==>", response);
         toast({
           title: "Uh oh! Something went wrong.",
           description: response.error,
           variant: "destructive",
         });
-        console.log("Response error==>", response.error);
       }
       if (response?.success) {
-        console.log("Response success==>", response.success);
         toast({
           title: "Good news!",
           description: response.success,

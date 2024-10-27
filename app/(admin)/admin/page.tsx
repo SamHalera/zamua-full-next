@@ -2,9 +2,8 @@ import React from "react";
 
 const adminPage = () => {
   return (
-    <div className="p-10  h-screen flex flex-col items-center">
-      <div className="flex flex-col items-center my-auto">
-        <h1 className="text-3xl font-semibold mb-6">ADMIN SECTION</h1>
+    <div className="p-10  h-screen flex flex-col">
+      <div className="flex flex-col">
         <div className="text-xl text-center mb-4">
           Welcome to the Admin Section.
         </div>

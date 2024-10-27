@@ -8,7 +8,7 @@ const page = async ({ params }: { params: { id: string[] } }) => {
   const project = await getProjectById(id);
 
   return (
-    <div className="p-10 ">
+    <div className="p-2 md:p-10 ">
       <h1 className="text-3xl font-semibold mb-6 text-center">
         MANAGE Project
       </h1>

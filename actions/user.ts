@@ -10,8 +10,6 @@ export const createUser = async () => {
     const salt = uid2(12);
     const password = SHA256("1234" + salt).toString(encBase64);
 
-    console.log(password);
-
     const user = await prisma.user.create({
       data: {
         email,
@@ -34,8 +32,6 @@ export const getTestUser = async () => {
     });
 
     const newHash = SHA256("test" + testUser?.salt).toString(encBase64);
-
-    console.log("matches", newHash === testUser?.password);
 
     return testUser;
   } catch (error) {

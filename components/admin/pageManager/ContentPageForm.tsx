@@ -15,7 +15,7 @@ const ContentPageForm = () => {
   const [pathValue, setPathValue] = useState<string>("");
   const handlePathOnChange = (value: string) => {
     const newStr = value.toLocaleLowerCase().split(" ").join("-");
-    console.log("newStr==>", newStr);
+
     setPathValue(`${newStr}`);
   };
 
@@ -28,9 +28,9 @@ const ContentPageForm = () => {
   });
 
   const onSubmit: SubmitHandler<CreatePageFormType> = async (values) => {
-    console.log(values);
+    console.log("values", values);
   };
-  console.log("path value==>", pathValue);
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">

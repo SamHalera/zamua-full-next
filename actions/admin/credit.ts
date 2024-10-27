@@ -11,7 +11,7 @@ export const createOrUpdateCredit = async (credits: Credit[]) => {
     if (credits.length === 0) await prisma.credit.deleteMany();
     else if (exixtingCredits.length > credits.length) {
       const creditsToDelete = itemsToDelete(exixtingCredits, credits);
-      console.log("items to delete");
+
       creditsToDelete.forEach(async (item: Credit) => {
         await prisma.credit.delete({ where: { id: item.id } });
       });
@@ -31,7 +31,6 @@ export const createOrUpdateCredit = async (credits: Credit[]) => {
 
 export const createCredit = async (credits: Credit[]) => {
   try {
-    console.log("credits to creater==>", credits);
     const creditToPersist = credits.map((item) => {
       const { id, ...itemNoId } = item;
       return itemNoId;

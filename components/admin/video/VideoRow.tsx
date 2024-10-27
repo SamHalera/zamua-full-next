@@ -23,7 +23,7 @@ const VideoRow = ({
   return (
     <div
       className={cn(
-        "flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6 w-2/3 mx-auto",
+        "flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6 mx-auto",
         {
           "border-2 border-primary shadow-lg": field?.iframe === "",
         }

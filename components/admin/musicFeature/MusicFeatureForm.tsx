@@ -67,7 +67,6 @@ const MusicFeatureForm = () => {
 
   const onSubmit: SubmitHandler<MusicFeatureFormType> = async (values) => {
     try {
-      console.log("values form=>", values);
       const response = await createOrUpdateMusicFeatures(values);
 
       if (response?.error) {
@@ -76,10 +75,8 @@ const MusicFeatureForm = () => {
           description: response.error,
           variant: "destructive",
         });
-        console.log("Response error==>", response.error);
       }
       if (response?.success) {
-        console.log("Response success==>", response.success);
         toast({
           title: "Good news!",
           description: response.success,
@@ -98,7 +95,6 @@ const MusicFeatureForm = () => {
   useEffect(() => {
     const fetchData: () => void = async () => {
       const musicFeatures = await getMusicFeatures();
-      console.log("musicFeatures", musicFeatures);
 
       setDataMusicFeatures(musicFeatures);
       setIsLoading(false);
@@ -122,7 +118,7 @@ const MusicFeatureForm = () => {
             onClick={() => {
               append(fieldToAppend);
             }}
-            className="flex items-center border border-primary p-3 gap-3 text-primary duration-500 hover:text-slate-700 hover:border-slate-700 hover:text-primary/80 font-semibold cursor-pointer self-start rounded-md"
+            className="flex fixed bottom-20 items-center border border-primary p-3 gap-3 text-primary duration-500 hover:text-slate-700 hover:border-slate-700 hover:text-primary/80 font-semibold cursor-pointer self-start rounded-md"
           >
             <PlusCircle /> Ajouter un album
           </div>

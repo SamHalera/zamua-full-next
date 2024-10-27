@@ -19,7 +19,7 @@ const ShowForm = ({ shows }: { shows?: Show[] }) => {
     handleSubmit,
     control,
     register,
-    getValues,
+
     formState: { isDirty, isSubmitting, errors },
   } = useForm<ShowFormType>({
     values: {
@@ -29,13 +29,6 @@ const ShowForm = ({ shows }: { shows?: Show[] }) => {
 
   const errorItems = errors;
 
-  console.log("form values==>", getValues());
-  console.log("errors==>", errors);
-  //   if(errors.shows){
-  //     for(const error of errors.shows.root){
-
-  //     }
-  //   }
   const { fields, append, remove } = useFieldArray<ShowFormType, "shows", "id">(
     { name: "shows", control }
   );
@@ -53,7 +46,6 @@ const ShowForm = ({ shows }: { shows?: Show[] }) => {
   };
 
   const onSubmit: SubmitHandler<ShowFormType> = async (values) => {
-    console.log("value from form==>", values);
     const { shows } = values;
     const response = await createOrUpdateShow(shows);
     if (response?.error) {
@@ -62,10 +54,8 @@ const ShowForm = ({ shows }: { shows?: Show[] }) => {
         description: response.error,
         variant: "destructive",
       });
-      console.log("Response error==>", response.error);
     }
     if (response?.success) {
-      console.log("Response success==>", response.success);
       toast({
         title: "Good news!",
         description: response.success,

@@ -4,7 +4,7 @@ import React from "react";
 const AdminMediaPage = async () => {
   return (
     <div className="p-10 ">
-      <h1 className="text-3xl font-semibold mb-6">MANAGE Media </h1>
+      <h1 className="text-3xl font-semibold mb-6 text-center">MANAGE Media </h1>
       <div className="flex gap-6 justify-center m-auto">
         <Link className="custom-btn" href={"/admin/media/photos"}>
           PHOTOS

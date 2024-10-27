@@ -5,11 +5,7 @@ import ShowForm from "./ShowForm";
 
 const ShowsContent = async () => {
   const shows = await getShows();
-  return (
-    <div>
-      <ShowForm shows={shows} />
-    </div>
-  );
+  return <ShowForm shows={shows} />;
 };
 
 export default ShowsContent;

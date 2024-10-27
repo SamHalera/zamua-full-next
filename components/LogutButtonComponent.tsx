@@ -6,7 +6,7 @@ import { signOut } from "next-auth/react";
 const LogoutButtonComponent = () => {
   return (
     <Button
-      className="mt-8"
+      className=""
       onClick={() => {
         signOut();
       }}
