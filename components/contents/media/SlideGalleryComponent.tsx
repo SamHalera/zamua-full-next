@@ -1,10 +1,9 @@
 "use client";
+import React, { useEffect } from "react";
 import { MediaType } from "@/types/types";
-
-import { CircleX } from "lucide-react";
+import { ChevronLeft, ChevronRight, CircleX } from "lucide-react";
 import { CldImage } from "next-cloudinary";
 import Link from "next/link";
-import React from "react";
 import { CurrentSlideType } from "./MediaGallery";
 import { cn } from "@/lib/utils";
 
@@ -32,6 +31,57 @@ const SlideGalleryComponent = ({
     };
     setCurrentSlideItem(newSlideItem);
   };
+
+  const handleSlideByControllers = (
+    currentSlideItem: CurrentSlideType,
+    target: "next" | "prev"
+  ) => {
+    if (mediaGallery) {
+      const currentMediaItem = mediaGallery.find(
+        (item) => item.source === currentSlideItem.src
+      );
+      if (currentMediaItem) {
+        const indexItem = mediaGallery?.indexOf(currentMediaItem);
+
+        const indexItemTarget =
+          target === "next" ? indexItem + 1 : indexItem - 1;
+        const image: MediaType =
+          indexItemTarget < 0
+            ? mediaGallery[mediaGallery.length - 1]
+            : mediaGallery[indexItemTarget];
+
+        const newSlideItem: CurrentSlideType = {
+          src: image?.source,
+          caption: image.caption ?? "",
+          creditName: image.credit?.name ?? "",
+          creditUrl: image.credit?.url ?? "",
+        };
+        setCurrentSlideItem(newSlideItem);
+      }
+    }
+  };
+
+  const handleClickOnArrowKey = (e: KeyboardEvent) => {
+    let target: "next" | "prev" = "next";
+    switch (e.key) {
+      case "ArrowRight":
+        target = "next";
+        break;
+      case "ArrowLeft":
+        target = "prev";
+        break;
+    }
+
+    if (currentSlideItem) {
+      handleSlideByControllers(currentSlideItem, target);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("keydown", handleClickOnArrowKey);
+    return () => {
+      document.removeEventListener("keydown", handleClickOnArrowKey);
+    };
+  }, [currentSlideItem]);
   return (
     <div className="bg-black absolute w-full h-auto z-50 top-0 bottom-0 left-0 right-0 p-10 flex flex-col gap-8 items-center">
       <CircleX
@@ -43,34 +93,50 @@ const SlideGalleryComponent = ({
 
       <div className="duration-700 relative">
         {currentSlideItem?.src && (
-          <div className="flex flex-col items-center gap-2">
-            <CldImage
-              className="duration-700"
-              width="500"
-              height="500"
-              src={currentSlideItem.src}
-              sizes="100vw"
-              crop="fill"
-              alt="Description of my image"
-              priority
+          <div className="flex items-center gap-14">
+            <ChevronLeft
+              onClick={() => {
+                handleSlideByControllers(currentSlideItem, "prev");
+              }}
+              className="text-primary cursor-pointer"
+              size={40}
             />
-            <div className="absolute w-full bg-black/60 bottom-0 text-center p-2">
-              <span className="text-white">{currentSlideItem.caption}</span>
-              <div className="flex gap-2 items-center justify-center">
-                <span className="text-white">
-                  {currentSlideItem.creditName}
-                </span>
-                {currentSlideItem.creditUrl && (
-                  <Link
-                    className="text-primary font-semibold hover:text-primary/80 duration-500"
-                    href={currentSlideItem.creditUrl}
-                    target="_blank"
-                  >
-                    {currentSlideItem.creditUrl}
-                  </Link>
-                )}
+            <div className="flex flex-col items-center gap-2">
+              <CldImage
+                className="duration-700"
+                width="500"
+                height="500"
+                src={currentSlideItem.src}
+                sizes="100vw"
+                crop="fill"
+                alt="Description of my image"
+                priority
+              />
+              <div className="absolute w-full bg-black/60 bottom-0 text-center p-2">
+                <span className="text-white">{currentSlideItem.caption}</span>
+                <div className="flex gap-2 items-center justify-center">
+                  <span className="text-white">
+                    {currentSlideItem.creditName}
+                  </span>
+                  {currentSlideItem.creditUrl && (
+                    <Link
+                      className="text-primary font-semibold hover:text-primary/80 duration-500"
+                      href={currentSlideItem.creditUrl}
+                      target="_blank"
+                    >
+                      {currentSlideItem.creditUrl}
+                    </Link>
+                  )}
+                </div>
               </div>
             </div>
+            <ChevronRight
+              onClick={() => {
+                handleSlideByControllers(currentSlideItem, "next");
+              }}
+              className="text-primary cursor-pointer"
+              size={40}
+            />
           </div>
         )}
       </div>

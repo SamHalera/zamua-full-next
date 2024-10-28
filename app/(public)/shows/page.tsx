@@ -28,6 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 const showPage = async () => {
   const shows = await getShowsNotPast();
+
   return <ShowsContent shows={shows} />;
 };
 
