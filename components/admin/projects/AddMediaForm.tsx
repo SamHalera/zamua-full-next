@@ -44,7 +44,6 @@ const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
           color: "black",
         },
       });
-      setIsLoading(false);
     }
     if (response?.error) {
       toast({
@@ -53,6 +52,7 @@ const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
         variant: "destructive",
       });
     }
+    setIsLoading(false);
   };
 
   return (

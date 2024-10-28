@@ -188,16 +188,18 @@ const CreateOrUpdateProjectForm = ({
                 >
                   {({ open }) => {
                     return (
-                      <button
+                      // <label>
+                      //   Upload an Image
+                      <input
+                        type="file"
                         name="uploadButton"
-                        className="border border-primary bg-primary hover:bg-primary/40 text-xs duration-500 font-semibold w-44 rounded-full py-4 mt-4"
+                        className="file-input file-input-bordered file-input-primary w-full max-w-xs text-xs duration-500 font-semibold mt-4"
                         onClick={(e) => {
                           open();
                           e.preventDefault();
                         }}
-                      >
-                        Upload an Image
-                      </button>
+                      />
+                      // </label>
                     );
                   }}
                 </CldUploadWidget>
