@@ -39,7 +39,6 @@ const UploadMediaForm = () => {
     control,
   });
 
-  console.log(process.env.NEX_PUBLIC_CLOUDINARY_UPLOAD_MEDIA);
   const onSubmit: SubmitHandler<UploadMediaFormType> = async (values) => {
     const { media } = values;
 
