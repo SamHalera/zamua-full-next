@@ -47,7 +47,6 @@ const MusicFeatureRow = ({
     }
   }, [dataImage, setValue]);
 
-  console.log(process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_ALBUMS);
   return (
     <div
       className={cn("flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6", {
