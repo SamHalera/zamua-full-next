@@ -4,11 +4,18 @@ import SHA256 from "crypto-js/sha256";
 import encBase64 from "crypto-js/enc-base64";
 import prisma from "@/db";
 
+export const deleteUser = async () => {
+  await prisma.user.delete({
+    where: {
+      email: "samuel.halera@gmail.com",
+    },
+  });
+};
 export const createUser = async () => {
   try {
     const email = "samuel.halera@gmail.com";
     const salt = uid2(12);
-    const password = SHA256("1234" + salt).toString(encBase64);
+    const password = SHA256("XXXX" + salt).toString(encBase64);
 
     const user = await prisma.user.create({
       data: {

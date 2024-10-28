@@ -95,7 +95,7 @@ const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
             };
             append(mediaField);
           }}
-          uploadPreset="lvfy5bk7"
+          uploadPreset={`${process.env.NEX_PUBLIC_CLOUDINARY_UPLOAD_PROJECT}`}
         >
           {({ open }) => {
             return (
