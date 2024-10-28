@@ -184,7 +184,7 @@ const CreateOrUpdateProjectForm = ({
                   onSuccess={(result: any) => {
                     setDataImage(result?.info?.secure_url);
                   }}
-                  uploadPreset="orzznnzy"
+                  uploadPreset={`${process.env.NEX_PUBLIC_CLOUDINARY_UPLOAD_PROJECT}`}
                 >
                   {({ open }) => {
                     return (

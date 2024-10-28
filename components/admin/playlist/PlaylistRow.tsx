@@ -89,7 +89,7 @@ const PlaylistRow = ({
             onSuccess={(result: any) => {
               setDataImage(result?.info?.secure_url);
             }}
-            uploadPreset="nzr9uqpt"
+            uploadPreset={`${process.env.NEX_PUBLIC_CLOUDINARY_UPLOAD_PLAYLIST}`}
           >
             {({ open }) => {
               return (
