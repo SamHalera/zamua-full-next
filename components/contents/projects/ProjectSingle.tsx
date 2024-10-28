@@ -58,10 +58,10 @@ const ProjectSingle = ({ project }: { project: ProjectAndMediaType }) => {
         </div>
       </div>
       {project.media?.length > 0 && (
-        <div className=" mx-auto flex justify-center">
-          <div className="w-full md:w-2/3 ">
+        <div className=" flex justify-center">
+          <div className=" ">
             {/* <ContentGallery component={project.Gallery} /> */}
-            <MediaGallery mediaGallery={project.media} />
+            <MediaGallery mediaGallery={project.media} layout="project" />
           </div>
         </div>
       )}

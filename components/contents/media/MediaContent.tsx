@@ -12,7 +12,9 @@ const MediaContent = async () => {
         PHOTOS
       </h1>
 
-      {mediaGallery && <MediaGallery mediaGallery={mediaGallery} />}
+      {mediaGallery && (
+        <MediaGallery mediaGallery={mediaGallery} layout="gallery" />
+      )}
     </div>
   );
 };

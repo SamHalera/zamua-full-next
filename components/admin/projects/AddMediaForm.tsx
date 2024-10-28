@@ -64,7 +64,7 @@ const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
         {isLoading ? (
           <Loader />
         ) : (
-          <div className=" flex gap-4">
+          <div className=" flex flex-wrap gap-4 justify-center">
             {fields.length > 0 &&
               fields.map((field, index) => {
                 return (

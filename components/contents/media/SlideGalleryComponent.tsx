@@ -62,7 +62,7 @@ const SlideGalleryComponent = ({
   };
 
   const handleClickOnArrowKey = (e: KeyboardEvent) => {
-    let target: "next" | "prev" = "next";
+    let target: string = "";
     switch (e.key) {
       case "ArrowRight":
         target = "next";
@@ -72,7 +72,7 @@ const SlideGalleryComponent = ({
         break;
     }
 
-    if (currentSlideItem) {
+    if (currentSlideItem && (target === "next" || target === "prev")) {
       handleSlideByControllers(currentSlideItem, target);
     }
   };
