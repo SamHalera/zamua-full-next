@@ -43,13 +43,16 @@ const SlideGalleryComponent = ({
       if (currentMediaItem) {
         const indexItem = mediaGallery?.indexOf(currentMediaItem);
 
-        const indexItemTarget =
-          target === "next" ? indexItem + 1 : indexItem - 1;
-        const image: MediaType =
-          indexItemTarget < 0
-            ? mediaGallery[mediaGallery.length - 1]
-            : mediaGallery[indexItemTarget];
+        let indexTarget: number = 0;
+        if (target === "next") {
+          const tempIndex = indexItem + 1;
+          indexTarget = tempIndex > mediaGallery.length - 1 ? 0 : tempIndex;
+        } else {
+          const tempIndex = indexItem - 1;
+          indexTarget = tempIndex < 0 ? mediaGallery.length - 1 : tempIndex;
+        }
 
+        const image: MediaType = mediaGallery[indexTarget];
         const newSlideItem: CurrentSlideType = {
           src: image?.source,
           caption: image.caption ?? "",
