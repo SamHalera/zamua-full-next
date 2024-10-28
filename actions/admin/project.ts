@@ -173,7 +173,7 @@ export const uploaAndCreatedMedia = async (
   try {
     const mediaToAdd = dataImages
       .map((elt) => {
-        const { id, ...noIdMedia } = elt;
+        const { id, credit, ...noIdMedia } = elt;
         return noIdMedia;
       })
       .filter((media) => {
