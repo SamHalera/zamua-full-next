@@ -27,7 +27,7 @@ const AddMediaRow = ({
   return (
     <div
       className={cn(
-        "flex flex-col gap-3 w-1/3 items-center p-5 bg-slate-200 rounded-md shadow-md",
+        "flex flex-col gap-2 items-center p-4 bg-slate-200 rounded-md shadow-md",
         {
           "border-2 border-primary": field.source === "",
         }
@@ -42,8 +42,8 @@ const AddMediaRow = ({
 
       <CldImage
         key={field.id}
-        width="200"
-        height="200"
+        width="100"
+        height="100"
         src={field.source}
         crop="fill"
         sizes="100vw"
