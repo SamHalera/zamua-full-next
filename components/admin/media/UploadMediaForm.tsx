@@ -98,7 +98,7 @@ const UploadMediaForm = () => {
           };
           append(mediaField);
         }}
-        uploadPreset={`${process.env.NEX_PUBLIC_CLOUDINARY_UPLOAD_MEDIA}`}
+        uploadPreset={`${process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_MEDIA}`}
       >
         {({ open }) => {
           return (

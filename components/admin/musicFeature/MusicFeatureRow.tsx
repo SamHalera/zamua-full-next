@@ -130,7 +130,7 @@ const MusicFeatureRow = ({
           onSuccess={(result: any) => {
             setDataImage(result?.info?.secure_url);
           }}
-          uploadPreset={`${process.env.NEX_PUBLIC_CLOUDINARY_UPLOAD_ALBUMS}`}
+          uploadPreset={`${process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_ALBUMS}`}
         >
           {({ open }) => {
             return (
