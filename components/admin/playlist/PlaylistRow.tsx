@@ -89,7 +89,7 @@ const PlaylistRow = ({
             onSuccess={(result: any) => {
               setDataImage(result?.info?.secure_url);
             }}
-            uploadPreset={`${process.env.NEX_PUBLIC_CLOUDINARY_UPLOAD_PLAYLIST}`}
+            uploadPreset={`${process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PLAYLIST}`}
           >
             {({ open }) => {
               return (
