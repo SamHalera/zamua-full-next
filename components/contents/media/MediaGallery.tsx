@@ -11,7 +11,13 @@ export type CurrentSlideType = {
   creditName: string | null;
   creditUrl: string | null;
 };
-const MediaGallery = ({ mediaGallery }: { mediaGallery: MediaType[] }) => {
+const MediaGallery = ({
+  mediaGallery,
+  layout,
+}: {
+  mediaGallery: MediaType[];
+  layout: "project" | "gallery";
+}) => {
   const [isSlideView, setIsSlideView] = useState<boolean>(false);
   const [currentSlideItem, setCurrentSlideItem] =
     useState<CurrentSlideType | null>(null);
@@ -45,8 +51,8 @@ const MediaGallery = ({ mediaGallery }: { mediaGallery: MediaType[] }) => {
                   }}
                   key={image.id}
                   className=" cursor-pointer  hover:opacity-75 duration-700 object-cover"
-                  width="300"
-                  height="300"
+                  width={layout === "gallery" ? "300" : "200"}
+                  height={layout === "gallery" ? "300" : "200"}
                   src={image.source}
                   sizes="100vw"
                   crop="fill"
