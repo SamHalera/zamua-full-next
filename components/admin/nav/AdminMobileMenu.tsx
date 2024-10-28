@@ -56,7 +56,7 @@ const AdminMobileMenu = () => {
                             onClick={() => {
                               setShowMenu(false);
                             }}
-                            className=" text-primary duration-500 hover:text-black/65"
+                            className=" text-primary text-center duration-500 border-b border-transparent hover:border-primary "
                             key={singleItem.label}
                             href={singleItem.href}
                           >
