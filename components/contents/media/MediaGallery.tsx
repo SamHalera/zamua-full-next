@@ -2,10 +2,12 @@
 import React, { useState } from "react";
 
 import { CldImage } from "next-cloudinary";
-import SlideGalleryComponent from "./SlideGalleryComponent";
 import { MediaType } from "@/types/types";
+import dynamic from "next/dynamic";
+const SlideGalleryComponent = dynamic(() => import("./SlideGalleryComponent"));
 
 export type CurrentSlideType = {
+  id: number;
   src: string | null;
   caption: string | null;
   creditName: string | null;
@@ -31,11 +33,13 @@ const MediaGallery = ({
               return (
                 <CldImage
                   onClick={() => {
+                    const id = image.id;
                     const src = image.source;
                     const caption = image.caption ?? "";
                     const creditName = image.credit?.name ?? "";
                     const creditUrl = image.credit?.url ?? "";
                     const currentObjectSlide = {
+                      id,
                       src,
                       caption,
                       creditName,
