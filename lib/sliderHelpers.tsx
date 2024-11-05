@@ -118,5 +118,5 @@ export const handleTouchEnd = (
     moveX: 0,
     moveY: 0,
   });
-  return deltaX < deltaY ? "prev" : "next";
+  return deltaX > deltaY ? "prev" : "next";
 };
