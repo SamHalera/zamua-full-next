@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 
 import { CldImage } from "next-cloudinary";
 import { MediaType } from "@/types/types";
 import dynamic from "next/dynamic";
+import { Skeleton } from "@/components/ui/skeleton";
 const SlideGalleryComponent = dynamic(() => import("./SlideGalleryComponent"));
 
 export type CurrentSlideType = {
@@ -27,44 +28,50 @@ const MediaGallery = ({
     <div className="">
       <div className=" p-4 md:p-8">
         <div className="flex flex-wrap gap-5 justify-center" id="lightgallery">
-          {!isSlideView &&
-            mediaGallery &&
-            mediaGallery.map((image) => {
-              return (
-                <CldImage
-                  onClick={() => {
-                    const id = image.id;
-                    const src = image.source;
-                    const caption = image.caption ?? "";
-                    const creditName = image.credit?.name ?? "";
-                    const creditUrl = image.credit?.url ?? "";
-                    const currentObjectSlide = {
-                      id,
-                      src,
-                      caption,
-                      creditName,
-                      creditUrl,
-                    };
-                    setCurrentSlideItem(currentObjectSlide);
-                    setIsSlideView(!isSlideView);
-                    window.scrollTo({
-                      top: 0,
-                      left: 0,
-                      behavior: "smooth",
-                    });
-                  }}
-                  key={image.id}
-                  className=" cursor-pointer  hover:opacity-75 duration-700 object-cover"
-                  width={layout === "gallery" ? "300" : "200"}
-                  height={layout === "gallery" ? "300" : "200"}
-                  src={image.source}
-                  sizes="100vw"
-                  crop="fill"
-                  alt="Description of my image"
-                  priority
-                />
-              );
-            })}
+          <Suspense
+            fallback={
+              <Skeleton className="bg-slate-300 h-[125px] w-[250px] rounded-xl" />
+            }
+          >
+            {!isSlideView &&
+              mediaGallery &&
+              mediaGallery.map((image) => {
+                return (
+                  <CldImage
+                    onClick={() => {
+                      const id = image.id;
+                      const src = image.source;
+                      const caption = image.caption ?? "";
+                      const creditName = image.credit?.name ?? "";
+                      const creditUrl = image.credit?.url ?? "";
+                      const currentObjectSlide = {
+                        id,
+                        src,
+                        caption,
+                        creditName,
+                        creditUrl,
+                      };
+                      setCurrentSlideItem(currentObjectSlide);
+                      setIsSlideView(!isSlideView);
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}
+                    key={image.id}
+                    className=" cursor-pointer  hover:opacity-75 duration-700 object-cover"
+                    width={layout === "gallery" ? "300" : "200"}
+                    height={layout === "gallery" ? "300" : "200"}
+                    src={image.source}
+                    sizes="100vw"
+                    crop="fill"
+                    alt="Description of my image"
+                    priority
+                  />
+                );
+              })}
+          </Suspense>
         </div>
       </div>
       {isSlideView && (

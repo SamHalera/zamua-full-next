@@ -68,7 +68,7 @@ const SlideGalleryComponent = ({
         className="size-10 text-primary cursor-pointer self-end"
       />
 
-      <div className="duration-700  flex-1">
+      <div className="duration-700">
         {currentSlideItem?.src && (
           <div className="flex items-center gap-14 bg-white">
             <div className="flex flex-col items-center gap-2">
