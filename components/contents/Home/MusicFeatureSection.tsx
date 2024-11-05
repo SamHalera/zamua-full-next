@@ -8,7 +8,7 @@ const MusicFeatureSection = () => {
   return (
     <div className="flex flex-wrap justify-center md:gap-8 lg:gap-20 py-20 lg:py-32 px-10">
       <div className="mb-20 flex flex-col items-center gap-6">
-        <div className={cn("text-center flex flex-col gap-4 h-44")}>
+        <div className={cn("text-center flex flex-col gap-4 h-44 mb-10")}>
           <h2
             className={cn(
               "text-black text-6xl md:text-7xl lg:text-8xl custom-title font-semibold"
@@ -20,6 +20,7 @@ const MusicFeatureSection = () => {
             EP
           </h3>
         </div>
+
         <div className=" flex flex-col items-center">
           <Image
             className="w-64 md:w-[420px]"
@@ -29,7 +30,7 @@ const MusicFeatureSection = () => {
             alt="Zamua dans la couverture de son EP"
           />
 
-          <div className="w-full">
+          <div className="w-full mb-10">
             <iframe
               className=" rounded-lg"
               src="https://open.spotify.com/embed/album/49xV7avbfOOiy1b3EWVvIV?utm_source=generator"
@@ -43,7 +44,7 @@ const MusicFeatureSection = () => {
           </div>
         </div>
         <div className="lg:w-2/3 text-xl leading-9">
-          <p>
+          <p className="">
             <strong>LITANIE</strong> is Zamua&apos;s first EP, produced by the
             young independent label OD MusicLab, founded by producer and sound
             designer Shay Mané, sound engineer Fabrice Ho-Shui-Ling, and
