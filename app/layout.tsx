@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import { Montserrat } from "next/font/google";
+import { Toaster } from "@/components/ui/toaster";
 // import { Providers } from "./providers";
 
 const montserrat = Montserrat({
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body
         className={`  antialiased min-h-screen relative flex flex-col justify-between w-full`}
       >
+        <Toaster />
         {/* <Providers> */}
         {/* <Header /> */}
         <main className=" flex-1 min-h-full">{children}</main>
