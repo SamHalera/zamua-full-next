@@ -1,9 +1,10 @@
 import React from "react";
 import SecondaryHeroSection from "../SecondaryHeroSection";
 import bgMusic from "@/public/images/bg-music.jpg";
-import FirstSection from "./FirstSection";
-import MusicFeatures from "./MusicFeatures";
 import { MusicFeature } from "@prisma/client";
+import dynamic from "next/dynamic";
+const FirstSection = dynamic(() => import("./FirstSection"));
+const MusicFeatures = dynamic(() => import("./MusicFeatures"));
 
 const MusicContent = ({
   musicFeatures,

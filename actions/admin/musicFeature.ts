@@ -29,20 +29,20 @@ export const createOrUpdateMusicFeatures = async (
       existingMusicFeature &&
       existingMusicFeature?.length > musicFeature.length
     ) {
-      //remove
-
       await removeMusicFeaturesOnUpdate(data, existingMusicFeature);
     }
 
     for (const item of musicFeature) {
       item.priority = parseFloat(item.priority.toString());
+      item.title = item.title.trim();
+
       if (item.id === 0) {
         const { id, ...musicFeatureToPersists } = item;
-        const itemCreated = await prisma.musicFeature.create({
+        await prisma.musicFeature.create({
           data: musicFeatureToPersists,
         });
       } else {
-        const itemUpdated = await prisma.musicFeature.update({
+        await prisma.musicFeature.update({
           where: {
             id: item.id,
           },
@@ -64,7 +64,7 @@ const removeMusicFeaturesOnUpdate = async (
   existingMusicFeature: MusicFeature[] | null
 ) => {
   if (existingMusicFeature && existingMusicFeature?.length > 0) {
-    const musicFeatureToRemove = existingMusicFeature
+    existingMusicFeature
       .filter(
         (obj1) =>
           !dataToPersist.musicFeature.some((obj2) => obj2.id === obj1.id)

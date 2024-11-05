@@ -28,9 +28,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 const Cookiespage = () => {
   return (
-    <div className="p-40 flex flex-col gap-8">
+    <div className="p-5 md:p-10 lg:p-40 flex flex-col gap-8">
       <div className="mb-4 flex flex-col gap-6">
-        <h1 className="font-bold text-5xl mb-10">COOKIES AND PRIVACY POLICY</h1>
+        <h1 className="font-bold text-4xl md:text-5xl mb-10">
+          COOKIES AND PRIVACY POLICY
+        </h1>
 
         <div className=" flex flex-col gap-4">
           <div className=" flex flex-col gap-4">

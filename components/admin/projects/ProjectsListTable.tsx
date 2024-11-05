@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { SquarePen, Trash2 } from "lucide-react";
+import { Eye, SquarePen, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { ProjectMember } from "@prisma/client";
 import { ProjectType } from "@/types/types";
@@ -48,6 +48,7 @@ const ProjectsListTable = () => {
             <TableHead className="">Order priority</TableHead>
 
             <TableHead>Members</TableHead>
+            <TableHead>Public view</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -89,21 +90,32 @@ const ProjectsListTable = () => {
                         );
                       })}
                   </TableCell>
-                  <TableCell className="flex gap-4 justify-end items-center">
+                  <TableCell>
                     <Link
-                      href={`/admin/projects/${item.id}`}
-                      className="text-green-600"
+                      href={`/projects/${item?.slug}`}
+                      target="_blank"
+                      className=" text-primary font-semibold"
                     >
-                      <SquarePen />
+                      <Eye className="size-7" />
                     </Link>
-                    <div
-                      onClick={async () => {
-                        await deleteProjectById(item.id);
-                        router.push("/admin/projects");
-                      }}
-                      className="text-red-500 cursor-pointer"
-                    >
-                      <Trash2 />
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex gap-4 justify-end items-center">
+                      <Link
+                        href={`/admin/projects/${item.id}`}
+                        className="text-green-600"
+                      >
+                        <SquarePen />
+                      </Link>
+                      <div
+                        onClick={async () => {
+                          await deleteProjectById(item.id);
+                          router.push("/admin/projects");
+                        }}
+                        className="text-red-500 cursor-pointer"
+                      >
+                        <Trash2 />
+                      </div>
                     </div>
                   </TableCell>
                 </TableRow>

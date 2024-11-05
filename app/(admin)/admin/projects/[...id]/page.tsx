@@ -1,5 +1,6 @@
 import { getProjectById } from "@/actions/projects";
 import CreateOrUpdateProjectForm from "@/components/admin/projects/CreateOrUpdateProjectForm";
+import LinkToPublicView from "@/components/globals/LinkToPublicView";
 
 import React from "react";
 
@@ -9,12 +10,16 @@ const page = async ({ params }: { params: { id: string[] } }) => {
 
   return (
     <div className="p-2 md:p-10 ">
-      <h1 className="text-3xl font-semibold mb-6 text-center">
-        MANAGE Project
-      </h1>
-      <h2 className="text-2xl font-semibold mb-6 text-center">
-        {project?.fullTitle.toUpperCase()}
-      </h2>
+      <div className="flex flex-col items-center">
+        <h1 className="text-3xl font-semibold mb-6 text-center">
+          MANAGE Project
+        </h1>
+        <h2 className="text-2xl font-semibold mb-6 text-center">
+          {project?.fullTitle.toUpperCase()}
+        </h2>
+
+        <LinkToPublicView path={`/projects/${project?.slug}`} />
+      </div>
 
       <CreateOrUpdateProjectForm project={project} />
     </div>

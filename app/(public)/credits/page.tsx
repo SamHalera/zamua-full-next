@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const page = async () => {
   const credits = await getCredits();
   return (
-    <div className="p-20">
+    <div className="p-5 md:p-20">
       <h1 className="text-3xl font-semibold mb-6"> CREDITS </h1>
       <div className="flex flex-col gap-4">
         <p className="text-xl">

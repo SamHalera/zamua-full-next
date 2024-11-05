@@ -2,7 +2,7 @@
 import { Playlist } from "@prisma/client";
 
 import prisma from "@/db";
-import { itemsToDelete } from "@/lib/serverActionhepelrs";
+import { itemsToDelete } from "@/lib/serverActionHelpers";
 import { revalidatePath } from "next/cache";
 
 export const createOrUpdatePlaylist = async (values: Playlist[]) => {

@@ -9,14 +9,20 @@ const MusicFeatureSection = () => {
     <div className="flex flex-wrap justify-center md:gap-8 lg:gap-20 py-20 lg:py-32 px-10">
       <div className="mb-20 flex flex-col items-center gap-6">
         <div className={cn("text-center flex flex-col gap-4 h-44")}>
-          <h2 className={cn("text-black text-6xl md:text-7xl lg:text-8xl")}>
+          <h2
+            className={cn(
+              "text-black text-6xl md:text-7xl lg:text-8xl custom-title font-semibold"
+            )}
+          >
             LITANIE
           </h2>
-          <h3 className={cn("text-black text-5xl md:text-7xl")}>EP</h3>
+          <h3 className={cn("text-black text-5xl md:text-7xl custom-title")}>
+            EP
+          </h3>
         </div>
         <div className=" flex flex-col items-center">
           <Image
-            className="w-64 md:w-[320px]"
+            className="w-64 md:w-[420px]"
             src={epCover.src}
             width="320"
             height="320"

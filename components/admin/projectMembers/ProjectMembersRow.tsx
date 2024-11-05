@@ -77,7 +77,7 @@ const ProjectMembersRow = ({
         className="size-8 text-red-400 self-end cursor-pointer"
       />
 
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col gap-4">
         <CustomInput
           type="text"
           register={register}

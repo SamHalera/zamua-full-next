@@ -51,7 +51,6 @@ const CustomInput = ({
             disabled={disabled}
             type={type}
             placeholder={placeholder}
-            // required={required}
             className={customClass}
           />
         )}

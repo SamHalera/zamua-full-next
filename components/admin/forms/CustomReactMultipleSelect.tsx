@@ -16,6 +16,7 @@ const CustomReactMultipleSelect = ({
   selectedValue,
   control,
   // field,
+  label,
   index,
 }: {
   label: string;
@@ -34,13 +35,16 @@ const CustomReactMultipleSelect = ({
       name={`projectMembers.${index}.project`}
       control={control}
       render={({ field: { onChange, value } }) => (
-        <Select
-          isMulti
-          options={selectOptions}
-          value={selectOptions.find((c) => c.value === value)}
-          onChange={(val) => onChange(val.map((c) => c.value))}
-          defaultValue={selected}
-        />
+        <>
+          <label>{label}</label>
+          <Select
+            isMulti
+            options={selectOptions}
+            value={selectOptions.find((c) => c.value === value)}
+            onChange={(val) => onChange(val.map((c) => c.value))}
+            defaultValue={selected}
+          />
+        </>
       )}
     />
   );

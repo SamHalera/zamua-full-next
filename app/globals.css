@@ -116,3 +116,10 @@ html,
 .custom-btn {
   @apply font-semibold text-xl self-center bg-primary text-black hover:bg-transparent transition-all duration-500 border-2 border-primary hover:text-primary h-12 w-40 flex justify-center items-center;
 }
+
+.custom-title {
+  @apply text-transparent bg-clip-text bg-gradient-to-tr from-primary via-yellow-200 to-primary;
+}
+.custom-secondary-title {
+  @apply text-transparent bg-clip-text bg-gradient-to-tr from-primary via-yellow-300 to-primary;
+}

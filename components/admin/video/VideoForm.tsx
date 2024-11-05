@@ -89,13 +89,13 @@ const VideoForm = () => {
         onClick={() => {
           append(fieldToAppend);
         }}
-        className="fixed bottom-10 flex items-center border border-primary p-3 gap-3 text-primary duration-500 hover:text-slate-700 hover:border-slate-700 hover:text-primary/80 font-semibold cursor-pointer self-start rounded-md"
+        className="flex fixed bottom-20 left-20 items-center bg-slate-800 p-3 gap-3 text-white duration-500 hover:bg-slate-600 font-semibold cursor-pointer self-start rounded-md"
       >
         <PlusCircle /> add a video source
       </div>
 
       <Button
-        className="flex gap-4 fixed bottom-10 self-end"
+        className="flex gap-4 fixed bottom-20 self-end right-20"
         disabled={!isDirty || isSubmitting}
       >
         {isSubmitting && (

@@ -156,7 +156,7 @@ const CreateOrUpdateProjectForm = ({
             <div className="flex-1 flex flex-col items-center gap-3 ">
               <div className="">
                 {dataImage && (
-                  <>
+                  <div className="flex flex-col gap-2 items-center">
                     <span className="font-semibold text-primary text-center mb-4 block">
                       Project Cover
                     </span>
@@ -178,7 +178,7 @@ const CreateOrUpdateProjectForm = ({
                       placeholder="Cover"
                       disabled={true}
                     />
-                  </>
+                  </div>
                 )}
                 <CldUploadWidget
                   onSuccess={(result: any) => {
@@ -188,8 +188,6 @@ const CreateOrUpdateProjectForm = ({
                 >
                   {({ open }) => {
                     return (
-                      // <label>
-                      //   Upload an Image
                       <input
                         type="file"
                         name="uploadButton"
@@ -199,7 +197,6 @@ const CreateOrUpdateProjectForm = ({
                           e.preventDefault();
                         }}
                       />
-                      // </label>
                     );
                   }}
                 </CldUploadWidget>

@@ -10,7 +10,10 @@ const MusicFeatures = ({
   musicFeatures: MusicFeature[] | null;
 }) => {
   return (
-    <div className="bg-black flex flex-wrap items-center justify-center gap-4 md:gap-8 lg:gap-20 py-32 px-10">
+    <div
+      id="music-features"
+      className="bg-black flex flex-wrap items-center justify-center gap-4 md:gap-8 lg:gap-20 py-32 px-10"
+    >
       {musicFeatures &&
         musicFeatures.length > 0 &&
         musicFeatures.map((item: MusicFeature) => {

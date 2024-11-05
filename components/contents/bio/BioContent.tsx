@@ -1,16 +1,18 @@
 import React from "react";
-import FirstSection from "./FirstSection";
-import FirstCaption from "./FirstCaption";
-import SecondSection from "./SecondSection";
-import SecondCaption from "./SecondCaption";
 import SecondaryHeroSection from "../SecondaryHeroSection";
 import bgBio from "@/public/images/bg-bio.jpg";
+import dynamic from "next/dynamic";
+
+const FirstSection = dynamic(() => import("./FirstSection"));
+const FirstCaption = dynamic(() => import("./FirstCaption"));
+const SecondSection = dynamic(() => import("./SecondSection"));
+const SecondCaption = dynamic(() => import("./SecondCaption"));
 
 const BioContent = () => {
   const title = (
     <>
       <span className="text-primary">BIO</span>
-      <span className="text-white">GRAFY</span>
+      <span className="text-white">GRAPHY</span>
     </>
   );
   return (
