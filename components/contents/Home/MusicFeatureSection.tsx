@@ -43,7 +43,7 @@ const MusicFeatureSection = () => {
             ></iframe>
           </div>
         </div>
-        <div className="lg:w-2/3 text-xl leading-9  pl-20 pr-5 py-10">
+        <div className="lg:w-2/3 text-xl leading-9">
           <p className="">
             <strong>LITANIE</strong> is Zamua&apos;s first EP, produced by the
             young independent label OD MusicLab, founded by producer and sound
