@@ -8,7 +8,7 @@ const MusicFeatureSection = () => {
   return (
     <div className="flex flex-wrap justify-center md:gap-8 lg:gap-20 py-20 lg:py-32 px-10">
       <div className="mb-20 flex flex-col items-center gap-6">
-        <div className={cn("text-end flex flex-col self-end gap-4 h-44 mr-40")}>
+        <div className={cn("text-center flex flex-col gap-4 h-44 mb-10")}>
           <h2
             className={cn(
               "text-black text-6xl md:text-7xl lg:text-8xl custom-title font-semibold"
@@ -16,9 +16,7 @@ const MusicFeatureSection = () => {
           >
             LITANIE
           </h2>
-          <h3
-            className={cn("text-black text-5xl md:text-7xl custom-title mr-10")}
-          >
+          <h3 className={cn("text-black text-5xl md:text-7xl custom-title")}>
             EP
           </h3>
         </div>
