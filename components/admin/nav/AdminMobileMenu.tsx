@@ -5,9 +5,11 @@ import adminMenu from "@/assets/adminMenu.json";
 import Link from "next/link";
 import { AdminMenuItem, SingleItem } from "@/types/types";
 import LogoutButtonComponent from "@/components/LogutButtonComponent";
+import { useRouter } from "next/navigation";
 
 const AdminMobileMenu = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
+  const router = useRouter();
   return (
     <div className="block ">
       <AlignJustify
@@ -38,30 +40,30 @@ const AdminMobileMenu = () => {
           {adminMenu.map((adminMenuItem: AdminMenuItem) => {
             return (
               <div key={adminMenuItem.label} className="">
-                <Link
+                <div
                   onClick={() => {
+                    router.push(adminMenuItem.href);
                     setShowMenu(false);
                   }}
-                  className="text-primary text-2xl duration-700 hover:text-primary/70 font-semibold block"
-                  href={adminMenuItem.href}
+                  className="text-primary text-2xl duration-700 hover:text-primary/70 font-semibold block cursor-pointer"
                 >
                   {adminMenuItem.label}
-                </Link>
+                </div>
                 {adminMenuItem.items && (
                   <div className=" flex flex-col gap-1 my-3 border-r-2 border-primary">
                     {adminMenuItem.items.length > 0 &&
                       adminMenuItem.items.map((singleItem: SingleItem) => {
                         return (
-                          <Link
+                          <div
                             onClick={() => {
+                              router.push(singleItem.href);
                               setShowMenu(false);
                             }}
-                            className=" text-primary text-center duration-500 border-b border-transparent hover:border-primary "
+                            className=" text-primary text-center duration-500 border-b border-transparent hover:border-primary cursor-pointer"
                             key={singleItem.label}
-                            href={singleItem.href}
                           >
                             {singleItem.label}
-                          </Link>
+                          </div>
                         );
                       })}
                   </div>

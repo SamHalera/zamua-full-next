@@ -18,9 +18,7 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
   try {
     let message: string = "";
     if (data.id === 0) {
-      const { id, ...dataToPersist } = data;
-
-      const createProject = await prisma.project.create({
+      await prisma.project.create({
         data: {
           fullTitle: data.fullTitle,
           primaryTitleString: data.primaryTitleString,
@@ -34,7 +32,7 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
 
       message = "Project has been created successfully";
     } else {
-      const updateProject = await prisma.project.update({
+      await prisma.project.update({
         where: {
           id: data.id,
         },
@@ -83,8 +81,10 @@ export const deleteProjectById = async (id: number) => {
 
 export const handleMediaUpload = async (
   dataImages: MediaType[],
-  currentProject: ProjectAndMediaType
+  currentProject: ProjectAndMediaType,
+  id: number
 ) => {
+  console.log("dataImages==>", dataImages);
   if (dataImages.length === 0) {
     const deleteAllMedia = await deletAllMediaFromDBAndCloudinary(
       currentProject.media
@@ -103,6 +103,7 @@ export const handleMediaUpload = async (
     );
     return deleteSomeMedia;
   }
+  revalidatePath(`/admin/projects/${id}`);
 };
 
 export const deletAllMediaFromDBAndCloudinary = async (

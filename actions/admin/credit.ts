@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/db";
-import { itemsToDelete } from "@/lib/serverActionhepelrs";
+import { itemsToDelete } from "@/lib/serverActionHelpers";
 import { Credit } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 

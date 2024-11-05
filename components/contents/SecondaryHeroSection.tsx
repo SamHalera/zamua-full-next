@@ -25,7 +25,7 @@ const SecondaryHeroSection = ({
             {title}
           </h1>
 
-          <Link
+          {/* <Link
             href="#toScroll"
             className="absolute left-2/4 -bottom-16 md:-bottom-12 flex flex-col items-center gap-6"
           >
@@ -37,10 +37,10 @@ const SecondaryHeroSection = ({
               scroll
             </span>
             <div className="w-[2px] h-28 md:h-36 lg:h-40 bg-primary"></div>
-          </Link>
+          </Link> */}
         </div>
       </div>
-      <div id="toScroll" className=" mb-20"></div>
+      {/* <div id="toScroll" className=" mb-20"></div> */}
     </>
   );
 };

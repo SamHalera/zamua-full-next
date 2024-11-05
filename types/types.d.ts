@@ -101,3 +101,13 @@ type MediaType = {
   // project: Project | null;
   credit: Credit | null;
 };
+
+type MusicFeatureType = {
+  id: number;
+  title: string;
+  subTitle: string | null;
+  iframe: string;
+  path: string;
+  priority: number;
+  cover: string | null;
+};

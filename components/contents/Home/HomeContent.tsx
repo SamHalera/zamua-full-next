@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 
 const BioSection = dynamic(() => import("./BioSection"));
 const MusicFeatureSection = dynamic(() => import("./MusicFeatureSection"));
+
 const ProjectsSection = dynamic(() => import("./ProjectsSection"));
 
 const HomeContent = () => {
@@ -12,6 +13,7 @@ const HomeContent = () => {
       <HeroSection />
       <BioSection />
       <MusicFeatureSection />
+
       <ProjectsSection />
     </>
   );

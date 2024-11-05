@@ -12,7 +12,7 @@ const BioContent = () => {
   const title = (
     <>
       <span className="text-primary">BIO</span>
-      <span className="text-white">GRAFY</span>
+      <span className="text-white">GRAPHY</span>
     </>
   );
   return (

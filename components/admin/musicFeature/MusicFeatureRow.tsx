@@ -26,8 +26,7 @@ const MusicFeatureRow = ({
   remove,
   index,
   setValue,
-}: // errors,
-{
+}: {
   register: UseFormRegister<MusicFeatureFormType>;
   field: FieldArrayWithId<MusicFeatureFormType, "musicFeature", "id">;
   remove: UseFieldArrayRemove;
