@@ -1,8 +1,6 @@
 import { getProjectById } from "@/actions/projects";
 import CreateOrUpdateProjectForm from "@/components/admin/projects/CreateOrUpdateProjectForm";
 import LinkToPublicView from "@/components/globals/LinkToPublicView";
-import { Eye } from "lucide-react";
-import Link from "next/link";
 
 import React from "react";
 

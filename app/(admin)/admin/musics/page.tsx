@@ -1,7 +1,6 @@
 import React from "react";
 import MusicFeatureForm from "@/components/admin/musicFeature/MusicFeatureForm";
-import Link from "next/link";
-import { Eye } from "lucide-react";
+
 import LinkToPublicView from "@/components/globals/LinkToPublicView";
 
 const AdminMusicPage = () => {
