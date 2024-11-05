@@ -111,3 +111,10 @@ type MusicFeatureType = {
   priority: number;
   cover: string | null;
 };
+
+type ToucheDataType = {
+  startX: number;
+  startY: number;
+  moveX: number;
+  moveY: number;
+};
