@@ -1,4 +1,5 @@
-import ProjectsList from "@/components/admin/projects/ProjectsList";
+import ProjectsListTable from "@/components/admin/projects/ProjectsListTable";
+import Link from "next/link";
 
 import React from "react";
 
@@ -8,7 +9,13 @@ const AdminProjectPage = () => {
       <h1 className="text-3xl font-semibold mb-6 text-center">
         MANAGE Projects
       </h1>
-      <ProjectsList />
+
+      <div>
+        <Link href={"/admin/projects/new"} className="custom-btn">
+          new project
+        </Link>
+        <ProjectsListTable />
+      </div>
     </div>
   );
 };

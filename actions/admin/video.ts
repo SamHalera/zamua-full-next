@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/db";
-import { itemsToDelete } from "@/lib/serverActionhepelrs";
+import { itemsToDelete } from "@/lib/serverActionHelpers";
 import { Videos } from "@prisma/client";
 
 export const createOrUpdateVideos = async (videos: Videos[]) => {

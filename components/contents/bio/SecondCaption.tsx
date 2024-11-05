@@ -11,7 +11,7 @@ const SecondCaption = () => {
       <div className="mb-4 flex flex-col gap-8">
         <h2
           className={cn(
-            "text-center lg:text-start text-primary font-bold text-4xl md:text-5xl md:w-[700px] z-10"
+            "text-center lg:text-start custom-secondary-title font-bold text-4xl md:text-5xl md:w-[700px] z-10"
           )}
         >
           A borderline between analogue and electronica

@@ -1,8 +1,11 @@
 import React from "react";
 import HeroSection from "./HeroSection";
-import BioSection from "./BioSection";
-import MusicFeatureSection from "./MusicFeatureSection";
-import ProjectsSection from "./ProjectsSection";
+import dynamic from "next/dynamic";
+
+const BioSection = dynamic(() => import("./BioSection"));
+const MusicFeatureSection = dynamic(() => import("./MusicFeatureSection"));
+
+const ProjectsSection = dynamic(() => import("./ProjectsSection"));
 
 const HomeContent = () => {
   return (
@@ -10,6 +13,7 @@ const HomeContent = () => {
       <HeroSection />
       <BioSection />
       <MusicFeatureSection />
+
       <ProjectsSection />
     </>
   );

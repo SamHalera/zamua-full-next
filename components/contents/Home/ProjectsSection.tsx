@@ -6,14 +6,14 @@ const ProjectsSection = () => {
   return (
     <div
       className={cn(
-        " bg-cover bg-scroll bg-right-top lg:bg-fixed h-auto md:h-screen py-6"
+        " bg-cover bg-scroll bg-right-top lg:bg-fixed h-auto md:h-screen"
       )}
       style={{
         backgroundImage: `url(/images/bg-cta.jpg)`,
       }}
     >
       <div className="bg-black/60 h-screen flex flex-col items-center justify-center gap-8">
-        <h1 className="text-primary text-4xl text-center md:text-6xl lg:text-7xl">
+        <h1 className="text-primary text-4xl text-center md:text-6xl lg:text-7xl custom-title font-semibold">
           ZAMUA&apos;S PROJECTS
         </h1>
 

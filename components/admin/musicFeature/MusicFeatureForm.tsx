@@ -14,19 +14,12 @@ import {
   getMusicFeatures,
 } from "@/actions/admin/musicFeature";
 import { useToast } from "@/hooks/use-toast";
+import { MusicFeatureType } from "@/types/types";
 
 export type MusicFeatureFormType = {
   musicFeature: MusicFeatureType[];
 };
-type MusicFeatureType = {
-  id: number;
-  title: string;
-  subTitle: string | null;
-  iframe: string;
-  path: string;
-  priority: number;
-  cover: string | null;
-};
+
 const MusicFeatureForm = () => {
   const [dataMusicFeatures, setDataMusicFeatures] = useState<
     MusicFeatureType[] | null
@@ -118,13 +111,13 @@ const MusicFeatureForm = () => {
             onClick={() => {
               append(fieldToAppend);
             }}
-            className="flex fixed bottom-20 items-center border border-primary p-3 gap-3 text-primary duration-500 hover:text-slate-700 hover:border-slate-700 hover:text-primary/80 font-semibold cursor-pointer self-start rounded-md"
+            className="flex fixed bottom-20 left-20 items-center bg-slate-800 p-3 gap-3 text-white duration-500 hover:bg-slate-600 font-semibold cursor-pointer self-start rounded-md"
           >
             <PlusCircle /> Ajouter un album
           </div>
           <Button
             disabled={!isDirty}
-            className="self-end text-xl fixed bottom-20 btn btn-custom"
+            className="self-end text-xl fixed bottom-20 btn btn-custom right-20"
             type="submit"
           >
             Submit

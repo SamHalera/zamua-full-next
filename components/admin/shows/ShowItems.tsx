@@ -20,7 +20,7 @@ const ShowItems = ({
   errorItems?: FieldErrors<ShowFormType>;
 }) => {
   return (
-    <div className="flex flex-wrap gap-8">
+    <div className="flex flex-wrap gap-8 justify-center">
       {fields.map((field, index) => {
         return (
           <ShowRow

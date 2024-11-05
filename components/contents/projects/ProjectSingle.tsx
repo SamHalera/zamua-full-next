@@ -3,7 +3,7 @@ import React from "react";
 
 import Link from "next/link";
 import { formatTitle } from "@/lib/utils";
-// import ContentGallery from "../contents/gallery/ContentGallery";
+
 import { ProjectMember } from "@prisma/client";
 import { CldImage } from "next-cloudinary";
 import { ProjectAndMediaType } from "@/types/types";
@@ -60,7 +60,6 @@ const ProjectSingle = ({ project }: { project: ProjectAndMediaType }) => {
       {project.media?.length > 0 && (
         <div className=" flex justify-center">
           <div className=" ">
-            {/* <ContentGallery component={project.Gallery} /> */}
             <MediaGallery mediaGallery={project.media} layout="project" />
           </div>
         </div>

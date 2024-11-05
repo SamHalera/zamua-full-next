@@ -33,7 +33,7 @@ const AddMediaForm = ({ project }: { project: ProjectAndMediaType }) => {
     setIsLoading(true);
 
     const { media } = values;
-    const response = await handleMediaUpload(media, project);
+    const response = await handleMediaUpload(media, project, project.id);
     if (response?.success) {
       toast({
         title: "Good news!",

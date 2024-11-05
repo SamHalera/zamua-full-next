@@ -3,7 +3,10 @@ import React from "react";
 
 const BioSection = () => {
   return (
-    <div className="flex flex-col px-6 sm:px-6 lg:px-48 mx-auto sm:mb-4 md:mb-14 lg:mb-16">
+    <div className="flex flex-col gap-4 px-6 sm:px-6 lg:px-48 mx-auto sm:mb-4 md:mb-14 lg:mb-16">
+      <h2 className="text-8xl font-bold custom-title mb-10 flex flex-col">
+        <span>MUSIC</span> <span className="ml-40">IS LIFE</span>
+      </h2>
       <div className="text-xl leading-9 mb-9">
         <p className="italic">
           The first time I sang in front of someone, I was seven years old. It

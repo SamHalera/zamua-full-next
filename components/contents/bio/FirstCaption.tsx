@@ -10,7 +10,7 @@ const FirstCaption = () => {
       <div className="mb-4 flex flex-col gap-8">
         <h2
           className={cn(
-            "text-center lg:text-start text-black font-bold text-4xl md:text-5xl md:w-[700px] z-10"
+            "text-center lg:text-start custom-secondary-title mb-10 font-bold text-4xl md:text-5xl md:w-[700px] z-10"
           )}
         >
           A unique combination of folk and soul-jazz
