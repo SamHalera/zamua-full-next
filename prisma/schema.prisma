@@ -29,7 +29,7 @@ model MusicFeature {
   cover     String?
   iframe    String
   path      String
-  priority  Int 
+  priority  String 
 
 
 }
@@ -44,7 +44,7 @@ model Project {
   projectMember           ProjectMember[]
   media                   Media[]
   videos                  Videos[]
-  priority                Int @default(1)
+  priority                String @default("1")
   slug                    String @default("my-project")
 }
 
@@ -103,7 +103,7 @@ model Playlist {
   iframe      String
   path        String
   slug        String 
-  priority    Int @default(1)
+  priority    String @default("1")
   cover       String?
 }
 

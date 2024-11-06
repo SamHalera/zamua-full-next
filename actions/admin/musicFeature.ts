@@ -2,6 +2,7 @@
 import { MusicFeatureFormType } from "@/components/admin/musicFeature/MusicFeatureForm";
 
 import prisma from "@/db";
+import { MusicFeatureType } from "@/types/types";
 import { MusicFeature } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
@@ -33,11 +34,13 @@ export const createOrUpdateMusicFeatures = async (
     }
 
     for (const item of musicFeature) {
-      item.priority = parseFloat(item.priority.toString());
       item.title = item.title.trim();
-
+      // const itemPriority = parseFloat(item.priority);
+      // const { priority, ...itemPartial } = item;
+      // const itemWithPriorityInt = { priority: itemPriority, ...itemPartial };
       if (item.id === 0) {
         const { id, ...musicFeatureToPersists } = item;
+
         await prisma.musicFeature.create({
           data: musicFeatureToPersists,
         });

@@ -15,6 +15,9 @@ import {
 } from "@/actions/admin/musicFeature";
 import { useToast } from "@/hooks/use-toast";
 import { MusicFeatureType } from "@/types/types";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { musicFeatureSchema } from "@/types/zodSchemas/adminForms";
 
 export type MusicFeatureFormType = {
   musicFeature: MusicFeatureType[];
@@ -27,18 +30,23 @@ const MusicFeatureForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const { toast } = useToast();
+
   const {
     register,
     handleSubmit,
     setValue,
     formState: { isSubmitSuccessful, errors, isDirty },
     control,
-  } = useForm<MusicFeatureFormType>({
-    values: {
+    reset,
+    getValues,
+  } = useForm<z.infer<typeof musicFeatureSchema>>({
+    resolver: zodResolver(musicFeatureSchema),
+    defaultValues: {
       musicFeature: dataMusicFeatures ? dataMusicFeatures : [],
     },
   });
-
+  // console.log("dataMusicFeatures==>", dataMusicFeatures);
+  // console.log("getValues==>", getValues());
   const { fields, append, remove } = useFieldArray<
     MusicFeatureFormType,
     "musicFeature",
@@ -54,11 +62,13 @@ const MusicFeatureForm = () => {
     subTitle: "",
     iframe: "",
     path: "",
-    priority: 1,
+    priority: "1",
     cover: "",
   };
 
-  const onSubmit: SubmitHandler<MusicFeatureFormType> = async (values) => {
+  const onSubmit: SubmitHandler<MusicFeatureFormType> = async (
+    values: z.infer<typeof musicFeatureSchema>
+  ) => {
     try {
       const response = await createOrUpdateMusicFeatures(values);
 
@@ -89,11 +99,13 @@ const MusicFeatureForm = () => {
     const fetchData: () => void = async () => {
       const musicFeatures = await getMusicFeatures();
 
+      // console.log("musicFeatures from db==>", musicFeatures);
       setDataMusicFeatures(musicFeatures);
       setIsLoading(false);
+      if (musicFeatures) reset({ musicFeature: musicFeatures });
     };
     fetchData();
-  }, [isSubmitSuccessful]);
+  }, [isSubmitSuccessful, reset]);
   return (
     <div>
       {isLoading ? (

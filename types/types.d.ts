@@ -50,7 +50,6 @@ type CustomInputProps = {
   name: string;
   value?: string | number;
   register: UseFormRegister<any>;
-
   error?: FieldError;
   required?: boolean;
   disabled?: boolean;
@@ -108,7 +107,7 @@ type MusicFeatureType = {
   subTitle: string | null;
   iframe: string;
   path: string;
-  priority: number;
+  priority: string;
   cover: string | null;
 };
 

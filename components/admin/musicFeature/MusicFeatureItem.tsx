@@ -10,6 +10,7 @@ import {
 import { MusicFeatureFormType } from "./MusicFeatureForm";
 
 import MusicFeatureRow from "./MusicFeatureRow";
+import { MusicFeatureType } from "@/types/types";
 
 const MusicFeatureItem = ({
   register,
@@ -24,11 +25,17 @@ const MusicFeatureItem = ({
   remove: UseFieldArrayRemove;
   setValue: UseFormSetValue<MusicFeatureFormType>;
 
-  errors: FieldErrors;
+  errors: FieldErrors<MusicFeatureFormType>;
 }) => {
+  // console.log("errors==>", errors.musicFeature);
   return (
     <div className="flex flex-wrap justify-center gap-2">
       {fields.map((field, index) => {
+        let errorObject = undefined;
+        if (errors?.musicFeature) {
+          errorObject = errors?.musicFeature[index];
+        }
+
         return (
           <MusicFeatureRow
             key={field.id}
@@ -37,7 +44,7 @@ const MusicFeatureItem = ({
             index={index}
             remove={remove}
             setValue={setValue}
-            errors={errors}
+            error={errorObject}
           />
         );
       })}

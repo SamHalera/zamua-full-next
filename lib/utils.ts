@@ -15,3 +15,17 @@ export const formatTitle = (text: string) => {
     );
   });
 };
+
+export const extractErrorFieldFromErrorsObject = (
+  errors: any,
+  keyToExtract: string
+) => {
+  if (errors) {
+    // if (errors.hasOwnProperty(keyToExtract)) {
+    //   console.log("errorTo Extract==>", errors[keyToExtract]);
+    //   return errors[keyToExtract]
+    // }
+    return errors[keyToExtract];
+  }
+  return null;
+};

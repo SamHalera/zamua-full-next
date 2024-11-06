@@ -45,6 +45,7 @@ const CreateOrUpdateProjectForm = ({
     register,
     handleSubmit,
     setValue,
+    getValues,
     formState: { isDirty, isSubmitting, errors },
   } = useForm<ProjectFormType>({
     values: {
@@ -58,6 +59,8 @@ const CreateOrUpdateProjectForm = ({
       slug: project?.slug ?? "",
     },
   });
+
+  console.log("getValues==>", getValues());
   const handleSlugOnChange = (value: string) => {
     const newStr = value.toLocaleLowerCase().split(" ").join("-");
 
