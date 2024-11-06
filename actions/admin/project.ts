@@ -25,7 +25,7 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
           secondaryTitleString: data.secondaryTitleString,
           description: data.description,
           cover: data.cover,
-          priority: parseFloat(data.priority.toString()),
+          priority: data.priority.toString(),
           slug: data.slug,
         },
       });
@@ -42,7 +42,7 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
           secondaryTitleString: data.secondaryTitleString,
           description: data.description,
           cover: data.cover,
-          priority: parseFloat(data.priority.toString()),
+          priority: data.priority,
           slug: data.slug,
         },
       });

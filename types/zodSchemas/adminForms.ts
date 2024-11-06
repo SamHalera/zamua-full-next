@@ -34,3 +34,21 @@ export const musicFeatureSchema = z.object({
     })
   ),
 });
+
+export const projectSchema = z.object({
+  id: z.number(),
+  fullTitle: z.string().min(1, { message: "Project name is required" }),
+  primaryTitleString: z.string().min(1, { message: "This field is required" }),
+  secondaryTitleString: z
+    .string()
+    .min(1, { message: "This field is required" }),
+  description: z.string().nullable(),
+  cover: z.string().nullable(),
+  priority: z
+    .string({ required_error: "Priority is required" })
+    .min(1, { message: "Priority is required" })
+    .refine((val) => val.search(/\D/) === -1, {
+      message: "Only positive numbers",
+    }),
+  slug: z.string().min(1, { message: "Slug is required" }),
+});

@@ -74,7 +74,7 @@ interface ProjectType {
   primaryTitleString: string;
   secondaryTitleString: string;
   projectMember: ProjectMember[];
-  priority: number;
+  priority: string;
   slug: string;
 }
 
