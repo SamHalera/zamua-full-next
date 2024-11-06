@@ -29,8 +29,23 @@ export const musicFeatureSchema = z.object({
         .refine((val) => val.search(/\D/) === -1, {
           message: "Only positive numbers",
         }),
-      // .min(1, { message: "Priority is required" }),
       cover: z.string().nullable(),
+    })
+  ),
+});
+
+export const videoSchema = z.object({
+  videos: z.array(
+    z.object({
+      id: z.number(),
+      projectId: z.number().nullable(),
+      iframe: z.string().min(1, { message: "Iframe is required" }),
+      priority: z
+        .string({ required_error: "Priority is required" })
+        .min(1, { message: "Priority is required" })
+        .refine((val) => val.search(/\D/) === -1, {
+          message: "Only positive numbers",
+        }),
     })
   ),
 });

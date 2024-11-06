@@ -17,7 +17,7 @@ const CustomInput = ({
   customClass,
 }: CustomInputProps) => {
   let errorMessage;
-  console.log("error in customInput==>", error);
+
   if (error) {
     errorMessage = "Champs obligatoire";
   }
@@ -25,16 +25,14 @@ const CustomInput = ({
   return (
     <>
       <label className="form-control w-full ">
-        <div className="label">
-          <span className="label-text">
+        <div className="label flex flex-col items-start">
+          <span className="label-text ">
             {label}
             {required && <span className="text-red-400">*</span>}
-            {required && error && (
-              <span className=" text-red-400 text-sm ml-2">
-                {error.message}
-              </span>
-            )}
           </span>
+          {required && error && (
+            <span className=" text-red-400 text-sm">{error.message}</span>
+          )}
         </div>
         {handleChangeValue ? (
           <InputOnChange

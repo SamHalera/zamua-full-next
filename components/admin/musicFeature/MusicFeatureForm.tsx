@@ -45,8 +45,7 @@ const MusicFeatureForm = () => {
       musicFeature: dataMusicFeatures ? dataMusicFeatures : [],
     },
   });
-  // console.log("dataMusicFeatures==>", dataMusicFeatures);
-  // console.log("getValues==>", getValues());
+
   const { fields, append, remove } = useFieldArray<
     MusicFeatureFormType,
     "musicFeature",

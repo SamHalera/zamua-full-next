@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Videos" ALTER COLUMN "priority" SET DEFAULT '1',
+ALTER COLUMN "priority" SET DATA TYPE TEXT;

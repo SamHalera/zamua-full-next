@@ -9,6 +9,9 @@ import React, { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import VideoItem from "./VideoItem";
 import { createOrUpdateVideos } from "@/actions/admin/video";
+import { videoSchema } from "@/types/zodSchemas/adminForms";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export type VideoFormType = {
   videos: Videos[];
@@ -21,10 +24,12 @@ const VideoForm = () => {
   const {
     handleSubmit,
     register,
+    reset,
     control,
-    formState: { isDirty, isSubmitting },
-  } = useForm<VideoFormType>({
-    values: {
+    formState: { isDirty, isSubmitting, errors },
+  } = useForm<z.infer<typeof videoSchema>>({
+    resolver: zodResolver(videoSchema),
+    defaultValues: {
       videos: dataVideos ? dataVideos : [],
     },
   });
@@ -41,12 +46,15 @@ const VideoForm = () => {
   const fieldToAppend = {
     id: 0,
     iframe: "",
-    priority: 1,
+    priority: "1",
     projectId: null,
   };
 
-  const onSubmit: SubmitHandler<VideoFormType> = async (values) => {
+  const onSubmit: SubmitHandler<VideoFormType> = async (
+    values: z.infer<typeof videoSchema>
+  ) => {
     try {
+      setIsLoading(true);
       const { videos } = values;
       const response = await createOrUpdateVideos(videos);
       if (response?.error) {
@@ -67,24 +75,33 @@ const VideoForm = () => {
           },
         });
       }
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     const fetchData = async () => {
       const videos = await getAllVideos();
 
       if (videos) setDataVideos(videos);
       setIsLoading(false);
+
+      reset({ videos });
     };
     fetchData();
-  }, []);
+  }, [reset, isLoading]);
   return isLoading ? (
     <Loader />
   ) : (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-      <VideoItem register={register} remove={remove} fields={fields} />
+      <VideoItem
+        register={register}
+        remove={remove}
+        fields={fields}
+        errors={errors}
+      />
       <div
         onClick={() => {
           append(fieldToAppend);

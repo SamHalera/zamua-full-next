@@ -35,9 +35,7 @@ export const createOrUpdateMusicFeatures = async (
 
     for (const item of musicFeature) {
       item.title = item.title.trim();
-      // const itemPriority = parseFloat(item.priority);
-      // const { priority, ...itemPartial } = item;
-      // const itemWithPriorityInt = { priority: itemPriority, ...itemPartial };
+
       if (item.id === 0) {
         const { id, ...musicFeatureToPersists } = item;
 
