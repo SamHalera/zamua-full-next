@@ -16,12 +16,6 @@ const CustomInput = ({
   handleChangeValue,
   customClass,
 }: CustomInputProps) => {
-  let errorMessage;
-
-  if (error) {
-    errorMessage = "Champs obligatoire";
-  }
-
   return (
     <>
       <label className="form-control w-full ">

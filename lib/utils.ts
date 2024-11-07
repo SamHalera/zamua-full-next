@@ -21,10 +21,6 @@ export const extractErrorFieldFromErrorsObject = (
   keyToExtract: string
 ) => {
   if (errors) {
-    // if (errors.hasOwnProperty(keyToExtract)) {
-    //   console.log("errorTo Extract==>", errors[keyToExtract]);
-    //   return errors[keyToExtract]
-    // }
     return errors[keyToExtract];
   }
   return null;

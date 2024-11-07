@@ -49,22 +49,27 @@ export const createProjectMember = async (
     formValues.forEach(async (item) => {
       const { id, ...itemToPersist } = item;
 
-      const itemCreated = await prisma.projectMember.create({
-        data: {
-          name: item.name,
-          features: item.features,
-          project: {
-            connect: item.project.map((elt) => {
-              return { id: parseFloat(elt.toString()) };
-            }),
+      const projectNull = item.project?.find((elt) => elt.id === 0);
+      if (projectNull !== undefined) {
+        console.log("no project");
+      } else {
+        const itemCreated = await prisma.projectMember.create({
+          data: {
+            name: item.name,
+            features: item.features,
+            project: {
+              connect: item.project?.map((elt) => {
+                return { id: parseFloat(elt.toString()) };
+              }),
+            },
           },
-        },
-        include: {
-          project: true,
-        },
-      });
+          include: {
+            project: true,
+          },
+        });
 
-      return { success: "Members list has been created!" };
+        return { success: "Members list has been created!" };
+      }
     });
   } catch (error) {
     console.log("Error item creation==>", error);
@@ -85,7 +90,10 @@ export const updateProjectMember = async (
       let objectConnectDisconnect: {} = {};
 
       if (projectMemberFromDB) {
-        if (item.project.length > projectMemberFromDB.project.length) {
+        if (
+          item.project &&
+          item.project.length > projectMemberFromDB.project.length
+        ) {
           const projectIdsToADD: string[] = item.project
             .filter((elt) => {
               return !projectMemberFromDB.project.some(
@@ -99,10 +107,13 @@ export const updateProjectMember = async (
               id: parseFloat(item.toString()),
             })),
           };
-        } else if (item.project.length < projectMemberFromDB.project.length) {
+        } else if (
+          item.project &&
+          item.project.length < projectMemberFromDB.project.length
+        ) {
           const projectIdsToRemove: string[] = projectMemberFromDB.project
             .filter((elt) => {
-              return !item.project.some(
+              return !item.project?.some(
                 (elt2) => elt2.toString() === elt.id.toString()
               );
             })

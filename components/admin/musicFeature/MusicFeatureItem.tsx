@@ -10,7 +10,6 @@ import {
 import { MusicFeatureFormType } from "./MusicFeatureForm";
 
 import MusicFeatureRow from "./MusicFeatureRow";
-import { MusicFeatureType } from "@/types/types";
 
 const MusicFeatureItem = ({
   register,

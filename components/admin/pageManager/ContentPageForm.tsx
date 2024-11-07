@@ -27,9 +27,7 @@ const ContentPageForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<CreatePageFormType> = async (values) => {
-    console.log("values", values);
-  };
+  const onSubmit: SubmitHandler<CreatePageFormType> = async (values) => {};
 
   return (
     <div>

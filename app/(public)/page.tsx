@@ -1,4 +1,3 @@
-import { createUser } from "@/actions/user";
 import HomeContent from "@/components/contents/Home/HomeContent";
 import { Metadata } from "next";
 

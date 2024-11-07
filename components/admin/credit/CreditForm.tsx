@@ -1,7 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Credit } from "@prisma/client";
-import { PlusCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import CreditItem from "./CreditItem";
@@ -9,6 +8,7 @@ import { createOrUpdateCredit } from "@/actions/admin/credit";
 import { getCredits } from "@/actions/credits";
 import Loader from "@/components/Loader";
 import { useToast } from "@/hooks/use-toast";
+import ButtonAppendFieldArray from "../forms/ButtonAppendFieldArray";
 
 export type CreditFormType = {
   credits: Credit[];
@@ -87,7 +87,7 @@ const CreditForm = () => {
       className="flex flex-col gap-4 mx-auto"
     >
       <CreditItem register={register} fields={fields} remove={remove} />
-      <div
+      {/* <div
         onClick={() => {
           append(fieldToAppend);
         }}
@@ -95,10 +95,15 @@ const CreditForm = () => {
       >
         <PlusCircle />
         add a new credit
-      </div>
+      </div> */}
+      <ButtonAppendFieldArray
+        label="add a new credit"
+        append={append}
+        fieldToAppend={fieldToAppend}
+      />
 
       <Button
-        className="self-end fixed bottom-20"
+        className="self-end text-xl fixed bottom-20 btn btn-custom md:right-20"
         disabled={!isDirty || isSubmitting}
       >
         {isSubmitting && (

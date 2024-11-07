@@ -2,13 +2,6 @@
 import React, { useEffect, useState } from "react";
 import {
   FieldArrayWithId,
-  FieldError,
-  FieldErrors,
-  LiteralUnion,
-  Message,
-  MultipleFieldErrors,
-  Ref,
-  RegisterOptions,
   UseFieldArrayRemove,
   UseFormRegister,
   UseFormSetValue,
@@ -44,7 +37,13 @@ const MusicFeatureRow = ({
   error: any;
 }) => {
   const [dataImage, setDataImage] = useState<string>(field.cover ?? "");
-
+  const errorFieldTitle = extractErrorFieldFromErrorsObject(error, "title");
+  const errorFieldIframe = extractErrorFieldFromErrorsObject(error, "iframe");
+  const errorFieldPath = extractErrorFieldFromErrorsObject(error, "path");
+  const errorFieldPriority = extractErrorFieldFromErrorsObject(
+    error,
+    "priority"
+  );
   useEffect(() => {
     if (dataImage) {
       setValue(`musicFeature.${index}.cover`, dataImage, {
@@ -54,13 +53,6 @@ const MusicFeatureRow = ({
     }
   }, [dataImage, setValue]);
 
-  const errorFieldTitle = extractErrorFieldFromErrorsObject(error, "title");
-  const errorFieldIframe = extractErrorFieldFromErrorsObject(error, "iframe");
-  const errorFieldPath = extractErrorFieldFromErrorsObject(error, "path");
-  const errorFieldPriority = extractErrorFieldFromErrorsObject(
-    error,
-    "priority"
-  );
   return (
     <div
       className={cn("flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6", {

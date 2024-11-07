@@ -64,7 +64,6 @@ const CreateOrUpdateProjectForm = ({
     },
   });
 
-  console.log("getValues==>", getValues());
   const handleSlugOnChange = (value: string) => {
     const newStr = value.toLocaleLowerCase().split(" ").join("-");
 

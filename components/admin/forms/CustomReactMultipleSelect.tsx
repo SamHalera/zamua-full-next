@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   Control,
   Controller,
-  FieldArrayWithId,
+  FieldError,
   UseFormRegister,
 } from "react-hook-form";
 
@@ -16,8 +16,10 @@ const CustomReactMultipleSelect = ({
   selectedValue,
   control,
   // field,
+  error,
   label,
   index,
+  required,
 }: {
   label: string;
   register: UseFormRegister<any>;
@@ -25,8 +27,10 @@ const CustomReactMultipleSelect = ({
   selectOptions: SelectOptions[];
   selectedValue: { value: string; label: string }[] | null;
   control: Control<any>;
-  field: FieldArrayWithId<any, "projectMembers", "id">;
+  // field: FieldArrayWithId<any, "projectMembers", "id">;
   index: number;
+  error?: FieldError;
+  required?: boolean;
 }) => {
   const [selected] = useState(selectedValue);
 
@@ -36,7 +40,19 @@ const CustomReactMultipleSelect = ({
       control={control}
       render={({ field: { onChange, value } }) => (
         <>
-          <label>{label}</label>
+          <label>
+            <div className="label flex flex-col items-start">
+              <span className="label-text ">
+                {label}
+                {required && <span className="text-red-400">*</span>}
+              </span>
+              {required && error && (
+                <span className=" text-red-400 text-sm">
+                  {error.message ?? "Field required"}
+                </span>
+              )}
+            </div>
+          </label>
           <Select
             isMulti
             options={selectOptions}

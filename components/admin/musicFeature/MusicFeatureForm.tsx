@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import MusicFeatureItem from "./MusicFeatureItem";
 
 import Loader from "@/components/Loader";
-import { PlusCircle } from "lucide-react";
 import {
   createOrUpdateMusicFeatures,
   getMusicFeatures,
@@ -18,6 +17,9 @@ import { MusicFeatureType } from "@/types/types";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { musicFeatureSchema } from "@/types/zodSchemas/adminForms";
+import ButtonAppendFieldArray from "../forms/ButtonAppendFieldArray";
+import SeedComponent from "../seed/SeedComponent";
+import { createMusicFeatureFromSeeds } from "@/actions/admin/seeds";
 
 export type MusicFeatureFormType = {
   musicFeature: MusicFeatureType[];
@@ -35,10 +37,9 @@ const MusicFeatureForm = () => {
     register,
     handleSubmit,
     setValue,
-    formState: { isSubmitSuccessful, errors, isDirty },
+    formState: { isSubmitSuccessful, errors, isDirty, isSubmitting },
     control,
     reset,
-    getValues,
   } = useForm<z.infer<typeof musicFeatureSchema>>({
     resolver: zodResolver(musicFeatureSchema),
     defaultValues: {
@@ -98,7 +99,6 @@ const MusicFeatureForm = () => {
     const fetchData: () => void = async () => {
       const musicFeatures = await getMusicFeatures();
 
-      // console.log("musicFeatures from db==>", musicFeatures);
       setDataMusicFeatures(musicFeatures);
       setIsLoading(false);
       if (musicFeatures) reset({ musicFeature: musicFeatures });
@@ -110,30 +110,49 @@ const MusicFeatureForm = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-          <MusicFeatureItem
-            register={register}
-            setValue={setValue}
-            fields={fields}
-            remove={remove}
-            errors={errors}
+        <div className="flex flex-col gap-4">
+          <SeedComponent
+            customClassButton="self-end"
+            entityToSeed="Albums"
+            seedFunction={createMusicFeatureFromSeeds}
+            label="Seed"
           />
-          <div
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-4"
+          >
+            <MusicFeatureItem
+              register={register}
+              setValue={setValue}
+              fields={fields}
+              remove={remove}
+              errors={errors}
+            />
+            {/* <div
             onClick={() => {
               append(fieldToAppend);
             }}
-            className="flex fixed bottom-20 left-20 items-center bg-slate-800 p-3 gap-3 text-white duration-500 hover:bg-slate-600 font-semibold cursor-pointer self-start rounded-md"
+            className="flex fixed bottom-20 md:left-20 items-center bg-slate-800 p-3 gap-3 text-white duration-500 hover:bg-slate-600 font-semibold cursor-pointer self-start rounded-md"
           >
             <PlusCircle /> Ajouter un album
-          </div>
-          <Button
-            disabled={!isDirty}
-            className="self-end text-xl fixed bottom-20 btn btn-custom right-20"
-            type="submit"
-          >
-            Submit
-          </Button>
-        </form>
+          </div> */}
+            <ButtonAppendFieldArray
+              label="ajouter un album"
+              append={append}
+              fieldToAppend={fieldToAppend}
+            />
+            <Button
+              disabled={!isDirty}
+              className="self-end text-xl fixed bottom-20 btn btn-custom md:right-20"
+              type="submit"
+            >
+              {isSubmitting && (
+                <span className="loading text-white loading-spinner loading-sm"></span>
+              )}
+              Submit
+            </Button>
+          </form>
+        </div>
       )}
     </div>
   );

@@ -83,7 +83,7 @@ type ProjectMemberEntityType = {
   id: number;
   features: string;
   // project: string[] | [];
-  project: Project[];
+  project?: Project[];
 };
 
 interface ProjectAndMediaType extends ProjectType {

@@ -4,13 +4,17 @@ import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 import { Playlist } from "@prisma/client";
 
-import { PlusCircle } from "lucide-react";
-
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import PlaylistItem from "./PlaylistItem";
 import { createOrUpdatePlaylist } from "@/actions/admin/playlist";
 import { useToast } from "@/hooks/use-toast";
+import { z } from "zod";
+import { playlistSchema } from "@/types/zodSchemas/adminForms";
+import { zodResolver } from "@hookform/resolvers/zod";
+import ButtonAppendFieldArray from "../forms/ButtonAppendFieldArray";
+import SeedComponent from "../seed/SeedComponent";
+import { createPlaylistsFromSeed } from "@/actions/admin/seeds";
 
 export type PlaylistFormType = {
   playlists: Playlist[];
@@ -24,11 +28,13 @@ const PlaylistForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { isDirty, isSubmitting },
+    formState: { isDirty, isSubmitting, errors },
+    reset,
     control,
     setValue,
-  } = useForm<PlaylistFormType>({
-    values: {
+  } = useForm<z.infer<typeof playlistSchema>>({
+    resolver: zodResolver(playlistSchema),
+    defaultValues: {
       playlists: dataPlaylists ? dataPlaylists : [],
     },
   });
@@ -42,7 +48,9 @@ const PlaylistForm = () => {
     control,
   });
 
-  const onSubmit: SubmitHandler<PlaylistFormType> = async (values) => {
+  const onSubmit: SubmitHandler<PlaylistFormType> = async (
+    values: z.infer<typeof playlistSchema>
+  ) => {
     const { playlists } = values;
 
     const response = await createOrUpdatePlaylist(playlists);
@@ -75,7 +83,7 @@ const PlaylistForm = () => {
     path: "",
     cover: "",
     slug: "",
-    priority: 1,
+    priority: "1",
   };
   useEffect(() => {
     const fecthData = async () => {
@@ -84,6 +92,7 @@ const PlaylistForm = () => {
       if (playlists) {
         setDataPlaylists(playlists);
         setIsLoading(false);
+        reset({ playlists });
       }
     };
 
@@ -93,26 +102,31 @@ const PlaylistForm = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <div>
+    <div className="flex flex-col gap-4">
+      <SeedComponent
+        entityToSeed="Playlists"
+        label="Seed"
+        customClassButton="self-end"
+        seedFunction={createPlaylistsFromSeed}
+      />
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <PlaylistItem
           register={register}
           fields={fields}
           remove={remove}
           setValue={setValue}
+          errors={errors}
         />
-        <div
-          onClick={() => {
-            append(fieldToAppend);
-          }}
-          className="flex fixed bottom-20 left-20 items-center bg-slate-800 p-3 gap-3 text-white duration-500 hover:bg-slate-600 font-semibold cursor-pointer self-start rounded-md"
-        >
-          <PlusCircle /> add a playlist
-        </div>
+
+        <ButtonAppendFieldArray
+          label="add a playlist"
+          append={append}
+          fieldToAppend={fieldToAppend}
+        />
 
         <Button
           disabled={!isDirty || isSubmitting}
-          className="self-end text-xl fixed bottom-20 right-20"
+          className="self-end text-xl fixed bottom-20 btn btn-custom md:right-20"
           type="submit"
         >
           {isSubmitting && (

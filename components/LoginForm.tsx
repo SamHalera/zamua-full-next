@@ -36,7 +36,7 @@ const LoginForm = () => {
   const errorForm = form.formState.errors;
 
   const isErrorForm = Object.keys(errorForm).length > 0;
-  console.log(errorForm);
+
   const onSubmit: SubmitHandler<LoginForm> = async (
     values: z.infer<typeof signinFormSchema>
   ) => {
@@ -46,7 +46,7 @@ const LoginForm = () => {
       redirect: false,
       callbackUrl: "/admin",
     });
-    console.log("signInData==>", signInData);
+
     if (signInData?.error) {
       toast({
         title: "Uh oh! Something went wrong.",
