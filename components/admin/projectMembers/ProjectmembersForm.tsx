@@ -37,7 +37,7 @@ const ProjectmembersForm = () => {
     control,
     handleSubmit,
     reset,
-    formState: { isDirty, isSubmitting, errors },
+    formState: { isDirty, isSubmitting },
   } = useForm<ProjectMembersFormType>({
     values: {
       projectMembers: dataProjectMember ? dataProjectMember : [],

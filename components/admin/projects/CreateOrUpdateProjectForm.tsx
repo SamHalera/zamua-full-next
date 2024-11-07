@@ -48,7 +48,6 @@ const CreateOrUpdateProjectForm = ({
     register,
     handleSubmit,
     setValue,
-    getValues,
     formState: { isDirty, isSubmitting, errors },
   } = useForm<z.infer<typeof projectSchema>>({
     resolver: zodResolver(projectSchema),
