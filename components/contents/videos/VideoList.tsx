@@ -8,7 +8,10 @@ const VideoList = ({ videos }: { videos?: Videos[] }) => {
       <div className="flex flex-wrap justify-center gap-2 mb-40">
         {videos &&
           videos
-            .sort((a: Videos, b: Videos) => a.priority - b.priority)
+            .sort(
+              (a: Videos, b: Videos) =>
+                parseFloat(a.priority) - parseFloat(b.priority)
+            )
             .map((video) => {
               return <VideoItem key={video.id} video={video} />;
             })}

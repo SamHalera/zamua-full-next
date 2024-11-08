@@ -2,7 +2,7 @@ import { CustomInputProps } from "@/types/types";
 import React from "react";
 import InputOnChange from "./InputOnChange";
 
-const CustomInput = ({
+const CustomInputTest = ({
   label,
   type,
   register,
@@ -62,4 +62,4 @@ const CustomInput = ({
   );
 };
 
-export default CustomInput;
+export default CustomInputTest;

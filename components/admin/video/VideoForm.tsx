@@ -4,11 +4,16 @@ import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Videos } from "@prisma/client";
-import { PlusCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import VideoItem from "./VideoItem";
 import { createOrUpdateVideos } from "@/actions/admin/video";
+import { videoSchema } from "@/types/zodSchemas/adminForms";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import ButtonAppendFieldArray from "../forms/ButtonAppendFieldArray";
+import SeedComponent from "../seed/SeedComponent";
+import { createVideoFromSeed } from "@/actions/admin/seeds";
 
 export type VideoFormType = {
   videos: Videos[];
@@ -21,10 +26,12 @@ const VideoForm = () => {
   const {
     handleSubmit,
     register,
+    reset,
     control,
-    formState: { isDirty, isSubmitting },
-  } = useForm<VideoFormType>({
-    values: {
+    formState: { isDirty, isSubmitting, errors },
+  } = useForm<z.infer<typeof videoSchema>>({
+    resolver: zodResolver(videoSchema),
+    defaultValues: {
       videos: dataVideos ? dataVideos : [],
     },
   });
@@ -41,12 +48,15 @@ const VideoForm = () => {
   const fieldToAppend = {
     id: 0,
     iframe: "",
-    priority: 1,
+    priority: "1",
     projectId: null,
   };
 
-  const onSubmit: SubmitHandler<VideoFormType> = async (values) => {
+  const onSubmit: SubmitHandler<VideoFormType> = async (
+    values: z.infer<typeof videoSchema>
+  ) => {
     try {
+      setIsLoading(true);
       const { videos } = values;
       const response = await createOrUpdateVideos(videos);
       if (response?.error) {
@@ -67,43 +77,57 @@ const VideoForm = () => {
           },
         });
       }
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     const fetchData = async () => {
       const videos = await getAllVideos();
 
       if (videos) setDataVideos(videos);
       setIsLoading(false);
+
+      reset({ videos });
     };
     fetchData();
-  }, []);
+  }, [reset, isLoading]);
   return isLoading ? (
     <Loader />
   ) : (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-      <VideoItem register={register} remove={remove} fields={fields} />
-      <div
-        onClick={() => {
-          append(fieldToAppend);
-        }}
-        className="flex fixed bottom-20 left-20 items-center bg-slate-800 p-3 gap-3 text-white duration-500 hover:bg-slate-600 font-semibold cursor-pointer self-start rounded-md"
-      >
-        <PlusCircle /> add a video source
-      </div>
+    <div className="flex flex-col gap-4">
+      <SeedComponent
+        entityToSeed="Videos"
+        label="Seed"
+        customClassButton="self-end"
+        seedFunction={createVideoFromSeed}
+      />
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <VideoItem
+          register={register}
+          remove={remove}
+          fields={fields}
+          errors={errors}
+        />
 
-      <Button
-        className="flex gap-4 fixed bottom-20 self-end right-20"
-        disabled={!isDirty || isSubmitting}
-      >
-        {isSubmitting && (
-          <span className="loading text-white loading-spinner loading-sm"></span>
-        )}
-        Submit
-      </Button>
-    </form>
+        <ButtonAppendFieldArray
+          label="add a video source"
+          append={append}
+          fieldToAppend={fieldToAppend}
+        />
+        <Button
+          className="self-end text-xl fixed bottom-20 btn btn-custom md:right-20"
+          disabled={!isDirty || isSubmitting}
+        >
+          {isSubmitting && (
+            <span className="loading text-white loading-spinner loading-sm"></span>
+          )}
+          Submit
+        </Button>
+      </form>
+    </div>
   );
 };
 

@@ -50,7 +50,6 @@ type CustomInputProps = {
   name: string;
   value?: string | number;
   register: UseFormRegister<any>;
-
   error?: FieldError;
   required?: boolean;
   disabled?: boolean;
@@ -58,7 +57,20 @@ type CustomInputProps = {
   handleChangeValue?: (value: string) => void;
   customClass?: string;
   setValue?: UseFormSetValue<any>;
-  pattern?: RegExp;
+};
+type CustomInputDateProps = {
+  label?: string;
+  autoComplete?: string;
+  name: string;
+  value: Date;
+  register: UseFormRegister<any>;
+  error: FieldError;
+  required?: boolean;
+  disabled?: boolean;
+  placeholder?: string;
+
+  customClass?: string;
+  setValue?: UseFormSetValue<any>;
 };
 
 type SelectOptions = {
@@ -75,7 +87,7 @@ interface ProjectType {
   primaryTitleString: string;
   secondaryTitleString: string;
   projectMember: ProjectMember[];
-  priority: number;
+  priority: string;
   slug: string;
 }
 
@@ -84,7 +96,7 @@ type ProjectMemberEntityType = {
   id: number;
   features: string;
   // project: string[] | [];
-  project: Project[];
+  project?: Project[];
 };
 
 interface ProjectAndMediaType extends ProjectType {
@@ -108,7 +120,7 @@ type MusicFeatureType = {
   subTitle: string | null;
   iframe: string;
   path: string;
-  priority: number;
+  priority: string;
   cover: string | null;
 };
 

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { AlignJustify, CircleX, Home } from "lucide-react";
+import { AlignJustify, CircleX, Home, PocketKnife } from "lucide-react";
 import React, { useState } from "react";
 import adminMenu from "@/assets/adminMenu.json";
 import Link from "next/link";
@@ -71,6 +71,17 @@ const AdminMobileMenu = () => {
               </div>
             );
           })}
+          <div
+            onClick={() => {
+              setShowMenu(false);
+              router.push("/admin/utils");
+            }}
+            className=" cursor-pointer flex gap-1 text-primary items-center text-xl duration-700 hover:text-primary/70 font-semibold"
+            // href={"/admin/utils"}
+          >
+            <PocketKnife />
+            Utils
+          </div>
           <Link
             className="flex gap-1 text-primary items-center text-xl duration-700 hover:text-primary/70 font-semibold"
             href={"/"}

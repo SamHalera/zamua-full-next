@@ -5,7 +5,7 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { VideoFormType } from "./VideoForm";
-import { cn } from "@/lib/utils";
+import { cn, extractErrorFieldFromErrorsObject } from "@/lib/utils";
 import CustomInput from "../forms/CustomInput";
 import { Trash2 } from "lucide-react";
 
@@ -14,12 +14,19 @@ const VideoRow = ({
   field,
   index,
   remove,
+  error,
 }: {
   register: UseFormRegister<VideoFormType>;
   field: FieldArrayWithId<VideoFormType, "videos", "id">;
   index: number;
   remove: UseFieldArrayRemove;
+  error: any;
 }) => {
+  const errorFieldIframe = extractErrorFieldFromErrorsObject(error, "iframe");
+  const errorFieldPriority = extractErrorFieldFromErrorsObject(
+    error,
+    "priority"
+  );
   return (
     <div
       className={cn(
@@ -49,6 +56,7 @@ const VideoRow = ({
         type="text"
         register={register}
         required={true}
+        error={errorFieldIframe}
         placeholder="<iframe....></iframe>"
         customClass="input input-bordered w-full"
         value={field.iframe}
@@ -56,9 +64,10 @@ const VideoRow = ({
       <CustomInput
         name={`videos.${index}.priority`}
         label="Display priority on front-end"
-        type="number"
+        type="text"
         register={register}
         required={true}
+        error={errorFieldPriority}
         placeholder=""
         customClass="input input-bordered w-full"
         value={field.priority}

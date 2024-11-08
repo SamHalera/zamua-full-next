@@ -25,7 +25,7 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
           secondaryTitleString: data.secondaryTitleString,
           description: data.description,
           cover: data.cover,
-          priority: parseFloat(data.priority.toString()),
+          priority: data.priority,
           slug: data.slug,
         },
       });
@@ -42,7 +42,7 @@ export const createOrUpdateProject = async (data: ProjectFormType) => {
           secondaryTitleString: data.secondaryTitleString,
           description: data.description,
           cover: data.cover,
-          priority: parseFloat(data.priority.toString()),
+          priority: data.priority,
           slug: data.slug,
         },
       });
@@ -69,6 +69,7 @@ export const deleteProjectById = async (id: number) => {
         id,
       },
     });
+    revalidatePath("/admin/projects");
     return {
       success: "Project has been deleted successfully",
     };
@@ -84,7 +85,6 @@ export const handleMediaUpload = async (
   currentProject: ProjectAndMediaType,
   id: number
 ) => {
-  console.log("dataImages==>", dataImages);
   if (dataImages.length === 0) {
     const deleteAllMedia = await deletAllMediaFromDBAndCloudinary(
       currentProject.media

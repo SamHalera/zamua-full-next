@@ -14,6 +14,7 @@ const AdminProjectPage = () => {
         <Link href={"/admin/projects/new"} className="custom-btn">
           new project
         </Link>
+
         <ProjectsListTable />
       </div>
     </div>

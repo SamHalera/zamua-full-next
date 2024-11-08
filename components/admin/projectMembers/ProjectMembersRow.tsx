@@ -2,7 +2,6 @@ import React from "react";
 import {
   Control,
   FieldArrayWithId,
-  // FieldErrors,
   UseFieldArrayRemove,
   UseFormRegister,
 } from "react-hook-form";
@@ -21,7 +20,6 @@ const ProjectMembersRow = ({
   field,
   index,
   remove,
-  // errors,
 
   control,
 }: {
@@ -29,8 +27,6 @@ const ProjectMembersRow = ({
   field: FieldArrayWithId<ProjectMembersFormType, "projectMembers", "id">;
   index: number;
   remove: UseFieldArrayRemove;
-
-  // errors: FieldErrors<ProjectMembersFormType>;
 
   control: Control<ProjectMembersFormType, any>;
 }) => {
@@ -50,21 +46,23 @@ const ProjectMembersRow = ({
   let selectedValue: { value: string; label: string }[] | null = [
     { value: "", label: "" },
   ];
-  if (field.project.length === 1 && field.project[0].id === 0) {
-    selectedValue = null;
-  } else {
-    selectedValue = field.project.map((item) => {
-      return {
-        value: item.id?.toString() ?? "",
-        label: item.fullTitle ?? "",
-      };
-    });
+  if (field.project) {
+    if (field.project.length === 1 && field.project[0].id === 0) {
+      selectedValue = null;
+    } else {
+      selectedValue = field.project.map((item) => {
+        return {
+          value: item.id?.toString() ?? "",
+          label: item.fullTitle ?? "",
+        };
+      });
+    }
   }
 
   return (
     <div
       className={cn(
-        "flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6 mx-auto flex-1",
+        "flex flex-col gap-3 bg-slate-200 rounded-lg p-8 mb-6 flex-1 ",
         {
           "border-2 border-primary shadow-lg": field?.name === "",
         }
@@ -105,7 +103,6 @@ const ProjectMembersRow = ({
         label="Pick some projects"
         selectOptions={projectOptions}
         selectedValue={selectedValue}
-        field={field}
         index={index}
       />
     </div>

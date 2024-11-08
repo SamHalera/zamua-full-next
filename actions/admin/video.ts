@@ -3,6 +3,7 @@
 import prisma from "@/db";
 import { itemsToDelete } from "@/lib/serverActionHelpers";
 import { Videos } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 export const createOrUpdateVideos = async (videos: Videos[]) => {
   try {
@@ -10,15 +11,16 @@ export const createOrUpdateVideos = async (videos: Videos[]) => {
 
     if (videos.length === 0) {
       await prisma.videos.deleteMany();
-    }
-    if (existingVideos.length > videos.length) {
-      const videosToDelete = itemsToDelete(existingVideos, videos);
+    } else {
+      if (existingVideos.length > videos.length) {
+        const videosToDelete = itemsToDelete(existingVideos, videos);
 
-      videosToDelete.forEach(async (item: Videos) => {
-        await prisma.videos.delete({
-          where: { id: item.id },
+        videosToDelete.forEach(async (item: Videos) => {
+          await prisma.videos.delete({
+            where: { id: item.id },
+          });
         });
-      });
+      }
     }
 
     const videosToCreate = videos.filter((item) => item.id === 0);
@@ -31,6 +33,7 @@ export const createOrUpdateVideos = async (videos: Videos[]) => {
         error: "Something went wrong. Videos couldn't be uploaded! Try again!",
       };
     } else {
+      revalidatePath("/admin/media/videos");
       return { success: "Videos have been uploaded!" };
     }
   } catch (error) {
@@ -43,7 +46,6 @@ export const createOrUpdateVideos = async (videos: Videos[]) => {
 const createVideos = async (videos: Videos[]) => {
   try {
     const videosWithoutIDs = videos.map((item) => {
-      item.priority = parseFloat(item.priority.toString()) as number;
       const { id, ...noIdVideo } = item;
 
       return noIdVideo;
@@ -51,6 +53,7 @@ const createVideos = async (videos: Videos[]) => {
     await prisma.videos.createMany({
       data: videosWithoutIDs,
     });
+    revalidatePath("/admin/media/videos");
     return { success: "Videos have been Created!" };
   } catch (error) {
     console.log("error creation videos==>", error);
@@ -68,6 +71,7 @@ const updateVideos = async (videos: Videos[]) => {
         data: item,
       });
     });
+    revalidatePath("/admin/media/videos");
     return { success: "Videos have been updated!" };
   } catch (error) {
     console.log("error update videos==>", error);

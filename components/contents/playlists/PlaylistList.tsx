@@ -9,7 +9,7 @@ const PlaylistList = ({ playlists }: { playlists?: Playlist[] }) => {
         playlists?.length > 0 &&
         playlists
           .sort((elt1: Playlist, elt2: Playlist) => {
-            return elt1.priority - elt2.priority;
+            return parseFloat(elt1.priority) - parseFloat(elt2.priority);
           })
           .map((playlist: Playlist, index: number) => {
             return (

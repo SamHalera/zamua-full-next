@@ -18,15 +18,18 @@ import AddMediaForm from "./AddMediaForm";
 import ButtonForMediaManager from "./ButtonForMediaManager";
 import { CldImage, CldUploadWidget } from "next-cloudinary";
 import { useToast } from "@/hooks/use-toast";
+import { projectSchema } from "@/types/zodSchemas/adminForms";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export type ProjectFormType = {
   id: number;
   fullTitle: string;
   primaryTitleString: string;
   secondaryTitleString: string;
-  cover: string;
-  description: string;
-  priority: number;
+  cover: string | null;
+  description: string | null;
+  priority: string;
   slug: string;
 };
 const CreateOrUpdateProjectForm = ({
@@ -46,25 +49,29 @@ const CreateOrUpdateProjectForm = ({
     handleSubmit,
     setValue,
     formState: { isDirty, isSubmitting, errors },
-  } = useForm<ProjectFormType>({
-    values: {
+  } = useForm<z.infer<typeof projectSchema>>({
+    resolver: zodResolver(projectSchema),
+    defaultValues: {
       id: project?.id ?? 0,
       fullTitle: project?.fullTitle ?? "",
       primaryTitleString: project?.primaryTitleString ?? "",
       secondaryTitleString: project?.secondaryTitleString ?? "",
       description: project?.description ?? "",
       cover: project?.cover ?? "",
-      priority: project?.priority ?? 1,
+      priority: project?.priority ?? "1",
       slug: project?.slug ?? "",
     },
   });
+
   const handleSlugOnChange = (value: string) => {
     const newStr = value.toLocaleLowerCase().split(" ").join("-");
 
     setSlugValue(`${newStr}`);
   };
 
-  const onSubmit: SubmitHandler<ProjectFormType> = async (values) => {
+  const onSubmit: SubmitHandler<ProjectFormType> = async (
+    values: z.infer<typeof projectSchema>
+  ) => {
     try {
       const response = await createOrUpdateProject(values);
 
@@ -240,11 +247,12 @@ const CreateOrUpdateProjectForm = ({
               />
               <CustomInput
                 label="Order priority"
-                type="number"
+                type="text"
                 name="priority"
                 register={register}
                 customClass="input input-bordered w-full"
                 required={true}
+                error={errors.priority}
               />
             </div>
             <div className="flex md:flex-row flex-col gap-4 md:gap-8">
