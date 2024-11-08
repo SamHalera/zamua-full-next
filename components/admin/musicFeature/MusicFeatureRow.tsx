@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import {
   FieldArrayWithId,
-  FieldErrors,
   UseFieldArrayRemove,
   UseFormRegister,
   UseFormSetValue,
@@ -12,7 +11,7 @@ import { Trash2 } from "lucide-react";
 import CustomInput from "../forms/CustomInput";
 import { CldUploadWidget } from "next-cloudinary";
 import { CldImage } from "next-cloudinary";
-import { cn } from "@/lib/utils";
+import { cn, extractErrorFieldFromErrorsObject } from "@/lib/utils";
 
 export type UploadResultType = {
   event: string | undefined;
@@ -26,6 +25,7 @@ const MusicFeatureRow = ({
   remove,
   index,
   setValue,
+  error,
 }: {
   register: UseFormRegister<MusicFeatureFormType>;
   field: FieldArrayWithId<MusicFeatureFormType, "musicFeature", "id">;
@@ -33,10 +33,17 @@ const MusicFeatureRow = ({
   index: number;
   setValue: UseFormSetValue<MusicFeatureFormType>;
 
-  errors: FieldErrors<MusicFeatureFormType>;
+  // error: unknown | undefined;
+  error: any;
 }) => {
   const [dataImage, setDataImage] = useState<string>(field.cover ?? "");
-
+  const errorFieldTitle = extractErrorFieldFromErrorsObject(error, "title");
+  const errorFieldIframe = extractErrorFieldFromErrorsObject(error, "iframe");
+  const errorFieldPath = extractErrorFieldFromErrorsObject(error, "path");
+  const errorFieldPriority = extractErrorFieldFromErrorsObject(
+    error,
+    "priority"
+  );
   useEffect(() => {
     if (dataImage) {
       setValue(`musicFeature.${index}.cover`, dataImage, {
@@ -66,6 +73,8 @@ const MusicFeatureRow = ({
           type="text"
           customClass="input input-bordered w-full"
           placeholder="give a title"
+          error={errorFieldTitle}
+          required
         />
         <CustomInput
           register={register}
@@ -84,6 +93,8 @@ const MusicFeatureRow = ({
           type="texte"
           customClass="input input-bordered w-full"
           placeholder="Iframe"
+          required
+          error={errorFieldIframe}
         />
         <CustomInput
           register={register}
@@ -92,6 +103,8 @@ const MusicFeatureRow = ({
           type="text"
           customClass="input input-bordered w-full"
           placeholder="Url"
+          required
+          error={errorFieldPath}
         />
       </div>
       <div className="flex flex-col md:flex-row gap-4">
@@ -99,9 +112,11 @@ const MusicFeatureRow = ({
           register={register}
           label="Display order in Front End"
           name={`musicFeature.${index}.priority`}
-          type="number"
+          type="text"
           customClass="input input-bordered w-full"
           placeholder="priority"
+          required
+          error={errorFieldPriority}
         />
 
         <CustomInput

@@ -1,11 +1,9 @@
-import { getShows } from "@/actions/show";
 import ShowForm from "@/components/admin/shows/ShowForm";
 
 import LinkToPublicView from "@/components/globals/LinkToPublicView";
 import React from "react";
 
 const AdminShowPage = async () => {
-  const shows = await getShows();
   return (
     <div className="p-2 md:p-10 ">
       <div className="  flex flex-col items-center">
@@ -14,7 +12,7 @@ const AdminShowPage = async () => {
         </h1>
         <LinkToPublicView path="/shows" />
       </div>
-      <ShowForm shows={shows} />;
+      <ShowForm />
     </div>
   );
 };

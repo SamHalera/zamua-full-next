@@ -11,14 +11,21 @@ const CreditItem = ({
   register,
   fields,
   remove,
+  errors,
 }: {
   register: UseFormRegister<CreditFormType>;
   fields: FieldArrayWithId<CreditFormType, "credits", "id">[];
   remove: UseFieldArrayRemove;
+  errors: any;
 }) => {
   return (
     <div className="flex gap-4 flex-wrap justify-center">
       {fields.map((field, index) => {
+        let errorObject = null;
+        if (errors?.credits) {
+          errorObject = errors?.credits[index];
+        }
+
         return (
           <CreditRow
             key={field.id}
@@ -26,6 +33,7 @@ const CreditItem = ({
             remove={remove}
             index={index}
             field={field}
+            error={errorObject}
           />
         );
       })}

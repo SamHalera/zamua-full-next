@@ -19,6 +19,8 @@ import { CldImage } from "next-cloudinary";
 import { deleteProjectById } from "@/actions/admin/project";
 
 import { useRouter } from "next/navigation";
+import { createProjectFromSeeds } from "@/actions/admin/seeds";
+import SeedComponent from "../seed/SeedComponent";
 const ProjectsListTable = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { projects, setProjects } = useProjectStore();
@@ -38,7 +40,13 @@ const ProjectsListTable = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className="my-9">
+    <div className="my-9 flex flex-col gap-4">
+      <SeedComponent
+        customClassButton="self-end"
+        entityToSeed="Projects"
+        seedFunction={createProjectFromSeeds}
+        label="Seed"
+      />
       <Table className="w-full">
         <TableHeader>
           <TableRow>

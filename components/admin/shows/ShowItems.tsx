@@ -12,16 +12,20 @@ const ShowItems = ({
   register,
   fields,
   remove,
-  errorItems,
+  errors,
 }: {
   register: UseFormRegister<ShowFormType>;
   fields: FieldArrayWithId<ShowFormType, "shows", "id">[];
   remove: UseFieldArrayRemove;
-  errorItems?: FieldErrors<ShowFormType>;
+  errors?: FieldErrors<ShowFormType>;
 }) => {
   return (
     <div className="flex flex-wrap gap-8 justify-center">
       {fields.map((field, index) => {
+        let errorObject = undefined;
+        if (errors?.shows) {
+          errorObject = errors?.shows[index];
+        }
         return (
           <ShowRow
             key={field.id}
@@ -29,7 +33,7 @@ const ShowItems = ({
             index={index}
             field={field}
             remove={remove}
-            errorItems={errorItems}
+            error={errorObject}
           />
         );
       })}

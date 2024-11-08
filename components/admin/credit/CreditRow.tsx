@@ -2,11 +2,12 @@ import React from "react";
 import { CreditFormType } from "./CreditForm";
 import {
   FieldArrayWithId,
+  FieldError,
   UseFieldArrayRemove,
   UseFormRegister,
 } from "react-hook-form";
 import CustomInput from "../forms/CustomInput";
-import { cn } from "@/lib/utils";
+import { cn, extractErrorFieldFromErrorsObject } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
 
 const CreditRow = ({
@@ -14,12 +15,16 @@ const CreditRow = ({
   field,
   index,
   remove,
+  error,
 }: {
   register: UseFormRegister<CreditFormType>;
   field: FieldArrayWithId<CreditFormType, "credits", "id">;
   index: number;
   remove: UseFieldArrayRemove;
+  error: FieldError;
 }) => {
+  const errorFieldName = extractErrorFieldFromErrorsObject(error, "name");
+  const errorFieldUrl = extractErrorFieldFromErrorsObject(error, "url");
   return (
     <div
       className={cn("flex flex-col gap-3 bg-slate-200 rounded-lg p-4 mb-6 ", {
@@ -46,6 +51,8 @@ const CreditRow = ({
         placeholder="Credit Name"
         type="text"
         customClass="input input-bordered w-full"
+        required={true}
+        error={errorFieldName}
       />
       <CustomInput
         register={register}
@@ -54,6 +61,7 @@ const CreditRow = ({
         placeholder="https://.... "
         type="text"
         customClass="input input-bordered w-full"
+        error={errorFieldUrl}
       />
     </div>
   );

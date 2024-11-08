@@ -3,7 +3,6 @@ import { getProjectMembers } from "@/actions/projectMembers";
 import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 
-import { PlusCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import ProjectMemberItem from "./ProjectMemberItem";
@@ -17,6 +16,8 @@ import {
   deleteAllProjectMember,
 } from "@/actions/admin/projectMember";
 import { useToast } from "@/hooks/use-toast";
+
+import ButtonAppendFieldArray from "../forms/ButtonAppendFieldArray";
 
 export type ProjectMembersFormType = {
   projectMembers: ProjectMemberEntityType[];
@@ -35,7 +36,7 @@ const ProjectmembersForm = () => {
     register,
     control,
     handleSubmit,
-
+    reset,
     formState: { isDirty, isSubmitting },
   } = useForm<ProjectMembersFormType>({
     values: {
@@ -62,6 +63,7 @@ const ProjectmembersForm = () => {
       } else {
         response = await creatOrUpdateProjectMembers(projectMembers);
       }
+
       if (response?.error) {
         toast({
           title: "Uh oh! Something went wrong.",
@@ -98,7 +100,7 @@ const ProjectmembersForm = () => {
         cover: "",
         description: "",
         slug: "",
-        priority: 1,
+        priority: "1",
       },
     ],
   };
@@ -112,10 +114,11 @@ const ProjectmembersForm = () => {
         setProjects(projects);
       }
 
+      if (projectMembers) reset({ projectMembers });
       setIsLoading(false);
     };
     fecthData();
-  }, []);
+  }, [reset]);
 
   return isLoading || isSubmitting ? (
     <Loader />
@@ -125,22 +128,18 @@ const ProjectmembersForm = () => {
         register={register}
         fields={fields}
         remove={remove}
-        // errors={errors}
-
         control={control}
       />
-      <div
-        onClick={() => {
-          append(fieldToAppend);
-        }}
-        className="flex fixed bottom-20 items-center bg-slate-800 p-3 gap-3 text-white duration-500 hover:bg-slate-600 font-semibold cursor-pointer self-start rounded-md"
-      >
-        <PlusCircle /> add a project member
-      </div>
+
+      <ButtonAppendFieldArray
+        label=" add a project member"
+        append={append}
+        fieldToAppend={fieldToAppend}
+      />
 
       <Button
         disabled={!isDirty || isSubmitting}
-        className="self-end text-xl fixed bottom-10"
+        className="self-end text-xl fixed bottom-20 btn btn-custom md:right-20"
         type="submit"
       >
         {isSubmitting && (

@@ -1,6 +1,6 @@
 import { CustomInputProps } from "@/types/types";
 import React from "react";
-import InputOnChange from "./InputOnChange";
+import InputOnChange from "../../testComponents/InputOnChange";
 
 const CustomInput = ({
   label,
@@ -16,23 +16,17 @@ const CustomInput = ({
   handleChangeValue,
   customClass,
 }: CustomInputProps) => {
-  let errorMessage;
-
-  if (error) {
-    errorMessage = "Champs obligatoire";
-  }
-
   return (
     <>
       <label className="form-control w-full ">
-        <div className="label">
-          <span className="label-text">
+        <div className="label flex flex-col items-start">
+          <span className="label-text ">
             {label}
             {required && <span className="text-red-400">*</span>}
-            {required && error && (
-              <span className=" text-red-400 text-sm ml-2">{errorMessage}</span>
-            )}
           </span>
+          {error && (
+            <span className=" text-red-400 text-sm">{error.message}</span>
+          )}
         </div>
         {handleChangeValue ? (
           <InputOnChange

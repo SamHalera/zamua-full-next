@@ -67,7 +67,7 @@ const SlideGalleryComponent = ({
       if (slideItem) setCurrentSlideItem(slideItem);
     }
   };
-  console.log("touchData==>", touchData);
+
   useEffect(() => {
     document.addEventListener("keydown", handleClickOnArrowKey);
     return () => {
