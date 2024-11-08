@@ -2,7 +2,7 @@
 import React from "react";
 
 import Link from "next/link";
-import { formatTitle } from "@/lib/utils";
+import { formatTitle, parseText } from "@/lib/utils";
 
 import { ProjectMember } from "@prisma/client";
 import { CldImage } from "next-cloudinary";
@@ -10,6 +10,7 @@ import { ProjectAndMediaType } from "@/types/types";
 import MediaGallery from "../media/MediaGallery";
 
 const ProjectSingle = ({ project }: { project: ProjectAndMediaType }) => {
+  const parsedDescription = parseText(project.description ?? "");
   return (
     <>
       <div className="p-6 md:p-16">
@@ -51,7 +52,7 @@ const ProjectSingle = ({ project }: { project: ProjectAndMediaType }) => {
                 })}
               </div>
               <div
-                dangerouslySetInnerHTML={{ __html: project.description ?? "" }}
+                dangerouslySetInnerHTML={{ __html: parsedDescription ?? "" }}
               />
             </div>
           </div>
