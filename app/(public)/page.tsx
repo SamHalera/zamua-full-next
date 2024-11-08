@@ -1,4 +1,3 @@
-import { createUser } from "@/actions/user";
 import HomeContent from "@/components/contents/Home/HomeContent";
 import { Metadata } from "next";
 
@@ -26,6 +25,5 @@ export async function generateMetadata(): Promise<Metadata> {
   return metadata;
 }
 export default async function Home() {
-  // await createUser();
   return <HomeContent />;
 }
