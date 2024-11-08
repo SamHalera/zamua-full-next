@@ -8,7 +8,7 @@ export const getProjects = async () => {
       projectMember: true,
     },
   });
-
+  console.log("ici");
   return projects;
 };
 
