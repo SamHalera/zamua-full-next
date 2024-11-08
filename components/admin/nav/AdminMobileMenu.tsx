@@ -6,7 +6,6 @@ import Link from "next/link";
 import { AdminMenuItem, SingleItem } from "@/types/types";
 import LogoutButtonComponent from "@/components/LogutButtonComponent";
 import { useRouter } from "next/navigation";
-import { GearIcon } from "@radix-ui/react-icons";
 
 const AdminMobileMenu = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);

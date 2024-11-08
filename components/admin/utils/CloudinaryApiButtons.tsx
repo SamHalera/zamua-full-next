@@ -3,11 +3,10 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+
 import ButtonDeleteAllFolders from "./ButtonDeleteAllFolders";
 import { deleteAllCloudinaryFolders } from "@/actions/admin/utils";
 const CloudinaryApiButtons = () => {

@@ -34,6 +34,7 @@ const ButtonDeleteAllFolders = ({
         });
       }
     } catch (error) {
+      console.error(error);
       toast({
         title: "Uh oh! Something went wrong.",
         description: "Uh oh! Something went wrong.",
