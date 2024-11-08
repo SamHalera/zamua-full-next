@@ -128,14 +128,7 @@ const MusicFeatureForm = () => {
               remove={remove}
               errors={errors}
             />
-            {/* <div
-            onClick={() => {
-              append(fieldToAppend);
-            }}
-            className="flex fixed bottom-20 md:left-20 items-center bg-slate-800 p-3 gap-3 text-white duration-500 hover:bg-slate-600 font-semibold cursor-pointer self-start rounded-md"
-          >
-            <PlusCircle /> Ajouter un album
-          </div> */}
+
             <ButtonAppendFieldArray
               label="ajouter un album"
               append={append}

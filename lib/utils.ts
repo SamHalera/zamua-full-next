@@ -17,11 +17,11 @@ export const formatTitle = (text: string) => {
 };
 
 export const extractErrorFieldFromErrorsObject = (
-  errors: any,
+  error: any,
   keyToExtract: string
 ) => {
-  if (errors) {
-    return errors[keyToExtract];
+  if (error) {
+    return error[keyToExtract];
   }
   return null;
 };

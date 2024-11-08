@@ -57,7 +57,20 @@ type CustomInputProps = {
   handleChangeValue?: (value: string) => void;
   customClass?: string;
   setValue?: UseFormSetValue<any>;
-  pattern?: RegExp;
+};
+type CustomInputDateProps = {
+  label?: string;
+  autoComplete?: string;
+  name: string;
+  value: Date;
+  register: UseFormRegister<any>;
+  error: FieldError;
+  required?: boolean;
+  disabled?: boolean;
+  placeholder?: string;
+
+  customClass?: string;
+  setValue?: UseFormSetValue<any>;
 };
 
 type SelectOptions = {

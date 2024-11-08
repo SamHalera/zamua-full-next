@@ -30,7 +30,7 @@ const MusicFeatureItem = ({
   return (
     <div className="flex flex-wrap justify-center gap-2">
       {fields.map((field, index) => {
-        let errorObject = undefined;
+        let errorObject = null;
         if (errors?.musicFeature) {
           errorObject = errors?.musicFeature[index];
         }

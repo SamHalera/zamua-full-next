@@ -79,7 +79,7 @@ model Videos {
 model Credit {
   id Int @id @default(autoincrement())
   name String
-  url String
+  url String?
   media Media[]
 }
 

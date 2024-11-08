@@ -1,4 +1,3 @@
-import { Prisma, PrismaClient } from "@prisma/client";
 import * as z from "zod";
 
 export const projectSchema = z.object({
@@ -44,6 +43,53 @@ export const musicFeatureSchema = z.object({
   ),
 });
 
+export const showSchema = z.object({
+  shows: z.array(
+    z.object({
+      id: z.number(),
+      name: z.string().min(1, { message: "Show has to have a name" }),
+      date: z
+        .string({ required_error: "Date field is required" })
+        .transform((str) => new Date(str)),
+      venue: z.string().min(1, { message: "Venue is required" }),
+      venueUrl: z
+        .string()
+        .min(0)
+        .regex(/^(https:\/\/[^\s/$.?#].[^\s]*)?$/gm, {
+          message: "Invalid url",
+        })
+        .nullable(),
+      location: z.string().min(1, { message: "Location is required" }),
+      locationUrl: z
+        .string()
+        .regex(/^(https:\/\/[^\s/$.?#].[^\s]*)?$/gm, {
+          message: "Invalid url",
+        })
+        .nullable(),
+      ticketsUrl: z
+        .string()
+        .regex(/^(https:\/\/[^\s/$.?#].[^\s]*)?$/gm, {
+          message: "Invalid url",
+        })
+        .nullable(),
+    })
+  ),
+});
+export const creditSchema = z.object({
+  credits: z.array(
+    z.object({
+      id: z.number(),
+      name: z.string().min(1, { message: "Credit has to have a name" }),
+      url: z
+        .string()
+        .min(0)
+        .regex(/^(https:\/\/[^\s/$.?#].[^\s]*)?$/gm, {
+          message: "Invalid url",
+        })
+        .nullable(),
+    })
+  ),
+});
 export const videoSchema = z.object({
   videos: z.array(
     z.object({

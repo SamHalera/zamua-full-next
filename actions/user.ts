@@ -8,7 +8,7 @@ export const createUser = async () => {
   try {
     const email = "samuel.halera@gmail.com";
     const salt = uid2(12);
-    const password = SHA256("XXXXX" + salt).toString(encBase64);
+    const password = SHA256("Zamulele15$" + salt).toString(encBase64);
 
     const user = await prisma.user.create({
       data: {

@@ -9,6 +9,9 @@ import { getCredits } from "@/actions/credits";
 import Loader from "@/components/Loader";
 import { useToast } from "@/hooks/use-toast";
 import ButtonAppendFieldArray from "../forms/ButtonAppendFieldArray";
+import { creditSchema } from "@/types/zodSchemas/adminForms";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export type CreditFormType = {
   credits: Credit[];
@@ -20,10 +23,12 @@ const CreditForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     control,
-    formState: { isDirty, isSubmitting },
-  } = useForm<CreditFormType>({
-    values: {
+    formState: { isDirty, isSubmitting, errors },
+  } = useForm<z.infer<typeof creditSchema>>({
+    resolver: zodResolver(creditSchema),
+    defaultValues: {
       credits: dataCredits ? dataCredits : [],
     },
   });
@@ -42,7 +47,9 @@ const CreditForm = () => {
     name: "",
     url: "",
   };
-  const onSubmit: SubmitHandler<CreditFormType> = async (values) => {
+  const onSubmit: SubmitHandler<CreditFormType> = async (
+    values: z.infer<typeof creditSchema>
+  ) => {
     const { credits } = values;
 
     try {
@@ -76,6 +83,7 @@ const CreditForm = () => {
 
       if (credits) setDataCredits(credits);
       setIsLoading(false);
+      reset({ credits });
     };
     fetchData();
   }, []);
@@ -86,16 +94,13 @@ const CreditForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-4 mx-auto"
     >
-      <CreditItem register={register} fields={fields} remove={remove} />
-      {/* <div
-        onClick={() => {
-          append(fieldToAppend);
-        }}
-        className="flex fixed bottom-20 items-center bg-slate-800 p-3 gap-3 text-white duration-500 hover:bg-slate-600 font-semibold cursor-pointer self-start rounded-md"
-      >
-        <PlusCircle />
-        add a new credit
-      </div> */}
+      <CreditItem
+        register={register}
+        fields={fields}
+        remove={remove}
+        errors={errors}
+      />
+
       <ButtonAppendFieldArray
         label="add a new credit"
         append={append}

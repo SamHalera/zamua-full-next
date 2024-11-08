@@ -2,33 +2,36 @@
 import { Button } from "@/components/ui/button";
 import { Show } from "@prisma/client";
 import { PlusCircle } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 import ShowItems from "./ShowItems";
 import { createOrUpdateShow } from "@/actions/admin/show";
 import { useToast } from "@/hooks/use-toast";
 import Loader from "@/components/Loader";
+import { z } from "zod";
+import { showSchema } from "@/types/zodSchemas/adminForms";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { getShowsNotPast } from "@/actions/show";
 
 export type ShowFormType = {
   shows: Show[];
 };
-const ShowForm = ({ shows }: { shows?: Show[] }) => {
+const ShowForm = () => {
+  const [showsData, setShowsData] = useState<Show[] | null>(null);
   const { toast } = useToast();
   const {
+    reset,
     handleSubmit,
     control,
     register,
-
     formState: { isDirty, isSubmitting, errors },
-  } = useForm<ShowFormType>({
-    values: {
-      shows: shows && shows.length > 0 ? shows : [],
+  } = useForm<z.infer<typeof showSchema>>({
+    resolver: zodResolver(showSchema),
+    defaultValues: {
+      shows: showsData && showsData.length > 0 ? showsData : [],
     },
   });
-
-  const errorItems = errors;
-
   const { fields, append, remove } = useFieldArray<ShowFormType, "shows", "id">(
     { name: "shows", control }
   );
@@ -45,7 +48,11 @@ const ShowForm = ({ shows }: { shows?: Show[] }) => {
     ticketsUrl: "",
   };
 
-  const onSubmit: SubmitHandler<ShowFormType> = async (values) => {
+  console.log("isDirty==>", isDirty);
+  const onSubmit: SubmitHandler<ShowFormType> = async (
+    values: z.infer<typeof showSchema>
+  ) => {
+    console.log("sumbit==>", values);
     const { shows } = values;
     const response = await createOrUpdateShow(shows);
     if (response?.error) {
@@ -67,7 +74,17 @@ const ShowForm = ({ shows }: { shows?: Show[] }) => {
       });
     }
   };
-  return !shows || isSubmitting ? (
+  useEffect(() => {
+    const fetchData = async () => {
+      const shows = await getShowsNotPast();
+
+      if (shows) setShowsData(shows);
+      reset({ shows });
+    };
+    fetchData();
+  }, [reset]);
+
+  return !showsData || isSubmitting ? (
     <Loader />
   ) : (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -75,7 +92,8 @@ const ShowForm = ({ shows }: { shows?: Show[] }) => {
         register={register}
         fields={fields}
         remove={remove}
-        errorItems={errorItems}
+        errors={errors}
+        // control={control}
       />
       <div
         onClick={() => {

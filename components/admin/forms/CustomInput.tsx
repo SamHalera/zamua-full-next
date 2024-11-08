@@ -1,6 +1,6 @@
 import { CustomInputProps } from "@/types/types";
 import React from "react";
-import InputOnChange from "./InputOnChange";
+import InputOnChange from "../../testComponents/InputOnChange";
 
 const CustomInput = ({
   label,
@@ -24,7 +24,7 @@ const CustomInput = ({
             {label}
             {required && <span className="text-red-400">*</span>}
           </span>
-          {required && error && (
+          {error && (
             <span className=" text-red-400 text-sm">{error.message}</span>
           )}
         </div>
