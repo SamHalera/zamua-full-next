@@ -5,22 +5,23 @@ const HeadSection = () => {
     <div className="flex flex-col gap-8 items-center p-5 md:p-11">
       <h1 className="text-6xl text-center md:text-start">PLAY THE TAPE!</h1>
       <h2 className="text-4xl text-center md:text-start">SOME PLAYLISTS...</h2>
-      <div>
+      <div className="flex flex-col gap-3">
         <p>
-          PLAY-THE-TAPE is a section dedicated to the music and artists I listen
-          to, who inspire me every day and influence my creativity.
+          PLAY-THE-TAPE is my personal space for sharing the music and artists
+          who inspire me daily and shape my creativity.
         </p>
-        <p className="mb-4">
+        <p className="">
           <strong>
-            I am fascinated by the idea of researching, selecting, mixing
-            different musical styles and finally bringing them together in one
-            stream.
+            I’m captivated by the process of exploring, curating, and blending
+            different musical styles, merging them into a cohesive stream. It’s
+            a journey of discovery that constantly fuels my artistic vision.
           </strong>
         </p>
 
         <p>
-          That is why I have decided to publish playlists on a regular basis,
-          each one collecting different moods and thoughts on a specific theme.
+          That’s why I’ve started creating and sharing playlists regularly, each
+          one capturing a unique theme: an expression of various moods and
+          reflections woven together.
         </p>
       </div>
     </div>

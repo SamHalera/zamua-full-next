@@ -4,29 +4,31 @@ const FirstSection = () => {
   return (
     <>
       <div className="flex flex-col px-8 sm:px-10 md:px-24 lg:px-48 mx-auto sm:mb-4 md:mb-14 lg:mb-16">
+        <h2 className="text-6xl lg:text-8xl font-bold custom-title mb-10 flex flex-col">
+          <span>GUITARIST, SINGER,</span>{" "}
+          <span className="ml-8 lg:ml-40">SONGWRITER</span>
+        </h2>
         <div>
           <p className=" text-xl leading-9 mb-9 font-semibold">
-            Zamua is a guitarist, singer, and songwriter. He was born in
-            Sardinia to a Sardinian mother and a Burundian father.
+            I’m Zamua—a guitarist, singer, and songwriter, born in Sardinia to a
+            Sardinian mother and a Burundian father.
           </p>
           <p className="text-xl leading-9 mb-9 ">
-            His interest in singing and playing the guitar began almost by
-            chance, during a long period of convalescence that saw him
-            bedridden. Since then Zamua has devoted himself to music and
-            writing, establishing{" "}
-            <strong>
-              a unique and thrilling combination of folk and soul-jazz that
-              crosses over between analog and electronic music. The hybrid
-              outcome is one in which the power of words is crucial.
-            </strong>
+            My journey with music began unexpectedly, during a long period of
+            convalescence when I found myself bedridden. Picking up the guitar
+            and singing started almost by chance, but since then, it has become
+            my passion and purpose.
           </p>
           <p className="text-xl leading-9 mb-9 ">
-            His music continuously explores various musical styles, including
-            soul, blues, folk, jazz, and reggae.
+            Through my music, I blend the rich textures of folk and soul-jazz,
+            moving fluidly between analog warmth and electronic depth, where
+            words hold powerful weight. My style continues to evolve, weaving
+            together influences from soul, blues, folk, jazz, and reggae: a
+            reflection of the diverse roots that make up who I am.
           </p>
           <p className="text-xl leading-9 mb-9 font-semibold">
-            Music became a part of Zamua's life almost as a necessity, enabling
-            him to build a bridge between his different roots.
+            Music has become essential, a bridge that connects the different
+            parts of my heritage and life.
           </p>
         </div>
       </div>

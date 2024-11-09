@@ -45,14 +45,15 @@ const MusicFeatureSection = () => {
         </div>
         <div className="lg:w-2/3 text-xl leading-9">
           <p className="">
-            <strong>LITANIE</strong> is Zamua&apos;s first EP, produced by the
-            young independent label OD MusicLab, founded by producer and sound
-            designer Shay Mané, sound engineer Fabrice Ho-Shui-Ling, and
-            photographer and artistic director Chloé Dupeyrat (Acidulée
-            Production). His debut mini-album is{" "}
-            <strong>a unique blend of ecstatic feelings and litanies,</strong>{" "}
-            making it hard to categorize his art form yet essential to know
-            about.
+            <strong>LITANIE</strong> is my debut EP, brought to life with the
+            support of OD MusicLab, an independent label founded by a close-knit
+            trio: producer and sound designer Shay Mané, sound engineer Fabrice
+            Ho-Shui-Ling, and artistic director Chloé Dupeyrat of Acidulée
+            Production. This mini-album is a personal exploration—a space where
+            <strong> litanies and ecstatic emotions intertwine.</strong> It’s
+            more than music; it’s a journey that resists easy labels yet feels
+            essential, a reflection of my deepest thoughts and dreams, brought
+            into sound.
           </p>
         </div>
 
