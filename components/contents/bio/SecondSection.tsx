@@ -6,31 +6,32 @@ const SecondSection = () => {
       <div className="flex flex-col px-8 sm:px-10 md:px-24 lg:px-48 mx-auto sm:mb-4 md:mb-14 lg:mb-16">
         <div>
           <p className=" text-xl leading-9 mb-9 ">
-            His passion for experimentation plays a central role in his creative
-            and writing process.
+            My passion for experimentation is at the heart of how I write and
+            create.
           </p>
           <p className="text-xl leading-9 mb-9 ">
+            In my music, I dig into themes that resonate deeply with me:
             <strong>
-              Identity, migration, racism, the physical and spiritual journey
+              identity, migration, racism, and the journey—both physical and
+              spiritual
             </strong>{" "}
-            are central topics in his music, a source of inspiration and
-            essential matter for his work and inner reflection. The distancing
-            from what is stable and firm, the idea of a sacred journey envelops
-            most of his songs. Without ever stating it explicitly, his songs
-            reveal{" "}
+            These themes aren’t just inspirations; they’re the foundation of my
+            work and my own inner reflection. Many of my songs carry the feeling
+            of a sacred journey, of moving away from the familiar and stable.
+            Though I may not state it outright, each song tells a layered{" "}
             <strong>
-              a complex tale about how people relate to one another and how
-              events impact their emotions and experiences.
+              story of how we connect with others and how life’s events shape
+              our emotions and experiences.
             </strong>
           </p>
           <p className="text-xl leading-9 mb-9 ">
-            In 2013, Zamua collaborated with OD MusicLab record label (Shay
-            Mané, Fabrice Ho-Shui-Ling, and Chloé Dupeyrat) to create his debut
-            EP, LITANIE.
+            In 2013, I had the privilege of collaborating with the team at OD
+            MusicLab—Shay Mané, Fabrice Ho-Shui-Ling, and Chloé Dupeyrat—to
+            release my debut EP, LITANIE.
           </p>
           <p className="text-xl leading-9 mb-9 font-semibold">
-            Currently, Zamua resides between France and Italy while working on
-            the creation of his first album.
+            Now, as I split my time between France and Italy, I’m immersed in
+            creating my first full album.
           </p>
         </div>
       </div>
