@@ -9,8 +9,14 @@ const ProjectsList = ({ projects }: { projects?: Project[] }) => {
         projects.length > 0 &&
         projects
           .sort((a, b) => parseFloat(a.priority) - parseFloat(b.priority))
-          .map((project: Project) => {
-            return <ProjectThumbnail key={project.id} project={project} />;
+          .map((project: Project, index) => {
+            return (
+              <ProjectThumbnail
+                key={project.id}
+                project={project}
+                index={index}
+              />
+            );
           })}
     </div>
   );

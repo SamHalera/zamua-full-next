@@ -12,8 +12,8 @@ const VideoList = ({ videos }: { videos?: Videos[] }) => {
               (a: Videos, b: Videos) =>
                 parseFloat(a.priority) - parseFloat(b.priority)
             )
-            .map((video) => {
-              return <VideoItem key={video.id} video={video} />;
+            .map((video, index) => {
+              return <VideoItem key={video.id} video={video} index={index} />;
             })}
       </div>
     </div>
