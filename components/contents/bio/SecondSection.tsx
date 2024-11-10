@@ -1,9 +1,19 @@
 import React from "react";
+import * as motion from "framer-motion/client";
 
 const SecondSection = () => {
   return (
     <>
-      <div className="flex flex-col px-8 sm:px-10 md:px-24 lg:px-48 mx-auto sm:mb-4 md:mb-14 lg:mb-16">
+      <motion.div
+        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 30 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{
+          type: "tween",
+          duration: 0.8,
+        }}
+        className="flex flex-col px-8 sm:px-10 md:px-24 lg:px-48 mx-auto sm:mb-4 md:mb-14 lg:mb-16"
+      >
         <div>
           <p className=" text-xl leading-9 mb-9 ">
             My passion for experimentation is at the heart of how I write and
@@ -34,7 +44,7 @@ const SecondSection = () => {
             creating my first full album.
           </p>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

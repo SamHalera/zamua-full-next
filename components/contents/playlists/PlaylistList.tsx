@@ -16,7 +16,7 @@ const PlaylistList = ({ playlists }: { playlists?: Playlist[] }) => {
               <PlaylistItem
                 key={playlist.id}
                 playlist={playlist}
-                index={index + 1}
+                index={index}
               />
             );
           })}

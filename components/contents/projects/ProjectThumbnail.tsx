@@ -1,11 +1,26 @@
 import { Project } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
+import * as motion from "framer-motion/client";
 
-const ProjectThumbnail = ({ project }: { project: Project }) => {
+const ProjectThumbnail = ({
+  project,
+  index,
+}: {
+  project: Project;
+  index: number;
+}) => {
   return (
     <Link href={`${process.env.NEXT_PUBLIC_FRONT}/projects/${project.slug}`}>
-      <div
+      <motion.div
+        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 30 }}
+        viewport={{ once: true }}
+        transition={{
+          delay: index / 10,
+          type: "tween",
+          duration: 0.8,
+        }}
         className="h-72 w-72 sm:h-[400px] sm:w-[400px] bg-cover bg-bottom shadow-lg group"
         style={{
           backgroundImage: `url(${project.cover})`,
@@ -22,7 +37,7 @@ const ProjectThumbnail = ({ project }: { project: Project }) => {
             </h3>
           </div>
         </div>
-      </div>
+      </motion.div>
     </Link>
   );
 };

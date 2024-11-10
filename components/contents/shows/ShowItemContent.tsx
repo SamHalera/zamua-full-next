@@ -2,10 +2,19 @@ import { Show } from "@prisma/client";
 import dayjs from "dayjs";
 import Link from "next/link";
 import React from "react";
+import * as motion from "framer-motion/client";
 
-const ShowItemContent = ({ show }: { show: Show }) => {
+const ShowItemContent = ({ show, index }: { show: Show; index: number }) => {
   return (
-    <div
+    <motion.div
+      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        delay: index / 10,
+        type: "tween",
+        duration: 0.8,
+      }}
       key={show.id}
       className="bg-black flex-col lg:flex-row flex gap-6 items-center justify-center w-2/3 py-10 px-5"
     >
@@ -53,7 +62,7 @@ const ShowItemContent = ({ show }: { show: Show }) => {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

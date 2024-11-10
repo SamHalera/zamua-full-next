@@ -22,7 +22,7 @@ export const parseText = (text: string) => {
 
   const italics = text.match(REGEX_ITALIC);
   const strongs = text.match(REGEX_STRONG);
-  let parsedString: string = "";
+  let parsedString: string = text;
 
   if (italics && italics?.length > 0) {
     parsedString = text.replace(REGEX_ITALIC, (_, p1) => {

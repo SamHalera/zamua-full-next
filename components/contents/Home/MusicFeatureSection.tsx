@@ -3,34 +3,73 @@ import Image from "next/image";
 import React from "react";
 import epCover from "@/public/images/pochette-ep.jpg";
 import Link from "next/link";
-
+import * as motion from "framer-motion/client";
 const MusicFeatureSection = () => {
   return (
     <div className="flex flex-wrap justify-center md:gap-8 lg:gap-20 py-20 lg:py-32 px-10">
       <div className="mb-20 flex flex-col items-center gap-6">
         <div className={cn("text-center flex flex-col gap-4 h-44 mb-10")}>
-          <h2
-            className={cn(
-              "text-black text-6xl md:text-7xl lg:text-8xl custom-title font-semibold"
-            )}
+          <motion.div
+            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{ type: "tween", duration: 0.5 }}
           >
-            LITANIE
-          </h2>
-          <h3 className={cn("text-black text-5xl md:text-7xl custom-title")}>
-            EP
-          </h3>
+            {" "}
+            <h2
+              className={cn(
+                "text-black text-6xl md:text-7xl lg:text-8xl custom-title font-semibold"
+              )}
+            >
+              LITANIE
+            </h2>
+          </motion.div>
+          <motion.div
+            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{
+              delay: 0.3,
+              type: "tween",
+              duration: 0.5,
+            }}
+          >
+            <h3 className={cn("text-black text-5xl md:text-7xl custom-title")}>
+              EP
+            </h3>
+          </motion.div>
         </div>
 
         <div className=" flex flex-col items-center">
-          <Image
-            className="w-64 md:w-[420px]"
-            src={epCover.src}
-            width="320"
-            height="320"
-            alt="Zamua dans la couverture de son EP"
-          />
+          <motion.div
+            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            viewport={{ once: true }}
+            transition={{
+              type: "tween",
+              duration: 0.8,
+            }}
+          >
+            <Image
+              className="w-64 md:w-[420px]"
+              src={epCover.src}
+              width="320"
+              height="320"
+              alt="Zamua dans la couverture de son EP"
+            />
+          </motion.div>
 
-          <div className="w-full mb-10">
+          <motion.div
+            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            viewport={{ once: true }}
+            transition={{
+              delay: 0.2,
+              type: "tween",
+              duration: 0.8,
+            }}
+            className="w-full mb-10"
+          >
             <iframe
               className=" rounded-lg"
               src="https://open.spotify.com/embed/album/49xV7avbfOOiy1b3EWVvIV?utm_source=generator"
@@ -41,9 +80,19 @@ const MusicFeatureSection = () => {
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
             ></iframe>
-          </div>
+          </motion.div>
         </div>
-        <div className="lg:w-2/3 text-xl leading-9">
+        <motion.div
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          viewport={{ once: true }}
+          transition={{
+            delay: 0.3,
+            type: "tween",
+            duration: 0.8,
+          }}
+          className="lg:w-2/3 text-xl leading-9"
+        >
           <p className="">
             <strong>LITANIE</strong> is my debut EP, brought to life with the
             support of OD MusicLab, an independent label founded by a close-knit
@@ -55,11 +104,22 @@ const MusicFeatureSection = () => {
             essential, a reflection of my deepest thoughts and dreams, brought
             into sound.
           </p>
-        </div>
+        </motion.div>
 
-        <Link href={"/music"} className="custom-btn">
-          MUSIC
-        </Link>
+        <motion.div
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          viewport={{ once: true }}
+          transition={{
+            delay: 0.4,
+            type: "tween",
+            duration: 0.8,
+          }}
+        >
+          <Link href={"/music"} className="custom-btn">
+            MUSIC
+          </Link>
+        </motion.div>
       </div>
     </div>
   );
