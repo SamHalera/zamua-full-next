@@ -53,8 +53,8 @@ const MusicFeatureSection = () => {
             <Image
               className="w-64 md:w-[420px]"
               src={epCover.src}
-              width="320"
-              height="320"
+              width="300"
+              height="300"
               alt="Zamua dans la couverture de son EP"
             />
           </motion.div>

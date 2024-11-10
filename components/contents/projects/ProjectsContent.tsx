@@ -13,7 +13,7 @@ const ProjectsContent = async () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ type: "tween", duration: 0.8 }}
-      className="text-primary"
+      className="text-primary text-4xl md:text-6xl lg:text-7xl"
     >
       PROJECTS
     </motion.span>

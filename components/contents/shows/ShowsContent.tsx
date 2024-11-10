@@ -7,20 +7,20 @@ import * as motion from "framer-motion/client";
 
 const ShowsContent = ({ shows }: { shows?: Show[] }) => {
   const title = (
-    <div className="flex gap-3">
+    <div className="flex flex-col md:flex-row items-start gap-3">
       <motion.div
         animate={{ opacity: 1 }}
         initial={{ opacity: 0 }}
         transition={{ type: "tween", duration: 0.6 }}
-        className="text-primary "
+        className="text-primary text-4xl md:text-6xl lg:text-7xl"
       >
-        ZAMUA'S{" "}
+        ZAMUA'S
       </motion.div>
       <motion.div
         animate={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: 30 }}
         transition={{ delay: 0.1, type: "tween", duration: 1 }}
-        className="text-white"
+        className="text-white text-4xl md:text-6xl lg:text-7xl"
       >
         SHOWS
       </motion.div>
