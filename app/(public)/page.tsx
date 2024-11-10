@@ -24,6 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return metadata;
 }
+
 export default async function Home() {
   return <HomeContent />;
 }

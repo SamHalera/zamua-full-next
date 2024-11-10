@@ -1,14 +1,32 @@
 import React from "react";
+import * as motion from "framer-motion/client";
 
 const FirstSection = () => {
   return (
     <>
       <div className="flex flex-col px-8 sm:px-10 md:px-24 lg:px-48 mx-auto sm:mb-4 md:mb-14 lg:mb-16">
-        <h2 className="text-6xl lg:text-8xl font-bold custom-title mb-10 flex flex-col">
+        <motion.h2
+          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{
+            type: "tween",
+            duration: 0.8,
+          }}
+          className="text-6xl lg:text-8xl font-bold custom-title mb-10 flex flex-col"
+        >
           <span>VOICE, SOUL</span>{" "}
           <span className="ml-8 lg:ml-40">AND PRESENCE</span>
-        </h2>
-        <div>
+        </motion.h2>
+        <motion.div
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{
+            type: "tween",
+            duration: 0.8,
+          }}
+        >
           <p className=" text-xl leading-9 mb-9">
             Music emerges from a deep sense of urgency: a need to express one’s
             voice, soul, and presence.{" "}
@@ -47,7 +65,7 @@ const FirstSection = () => {
             electronic influences. Carrying this rich blend has allowed me to
             create something unique, something distinctly hybrid.
           </p>
-        </div>
+        </motion.div>
       </div>
     </>
   );
