@@ -17,7 +17,7 @@ const BioContent = () => {
         animate={{ opacity: 1 }}
         initial={{ opacity: 0 }}
         transition={{ type: "tween", duration: 0.6 }}
-        className="text-primary "
+        className="text-primary text-4xl md:text-6xl lg:text-7xl"
       >
         BIO
       </motion.div>
@@ -25,7 +25,7 @@ const BioContent = () => {
         animate={{ opacity: 1, y: 0 }}
         initial={{ opacity: 0, y: 30 }}
         transition={{ delay: 0.1, type: "tween", duration: 1 }}
-        className="text-white"
+        className="text-white text-4xl md:text-6xl lg:text-7xl"
       >
         GRAPHY
       </motion.div>

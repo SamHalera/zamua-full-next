@@ -4,7 +4,7 @@ import * as motion from "framer-motion/client";
 const FirstSection = () => {
   return (
     <>
-      <div className="flex flex-col px-8 sm:px-10 md:px-24 lg:px-48 mx-auto sm:mb-4 md:mb-14 lg:mb-16">
+      <div className="flex flex-col px-4 sm:px-10 md:px-16  xl:px-48 mx-auto sm:mb-4 md:mb-14 lg:mb-16">
         <motion.h2
           whileInView={{ opacity: 1 }}
           initial={{ opacity: 0 }}
@@ -13,11 +13,10 @@ const FirstSection = () => {
             type: "tween",
             duration: 0.8,
           }}
-          className="text-6xl lg:text-8xl font-bold custom-title my-14 flex flex-col"
+          className="text-4xl md:text-6xl lg:text-8xl font-bold custom-title my-14 flex flex-col"
         >
-          <span> SINGER,</span>{" "}
-          <span className="ml-4 lg:ml-20">GUITARIST,</span>
-          <span className="ml-8 lg:ml-40">SONGWRITER</span>
+          <span> SINGER,</span> <span className="lg:ml-20">GUITARIST,</span>
+          <span className="lg:ml-40">SONGWRITER</span>
         </motion.h2>
         <motion.div
           whileInView={{ opacity: 1, y: 0 }}

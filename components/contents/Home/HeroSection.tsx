@@ -38,21 +38,21 @@ const HeroSection = () => {
                   alt="spotify logo"
                   width={"110"}
                   height={"36"}
-                  className="w-20 lg:w-28 "
+                  className="w-16 sm:w-20 lg:w-28 "
                 />
                 <Image
                   src={deezerLogo.src}
                   alt="spotify logo"
                   width={"110"}
                   height={"36"}
-                  className="w-20 lg:w-28"
+                  className="w-16 sm:w-20 lg:w-28"
                 />
                 <Image
                   src={appleLogo.src}
                   alt="spotify logo"
                   width={"110"}
                   height={"36"}
-                  className="w-20 lg:w-28"
+                  className="w-16 sm:w-20 lg:w-28"
                 />
               </div>
             </Link>
